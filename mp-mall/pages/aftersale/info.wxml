@@ -1,0 +1,98 @@
+
+<view class="page_info">
+  <view class="info_box">
+    <view class="image_box">
+      <view class="img">
+        <image src="../../images/aftersale.png"></image>
+      </view>
+      <view class="txt">售后服务申请成功</view>
+    </view>
+    <view class="info_txt">您的订单售后服务申请成功，请您保持手机畅通，耐心等待，我们客服人员马上为您处理</view>
+  </view>
+  <view class="btns">
+    <view class="btn_item" bindtap="toIndex">返回首页</view>
+    <view class="btn_item" bindtap="toList">返回列表</view>
+  </view>
+  <!-- <view class="item_box">
+    <view class="item">
+      <view class="label">售后类型:</view>
+      <view class="val">换货</view>
+    </view>
+    <view class="item">
+      <view class="label">订单地址:</view>
+      <view class="val">浙江省杭州市上城区九堡街道</view>
+    </view>
+    <view class="item">
+      <view class="label">下单时间:</view>
+      <view class="val">2022-03-01 12：00</view>
+    </view>
+    <view class="item">
+      <view class="label">联系电话:</view>
+      <view class="val">15811223344</view>
+    </view>
+    <view class="item">
+      <view class="label">联系人:</view> 
+      <view class="val">小王</view>
+    </view>
+  </view> -->
+
+  <!-- <view class="recom">
+        <view class="recom_tit">
+          <view class="recom_tit_bx">
+            <view class="div"></view>
+            <view class="tit">为您推荐</view>
+            <view class="div"></view>
+          </view>
+        </view>
+        <view class="recom_box">
+          <view class="recom_item">
+            <view class="item_img">
+              <image src="../../images/list8.png"></image>
+            </view>
+            <view class="item_info">
+              <view class="info_tit">
+                <view class="tab">戴戴果园</view>
+                <view class="text tab_txt">砂糖橘</view>
+              </view>
+              <view class="add_car">
+                <view class="in_fl">
+                  <view class="price">
+                    <view class="util">￥</view>
+                    <view class="num">6.99</view>
+                    <view class="price_txt">/斤</view>
+                  </view>
+                  <view class="sales">销量999</view>
+                </view>
+                <view class="in_fr">
+                  <image src="../../images/add_car.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="recom_item">
+            <view class="item_img">
+              <image src="../../images/list9.png"></image>
+            </view>
+            <view class="item_info">
+              <view class="info_tit">
+                <view class="text">无花果</view>
+              </view>
+              <view class="add_car">
+                <view class="in_fl">
+                  <view class="price">
+                    <view class="util">￥</view>
+                    <view class="num">6.99</view>
+                    <view class="price_txt">/斤</view>
+                  </view>
+                  <view class="sales">销量999</view>
+                </view>
+                <view class="in_fr">
+                  <image src="../../images/add_car.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+  </view> -->
+
+</view>

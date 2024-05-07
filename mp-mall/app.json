@@ -1,0 +1,101 @@
+{
+  "pages": [
+    "pages/start/index",
+    "pages/index/index",
+    "pages/cellars/cellars",
+    "pages/login/login",
+    "pages/login/phone",
+    "pages/order/create",
+    "pages/menu/menu",
+    "pages/car/car",
+    "pages/user/user",
+    "pages/address/address",
+    "pages/integral/integral",
+    "pages/order/order",
+    "pages/order/info",
+    "pages/address/add",
+    "pages/remarks/remarks",
+    "pages/search/search",
+    "pages/treaty/treaty",
+    "pages/safety/safety",
+    "pages/help/help",
+    "pages/detail/detail",
+    "pages/order/list",
+    "pages/player/player",
+    "pages/player/res",
+    "pages/safety/phone",
+    "pages/order/invalid",
+    "pages/link/link",
+    "pages/reason/reason",
+    "pages/route/route",
+    "pages/lives/lives",
+    "pages/lives/detail",
+    "pages/coupon/index",
+    "pages/order/retreat",
+    "pages/login/auth",
+    "pages/coupon/receive",
+    "pages/evaluate/evaluate",
+    "pages/demand/demand",
+    "pages/activity/seckill",
+    "pages/activity/arrondi",
+    "pages/evaluate/list",
+    "pages/aftersale/index",
+    "pages/aftersale/cause",
+    "pages/activity/collage",
+    "pages/detail/collage",
+    "pages/aftersale/detail",
+    "pages/aftersale/info",
+    "pages/user/message",
+    "pages/user/messaged",
+    "pages/safety/info"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "维本生鲜",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#333333",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "./images/index.png",
+        "selectedIconPath": "./images/index_active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/menu/menu",
+        "iconPath": "./images/menu.png",
+        "selectedIconPath": "./images/menu_active.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/car/car",
+        "text": "购物车",
+        "iconPath": "./images/car.png",
+        "selectedIconPath": "./images/car_active.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "./images/user.png",
+        "selectedIconPath": "./images/user_active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "plugins": {
+    "logisticsPlugin": {
+      "version": "2.1.11",
+      "provider": "wx9ad912bf20548d92"
+    }
+  }
+}

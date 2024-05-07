@@ -1,0 +1,74 @@
+
+<view class="coupon">
+  <wxs src="./price.wxs" module="price"></wxs>
+  <wxs src="./time.wxs" module="time"></wxs>
+  <view class="coupon_menu">
+    <text class="menu_tit">全场优惠券</text>
+    <text class="line">|</text>
+    <text class="menu_txt">专属福利</text>
+  </view>
+  <view class="coupon_ls">
+    <view class="coupon_item" wx:for="{{list}}" wx:key="index">
+      <view class="item_box ">
+        <view class="item_fl">
+          <view class="num">￥{{price(item.couponAmount)}}</view>
+          <view class="name" wx:if="{{item.transactionMinimum>0}}">满￥{{price(item.transactionMinimum)}}可用</view>
+          <view class="name" wx:else>不限金额</view>
+        </view>
+        <view class="item_ml">
+          <view class="item_tit">
+          {{item.stockName}}
+            <!-- <text>全场</text>通用券 -->
+          </view>
+          <view class="item_date">有效期至{{time(item.cycleTimeEnd)}}</view>
+        </view>
+        <view class="item_img" wx:if="{{item.userGainType == 0 &&(!item.remainingCoupons || item.remainingCoupons == 0)}}">
+          <image src="../../images/coupon1.png"></image>
+        </view>
+        <view class="item_fr" wx:if="{{item.userGainType == 0 && item.remainingCoupons > 0}}" bindtap="gainHandle" data-id="{{item.couponsId}}">立即领取</view>
+        <view class="item_fr" wx:if="{{item.userGainType == 1}}" bindtap="gainHandle" data-id="{{item.couponsId}}">立即领取</view>
+        <view class="item_fr active" bindtap="toPathHandle" data-url="/pages/index/index" wx:if="{{item.userGainType == 0 && item.remainingCoupons <= 0}}">立即使用</view>
+      </view>
+    </view>
+  </view>
+  <!-- <view class="coupon_menu">
+    <text class="menu_tit">专属优惠券</text>
+    <text class="line">|</text>
+    <text class="menu_txt">专属福利</text>
+  </view>
+  <view class="coupon_ls">
+    <view class="coupon_item">
+      <view class="item_box ">
+        <view class="item_fl">
+          <view class="num">￥10</view>
+          <view class="name">满100可用</view>
+        </view>
+        <view class="item_ml">
+          <view class="item_tit">
+            <text>西瓜</text>通用券
+          </view>
+          <view class="item_date">有效期至2022.02.28</view>
+        </view>
+        <view class="item_fr" >立即领取</view>
+      </view>
+    </view>
+    <view class="coupon_item">
+      <view class="item_box ">
+        <view class="item_fl">
+          <view class="num">￥10</view>
+          <view class="name">满100可用</view>
+        </view>
+        <view class="item_ml">
+          <view class="item_tit">
+            <text>西瓜</text>通用券
+          </view>
+          <view class="item_date">有效期至2022.02.28</view>
+        </view>
+        <view class="item_img">
+          <image src="../../images/coupon1.png"></image>
+        </view>
+        <view class="item_fr active" >立即使用</view>
+      </view>
+    </view>
+  </view> -->
+</view>

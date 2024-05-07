@@ -1,0 +1,162 @@
+
+<view class="seckill">
+  <wxs src="./surplus.wxs" module="surplus"></wxs>
+  <wxs src="../order/price.wxs" module="price"></wxs>
+    <scroll-view class="scroll-view" scroll-x scroll-with-animation scroll-left="{{idx*60}}">
+      <view class="seckill_tabs">
+        <view class="tabs_box">
+        <view 
+          class="box_item {{seckillSiteId == item.id ? 'on' : ''}} {{(item.startTimeStamp && item.startTimeStamp < nowTimeStamp) && (item.endTimeStamp && item.endTimeStamp > nowTimeStamp) ? 'active':''}}" 
+          wx:for="{{dateSite}}" wx:key="index" bindtap="changTab" data-id="{{item.id}}" data-idx="{{index}}">
+            <view class="item_time">{{item.siteName}}</view>
+            <view class="item_txt" wx:if="{{item.startTimeStamp < nowTimeStamp}}">
+              {{item.endTimeStamp < nowTimeStamp ? "已结束" : '抢购中'}}
+            </view>
+            <view class="item_txt" wx:else>
+              还剩{{surplus(item.startTimeStamp-nowTimeStamp).h}}:{{surplus(item.startTimeStamp-nowTimeStamp).m}}:{{surplus(item.startTimeStamp-nowTimeStamp).s}}开始
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  
+  <view class="seckill_box"  wx:if="{{list.length > 0}}">
+    <view class="seckill_ls">
+      <view class="goods_item" wx:for="{{list}}" wx:key="index">
+        <view 
+        bindtap="{{(seckillId == item.seckillSiteId && item.availableStock > 0) ?'detail':''}}" 
+        data-id="{{item.skuId}}"
+        data-activitysiteid="{{item.activitySiteId}}"
+        data-activityskuid="{{item.id}}"
+        data-seckillsiteid="{{item.seckillSiteId}}"
+        data-activityid="{{item.activityId}}"
+        class="goods_image">
+        <image src="{{item.image}}" ></image>
+          <view class="seckill_tip">
+            <image src="../../images/seckill_tip.png" mode="widthFix"></image>
+          </view>
+        </view>
+        <!--  bindtap="{{(seckillId == item.seckillSiteId && item.availableStock > 0) ?'detail':''}}"  -->
+        <view class="goods_info" 
+       
+        data-id="{{item.skuId}}"
+        data-activitysiteid="{{item.activitySiteId}}"
+        data-activityskuid="{{item.id}}"
+        data-seckillsiteid="{{item.seckillSiteId}}"
+        data-activityid="{{item.activityId}}"
+        >
+          <view class="goods_tit"
+            data-id="{{item.skuId}}"
+            bindtap="{{(seckillId == item.seckillSiteId && item.availableStock > 0) ?'detail':''}}"
+            data-activitysiteid="{{item.activitySiteId}}"
+            data-activityskuid="{{item.id}}"
+            data-seckillsiteid="{{item.seckillSiteId}}"
+            data-activityid="{{item.activityId}}"
+          >
+            <view class="tab" wx:if="{{item.isShowItemSupplier == 1 && item.itemSupplier }}">
+            {{item.itemSupplier }}
+            </view>
+            <view class="text {{item.isShowItemSupplier == 1 && item.itemSupplier ? 'tab_txt':''}}">{{item.itemName}}</view>
+          </view>
+          <view class="goods_price"
+             data-id="{{item.skuId}}"
+            bindtap="{{(seckillId == item.seckillSiteId && item.availableStock > 0) ?'detail':''}}"
+            data-activitysiteid="{{item.activitySiteId}}"
+            data-activityskuid="{{item.id}}"
+            data-seckillsiteid="{{item.seckillSiteId}}"
+            data-activityid="{{item.activityId}}"
+          >
+            <view class="price_box">
+              <view class="price_now">
+                <view class="util">￥</view>
+                <view class="num">
+                  <!-- {{(!userInfo.merchantMemberId || userInfo.status != 1 || item.skuHiddenPrice) ? '***' : 
+                  price(item.skuActivityPrice)
+                  }} -->
+                   <!-- 按箱结算 展示销售计量单位价格  -->
+                  {{(!userInfo.merchantMemberId || userInfo.status != 1 || item.skuHiddenPrice) ? '***' : item.settleStyle==1?
+                  (item.skuActivityPrice ?price(item.skuActivityPrice): price(item.skuPrice)):price(item.basicSkuPrice)}} 
+                  <!--  1号位按斤结算展示基础计量单位价格 -->
+            
+                  /
+                  <!-- {{item.skuUnit}} -->
+                   <!-- 按箱结算 展示销售计量单位  按斤结算展示基础计量单位 -->
+                  {{item.settleStyle==1?item.skuUnit:item.basicUnit}}
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="goods_sales" 
+            data-id="{{item.skuId}}"
+            bindtap="{{(seckillId == item.seckillSiteId && item.availableStock > 0) ?'detail':''}}"
+            data-activitysiteid="{{item.activitySiteId}}"
+            data-activityskuid="{{item.id}}"
+            data-seckillsiteid="{{item.seckillSiteId}}"
+            data-activityid="{{item.activityId}}"
+          >
+            <view class="sales_num">
+            <!-- 3号位市场价 -->
+              <view class="old">￥{{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : 
+              price(item.skuUnderlinePrice)}}/{{item.settleStyle == 1 ? item.skuUnit : item.basicUnit}}</view>
+              <!-- <view class="now">
+                约￥{{item.skuHiddenPrice ? '***' : item.isBigShowBasic==1?price(item.goodsPrice):price(item.basicSkuPrice)}}元/{{item.salesSpecType == 0 ? item.skuUnit : item.salesSpecUnit}}
+              </view> -->
+              <!-- <view class="sales_txt">按实收数量结算</view> -->
+              <view class="sales_txt">{{item.settleStyle == 0 ? '按斤结算': '按箱结算'}}</view>
+            </view>
+            <!-- <view class="btn" bindtap="addCar" data-num="{{item.number}}" data-id='189995469980307'><image src="../../images/add_car.png" mode="widthFix"></image></view> -->
+          </view>
+          <view class="amount">
+            <view class="amount_fl"
+            data-id="{{item.skuId}}"
+            bindtap="{{(seckillId == item.seckillSiteId && item.availableStock > 0) ?'detail':''}}"
+            data-activitysiteid="{{item.activitySiteId}}"
+            data-activityskuid="{{item.id}}"
+            data-seckillsiteid="{{item.seckillSiteId}}"
+            data-activityid="{{item.activityId}}"
+            >
+              <!-- <view class="amount_item">
+                <view class="amount_tit">毛重</view>
+                <view class="amount_txt">约{{item.skuWeight}}{{item.skuWeightUnit}}</view>
+              </view>
+              <view class="amount_ls">
+                <view class="amount_item">
+                  <view class="amount_tit">净重</view>
+                  <view class="amount_txt">约{{item.netWeight}}{{item.netWeightUnit}}</view>
+                </view>
+                <view class="amount_item">
+                  <view class="amount_tit">净单价</view>
+                  <view class="amount_txt">约{{item.netWeightPrice}}/{{item.netWeightUnit}}</view>
+                </view>
+              </view> -->
+              <!-- <progress percent="{{item.progress}}" border-radius="6" show-info stroke-width="6"/> -->
+              <view class="progress">
+                <view class="progress_box" style="width:{{item.progressw}}%;"></view>
+                <view class="progress_txt" wx:if="{{item.progress > 0}}">仅剩{{item.progress}}%</view>
+                <view class="progress_txt" wx:else>已售罄</view>
+              </view>
+            </view>
+            <!-- catchtap="toOrider"  -->
+            <view class="btn {{(seckillId != item.seckillSiteId || item.availableStock == 0) ? 'dis': ''}}" 
+              data-item="{{item}}"
+              catchtap="{{(seckillId == item.seckillSiteId && item.availableStock > 0)?'addCar':''}}"
+              data-skusource="{{item.skuSource}}" 
+              data-activitysiteid="{{item.activitySiteId}}" 
+              data-activityskuid="{{item.id}}"
+              data-num="{{item.number}}"
+              data-id='{{item.skuId}}'
+              data-activityid="{{item.activityId}}"
+              >
+              <!-- {{item.availableStock > 0 ? '去抢购' : '已售罄'}} -->
+                <image src="{{(seckillId == item.seckillSiteId && item.availableStock > 0) ? '../../images/add_car.png':'../../images/add_card.png'}}" mode="widthFix"></image>
+              </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="void_box" wx:else>
+      <image src="../../images/void.png"></image>
+      <view class="void_txt">暂无秒杀商品</view>
+    </view>
+</view>

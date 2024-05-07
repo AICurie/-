@@ -1,0 +1,33 @@
+<!--pages/login/phone.wxml-->
+<view class="phone">
+  <!-- <view class="image">
+    <image src="../../images/login_img.png"></image>
+  </view> -->
+  <view class="logo">
+    <image src="../../images/logo.png"></image>
+  </view>
+  <view class="from">
+    <view class="from_item">
+      <input placeholder="请输入手机号" type="number" maxlength="11" bindinput="changeipt" data-item="phone"></input>
+    </view>
+    <view class="from_item">
+        <input placeholder="请输入验证码" bindinput="changeipt" data-item="code"></input>
+        <view class="code_btn {{disabled?'disabled':''}}" bindtap="getcode">{{code_txt}}</view>
+    </view>
+    <view class="from_item">
+      <input placeholder="请输入推荐人手机号码(选填)"></input>
+    </view>
+  </view>
+
+  <view class="login_btn" bindtap="login">登录</view>
+  <view class="wechat_box"> 
+  <!-- hidden="{{num<3}}" -->
+    <view >登录不成功？推荐</view>
+    <button class="wechat" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"> <text>微信用户一键登录</text></button>
+  </view>
+  
+  <view class="bottom">
+    <image src="../../images/login_btm.png"></image>
+  </view>
+
+</view>

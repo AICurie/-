@@ -1,0 +1,87 @@
+<!--pages/cellars/cellars.wxml-->
+<view class="cellars">
+  <view class="header">
+    <view class="img">
+      <image src="../../images/cellars_banner.png"></image>
+    </view>
+  </view>
+  <view class="menu">
+      <view class="menu_box">
+        <view class="list">
+          <view class="item">
+            <view class="img"><image src="../../images/cellars_menu1.png"></image></view>
+            <view class="desc">国酒茅台</view>
+          </view>
+          <view class="item">
+            <view class="img"><image src="../../images/cellars_menu2.png"></image></view>
+            <view class="desc">蛹虫精华</view>
+          </view>
+          <view class="item">
+            <view class="img"><image src="../../images/cellars_menu3.png"></image></view>
+            <view class="desc">提高免疫力</view>
+          </view>
+          <view class="item">
+            <view class="img"><image src="../../images/cellars_menu4.png"></image></view>
+            <view class="desc">抗肿瘤</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  <view class="content">
+
+    <!-- <view class="nav_info">
+      <view class="info_title">
+        <view class="tit">工艺传承 / 古法酿造</view>
+        <view class="desc">传统酿造的坛装酒带着时代的味道</view>
+      </view>
+      <view class="nav_box">
+        <view class="box_top">
+          <view class="img"><image src="../../images/search_nicht-hj.png"></image></view>
+        </view>
+        <view class="box_btm">
+          <view class="fl">沿用传统工艺，同时采用人工培养老窖，低温缓慢发酵、中途回沙，慢火蒸馏、分等贮存、精心勾兑等新工艺和新技术形成了“甜、棉、软、净、香”的独特风格。</view>
+          <view class="fr"><image src="../../images/goods_info2.png"></image></view>
+        </view>
+      </view>
+    </view> -->
+    
+    <view class="nav_box">
+      <view class="list">
+        <view class="item">
+          <view class="tit">一坛酱香酒·传承八百年</view>
+          <view class="img"> <image src="../../images/cellars_info.png"></image> </view>
+        </view>
+        <view class="item">
+          <view class="tit">提高免疫抗肿瘤·享受健康生活</view>
+          <view class="img"> <image src="../../images/cellars_info2.png"></image> </view>
+        </view>
+      </view>
+    </view>
+    <view class="goods_list">
+      <view class="tit">为您推荐</view>
+      <view class="list">
+        <wxs src="../order/price.wxs" module="price"></wxs>
+        <view class="item" wx:for="{{goods}}" wx:key="index">
+          <view class="item_box">
+            <view class="img" bindtap="detail" data-id="{{item.goodsId}}"><image src="{{item.image || '../../images/good_default.png'}}"></image></view>
+            <view class="desc">
+              <view class="name">{{item.goodsName}}</view>
+              <view class="norms">
+                <text>{{item.skuSpec}}</text>
+                <text>￥{{price(item.goodsPrice)}}</text>
+              </view>
+              <view class="buy_btn"  bindtap="addCar" data-num="{{item.number}}" data-id='{{item.goodsId}}'>立即购买</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="footer">
+    <!-- <view>——为健康快乐生活——</view>
+    <view>让每一个人养生又养心</view> -->
+    <view class="img">
+      <image src="../../images/cellars_footer.png"></image>
+    </view>
+  </view>
+</view>

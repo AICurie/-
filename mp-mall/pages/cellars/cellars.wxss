@@ -1,0 +1,183 @@
+
+.cellars .header .img {
+  width: 100%;
+  height: 500rpx;
+  overflow: hidden;
+  position: relative;
+}
+.cellars .header .img image {
+  width: 100%;
+  height: 100%;
+  top: -100rpx;
+  position: absolute;
+} 
+.cellars .content {
+  padding: 0 10rpx;
+  background-color: #c00300;
+}
+.cellars .content .info_title {
+  text-align: center;
+  padding: 10px 0;
+}
+.cellars .content .info_title view {
+  padding: 6rpx 0rpx;
+}
+.cellars .content .info_title .tit {
+  color: #c1ab91;
+  font-size: 36rpx;
+}
+.cellars .content .info_title .desc {
+  color: #a9a9a9;
+  font-size: 28rpx;
+}
+.cellars .menu  {
+  margin-top: -80rpx;
+}
+.cellars .menu .list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cellars .menu .item {
+  width: 25%;
+  text-align: center;
+  padding: 10rpx 20rpx;
+  box-sizing: border-box;
+}
+.cellars .menu .item .img {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 0 auto;
+}
+.cellars .menu .item image {
+  width: 100%;
+  height: 100%;
+}
+.cellars .menu .item .desc {
+  padding: 10rpx 0;
+  font-size: 28rpx; 
+  color: #6b6b6b;
+}
+
+.cellars .content .nav_info .nav_box {
+  padding: 0 20rpx;
+}
+.cellars .content .nav_info .nav_box .box_top .img image {
+  width: 100%;
+  height: 410rpx;
+}
+.cellars .content .nav_info .nav_box .box_btm {
+  display: flex;
+  margin-top: 20rpx;
+  justify-content: space-between;
+}
+.cellars .content .nav_info .nav_box .box_btm view {
+  width: 50%;
+  box-sizing: border-box;
+}
+.cellars .content .nav_info .nav_box .box_btm image {
+  width: 100%;
+  height: 510rpx;
+}
+.cellars .content .nav_info .nav_box .box_btm .fl {
+   color: #a9a9a9;
+   line-height: 70rpx;
+   padding-right: 10rpx;
+}
+.cellars .content .nav_info .nav_box .box_btm .fr {
+  padding-left: 10rpx;
+}
+.cellars .content .nav_box {
+  padding: 20rpx;
+}
+.cellars .content .nav_box .item {
+  padding: 10rpx 0;
+}
+.cellars .content .nav_box .tit {
+  color: #f5ba8c;
+  font-size: 40rpx;
+  padding: 10rpx 0;
+  text-align: center;
+}
+.cellars .content .nav_box .img {
+  width: 100%;
+  height: 320rpx;
+  border-radius: 10rpx;
+}
+.cellars .content .nav_box .img image {
+  width: 100%;
+  height: 100%;
+}
+.cellars .content .goods_list .tit {
+  color: #fff;
+  font-size: 32rpx;
+  padding: 20rpx 10rpx;
+}
+.cellars .content .goods_list .list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cellars .content .goods_list .list .item {
+  width: 50%;
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+.cellars .content .goods_list .list .item .item_box {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10rpx;
+}
+.cellars .content .goods_list .list .item .item_box .img {
+  width: 100%;
+  height: 360rpx;
+  background-color: #F8DAB1;
+}
+.cellars .content .goods_list .list .item .item_box .img image {
+  width: 100%;
+  height: 100%;
+}
+.cellars .content .goods_list .item_box .desc {
+  padding: 20rpx;
+  background-color: #f8987e;
+}
+.cellars .content .goods_list .item_box .desc .name {
+  width: 100%;
+  overflow: hidden;
+  color: #b31f22;
+  font-size: 30rpx;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cellars .content .goods_list .item_box .desc .norms {
+  display: flex;
+  padding: 10rpx 0;
+  justify-content: space-between;
+}
+.cellars .content .goods_list .item_box .desc .norms text {
+  color: #b31f22;
+  font-size: 26rpx;
+}
+.cellars .content .goods_list .item_box .desc .buy_btn {
+  width: 200rpx;
+  color: #fff;
+  padding: 10rpx 0;
+  font-size: 24rpx;
+  text-align: center;
+  margin: 20rpx auto 0;
+  border-radius: 40rpx;
+  background-color: #bb141b;
+}
+.footer {
+  padding: 20rpx 0;
+  text-align: center;
+  background-color: #c00300;
+}
+.footer view {
+  color: #f5ba8c;
+  font-size: 24rpx;
+  padding: 8rpx 20rpx;
+}
+.footer image {
+  width: 100%;
+  height: 200rpx;
+}

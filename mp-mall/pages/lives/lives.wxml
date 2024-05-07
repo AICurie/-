@@ -1,0 +1,43 @@
+<!--pages/orider/orider.wxml-->
+<view class="orider">
+  <view class="tabber">
+    <view class="tabber_item {{status == 0?'active':''}}" bindtap="changeStatus" data-idx="0">全部</view>
+    <view class="tabber_item {{status == 1?'active':''}}" bindtap="changeStatus" data-idx="1">直播中</view>
+     <view class="tabber_item {{status == 2?'active':''}}" bindtap="changeStatus" data-idx="2">未直播</view>
+    <!-- <view class="tabber_item {{status == 3?'active':''}}" bindtap="changeStatus" data-idx="3">已结束</view> -->
+    <!-- <view class="tabber_item {{status == 3?'active':''}}" bindtap="changeStatus" data-idx="5">已失效</view> -->
+  </view>
+  <wxs src="./util.wxs" module="util"></wxs>
+  <scroll-view class="orider_box" scroll-y bindscrolltolower="getMore">
+    <view class="orider_list" wx:if="{{list.length > 0}}">
+    <!-- wx:if="{{item.orderStatus == status || status == 0 }}" -->
+      <view class="orider_item" wx:for="{{list}}" wx:key="index" >
+        <view class="goods_info">
+          <view class="goods_tit" bindtap="liveHandle" data-item="{{item}}" data-id="{{item.roomNum}}">
+            <!-- <image src="{{item.feedsWechatFile ? item.feedsWechatFile : '../../images/banner_default.png'}}" data-idx="{{index}}" binderror="imageError"></image> -->
+            <image mode="aspectFill" src="{{item.feedsWechatFile ? item.feedsWechatFile : '../../images/add.png'}}" data-idx="{{index}}" binderror="imageError"></image>
+            <view class="goods_status">
+              <view class="{{item.broadcastStatus == 1 ? 'green' : 'red'}}" >{{util(item.broadcastStatus)}}</view>
+            </view>
+          </view>
+          <view class="room_info">
+            <!-- <view class="room_ico" bindtap="liveHandle" data-item="{{item}}" data-id="{{item.roomNum}}">
+              <image src="{{item.cdnUrl}}"></image>
+            </view> -->
+            <view class="room_nav" bindtap="liveHandle" data-item="{{item}}" data-id="{{item.roomNum}}"> 
+                <view class="room_tit">房间名：{{item.name}}</view>
+                <view class="room_desc">主播名：{{item.anchorName}}</view>
+            </view>
+            <view class="share_btn">
+              <button class="btn" open-type="share" >微信分享</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+      <view class="vido" wx:else>
+          <!-- <image src="../../images/{{search_nicht}}" mode="widthFix"></image> -->
+          <view>暂无直播房间</view>
+      </view>
+  </scroll-view>
+</view>

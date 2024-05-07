@@ -1,0 +1,10 @@
+<!-- <subscribe
+    room-id="{{roomId}}"
+    width="{{width}}"
+    height="{{height}}"
+    font-size="{{fontSize}}"
+    color="{{color}}"
+    background-color="{{backgroundColor}}"
+    custom-params="{{customParams}}"
+    bindsubscribe="onSubscribe">
+</subscribe> -->

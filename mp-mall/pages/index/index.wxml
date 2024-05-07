@@ -1,0 +1,442 @@
+<!--index.wxml-->
+<view class="index">
+<!-- 62px -->
+<!-- 87 -->
+
+  <view class="bar_header {{status?'active':''}}" 
+  style="height:{{statusBarHeight + (notices.length > 0 ? 42: 40)}}px;">
+    <view class="bar_item {{!status?'active':''}}" style="height:{{statusBarHeight + 42}}px;top:0px;line-height:{{statusBarHeight + 62}}px;">
+      <!-- mode="widthFix" -->
+      <image style="color: {{status?'#fff':'#1D202B'}};margin-bottom: {{isIos?'0px':'0px'}};width: 42px;margin-left: 10px;height: 42px;" src="../../images/logo.png" ></image>
+      <navigator style="height: {{isIos?'31px':'29px'}};line-height: {{isIos?'31px':'29px'}};margin-bottom: {{isIos?'6px':'4px'}};margin-left: 2px;" url="/pages/search/search" hover-class="noshadow" class="search"><image src="../../images/search.png" ></image>输入商品名称</navigator>
+    </view>
+     <!-- <view class="header_top {{status?'active':''}}">
+      <swiper class="news" autoplay circular vertical wx:if="{{notices.length > 0}}">
+        <swiper-item wx:for="{{notices}}" wx:key="index" class="news_item">
+          <view style="text-align: center;">{{item.noticeTitle}}</view>
+        </swiper-item>
+      </swiper>
+    </view> -->
+  </view>
+  <add-tips name="{{name}}" delay="{{1}}" duration="{{2}}" custom></add-tips>
+  <!-- 42+40+36 + 10 -->
+  <wxs src="../order/price.wxs" module="price"></wxs>
+  <view class="header" style="padding-top:{{statusBarHeight + 42}}px;background: linear-gradient({{gradientDirection}}, {{mpBgcolorFirst}}, {{mpBgcolorSecond}})">
+    <view class="news_tips {{!status ? 'active' : ''}}">
+      <swiper class="news" autoplay circular vertical wx:if="{{notices.length > 0}}">
+        
+          <swiper-item wx:for="{{notices}}" wx:key="index" class="news_item">
+            <!-- <view style="text-align: center;">{{item.noticeTitle}}</view> -->
+            <view style="text-align: center;">{{item}}</view>
+          </swiper-item>
+        </swiper>
+    </view>
+    <swiper class="banner"  bindchange="changecurrent" indicator-dots indicator-active-color="#fff" circular indicator-color="rgba(255,255,255,0.40)">
+      <!-- <swiper-item  class="banner_item">
+          <video id="indexmv" loop="{{true}}"	show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" enable-progress-gesture="{{false}}" autoplay="{{true}}" src="https://vali-g1.cp31.ott.cibntv.net/youku/657249c4b914b7203d38f37dc/030008010061DD3E71F8B7EC31956026E319E0-EADE-43C3-8F87-42131B0DC0D7.mp4?sid=164457728900010007447_00_B77fbb24bb5f2ecf70b80588798aadbcd&sign=6c0055ac456b24dcb24fd1a9a870cb7f&ctype=50&si=183&psid=edc3df2013a6677aa0221cacf402e49043346"></video>
+        </swiper-item> -->
+      <swiper-item wx:for="{{banner}}" wx:key="index" class="banner_item">
+      <navigator class="item_box" url="{{item.link + '&scene=banner&bizId=' + item.id}}" wx:if='{{item.link}}'>
+        <image src="{{item.image ? item.image : '../../images/banner_default.png'}}" binderror="imageError" data-idx="{{index}}" data-name="banner"></image>
+      </navigator>
+      <view wx:else class="item_box">
+        <image src="{{item.image ? item.image : '../../images/banner_default.png'}}" binderror="imageError" data-idx="{{index}}" data-name="banner"></image>
+      </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  <block wx:for="{{layout}}" wx:key="index">
+     <!-- 新品推荐 -->
+      <view class="new_goods" wx:if="{{item.layoutType == 0}}">
+        <view class="goods_list" >
+        <!-- url="/pages/menu/menu?parentId=749745392754704"  -->
+          <!-- <navigator wx:for="{{item.layoutModels}}"  
+          wx:for-item="val"
+          wx:for-index="idx"
+          hover-class="noshadow" 
+          open-type="reLaunch" 
+          wx:key="idx"
+          class="goods_im" >
+            <view class="item">
+              <view class="item_img">
+                <image src="{{baseUrl + val.imgId}}" binderror="imageError" data-idx="{{index}}" data-name="list"></image>
+              </view>
+              <view class="item_txt">{{val.title}}</view>
+            </view>
+          </navigator> -->
+
+          <view wx:for="{{item.layoutModels}}"  
+          wx:for-item="val"
+          wx:for-index="idx"
+          hover-class="noshadow" 
+          open-type="reLaunch" 
+          wx:key="idx"
+          bindtap="totabberpage" 
+          data-ids="{{val.ids}}"
+          class="goods_im" >
+            <view class="item">
+              <view class="item_img">
+                <image src="{{baseUrl + val.imgId+ '?appId='+appId  + '&width=200&height=200'}}" ></image>
+              </view>
+              <view class="item_txt">{{val.title}}</view>
+            </view>
+          </view>
+          <!-- <navigator wx:for="{{item.layoutModels}}"  
+          wx:for-item="val"
+          wx:for-index="idx"
+          hover-class="noshadow" 
+          open-type="reLaunch" 
+          wx:key="idx"
+          class="goods_im" >
+            <view class="item">
+              <view class="item_img">
+                <image src="{{baseUrl + val.imgId}}" binderror="imageError" data-idx="{{index}}" data-name="list"></image>
+              </view>
+              <view class="item_txt">{{val.title}}</view>
+            </view>
+          </navigator> -->
+        </view>
+      </view>
+      <!-- 秒杀&拼团活动 -->
+      <view class="activity" wx:if="{{item.layoutType == 1 && item.layoutModels.length > 0 && item.layoutModels[0].id}}">
+        <block 
+        wx:for="{{item.layoutModels}}" 
+        wx:for-item="val"
+        wx:for-index="idx"
+        wx:key="idx">
+          <view class="activity_tit">
+            <view class="tit_fl">
+              <view class="tit_type">
+              {{val.title}}
+                <!-- <image src="../../images/seckill.png"></image> -->
+              </view>
+                <!-- <swiper class="tit_news" autoplay circular vertical wx:if="{{notices.length > 0}}">
+                  <swiper-item wx:for="{{2}}" wx:key="index" class="news_item">
+                    <view style="text-align: center;">
+                      <image src="../../images/goods.png"></image>
+                      <text>{{index + 1}}分钟之前买过</text>
+                    </view>
+                  </swiper-item>
+                </swiper> -->
+            </view>
+            
+            <view class="tit_fr" bindtap="topagehandle" data-url="{{val.type == 1?'/pages/activity/seckill':'/pages/activity/collage'}}">
+              <view class="tit_more">
+                <text>更多好货</text>
+                <view class="arrow"></view>
+                <!-- <image src="../../images/next.png"></image> -->
+              </view>
+            </view>
+
+            </view>
+
+            <view class="activity_ls" wx:if="{{val.list.length > 0}}">
+              <view class="activity_ls_box" style="min-width: {{200*val.list.length}}rpx;">
+                <view class="activity_ls_im" 
+                wx:for="{{val.list}}"
+                wx:for-item="key"
+                wx:for-index="keys"
+                wx:key="keys"
+                >
+                  <navigator hover-class="noshadow"  bindtap="topagehandle" data-url="{{val.type == 1?'/pages/activity/seckill':'/pages/activity/collage'}}" class="im_img">
+                    <image src="{{baseUrl + key.imgId+ '?appId='+appId +'&width=100'+'&height=100'}}"></image>
+                  </navigator>
+                  <view class="im_name">{{key.itemName}}</view>
+                  <view class="im_price">
+                    <view class="util">￥</view>
+                    <!-- price(key.skuActivityPrice)}} -->
+                    <view class="num">{{
+                      (!userInfo.merchantMemberId || userInfo.status != 1 || item.skuHiddenPrice) ? '***' : key.settleStyle==1?
+                  (key.skuActivityPrice ?price(key.skuActivityPrice): price(key.skuPrice)):price(key.basicSkuPrice)}}
+                      /{{key.settleStyle==1?key.skuUnit:key.basicUnit}}</view>
+                  </view>
+                </view>
+                <!-- <view class="activity_ls_im">
+                  <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId=120515853025875" class="im_img">
+                    <image src="../../images/goods_info2.png"></image>
+                  </navigator>
+                  <view class="im_name">四川安岳柠檬</view>
+                  <view class="im_price">
+                    <view class="util">￥</view>
+                    <view class="num">9.99/斤</view>
+                  </view>
+                </view>
+                <view class="activity_ls_im">
+                  <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId=120515853025875" class="im_img">
+                    <image src="../../images/goods_info3.png"></image>
+                  </navigator>
+                  <view class="im_name">山东无花果</view>
+                  <view class="im_price">
+                    <view class="util">￥</view>
+                    <view class="num">9.99/斤</view>
+                  </view>
+                </view>
+                <view class="activity_ls_im">
+                  <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId=120515853025875" class="im_img">
+                    <image src="../../images/goods_info4.png"></image>
+                  </navigator>
+                  <view class="im_name">黑美人西瓜</view>
+                  <view class="im_price">
+                    <view class="util">￥</view>
+                    <view class="num">6.99/斤</view>
+                  </view>
+                </view> -->
+              </view>
+              
+            </view>
+            
+        </block>
+        
+      </view>
+
+      <!-- 拼团活动 -->
+      <!-- <view class="activity" wx:if="{{item.layoutType == 4}}">
+        <view class="activity_tit">
+        <view class="tit_fl">
+          <view class="tit_type">特惠拼团</view>
+            <swiper class="tit_news" autoplay circular vertical wx:if="{{notices.length > 0}}">
+              <swiper-item wx:for="{{2}}" wx:key="index" class="news_item">
+                <view style="text-align: center;">
+                  <image src="../../images/goods.png"></image>
+                  <text>{{index + 1}}分钟之前买过</text>
+                </view>
+              </swiper-item>
+            </swiper>
+        </view>
+        
+        <view class="tit_fr" bindtap="topagehandle" data-url="/pages/activity/collage">
+          <view class="tit_more">
+            <text>更多好货</text>
+            <view class="arrow"></view>
+          </view>
+        </view>
+
+        </view>
+
+        <view class="activity_ls">
+          <view class="activity_ls_box" style="min-width: {{200*4}}rpx;">
+            <view class="activity_ls_im">
+              <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId=120515853025875" class="im_img">
+                <image src="../../images/goods_info.png"></image>
+              </navigator>
+              <view class="im_name">陕西软籽石榴</view>
+              <view class="im_price">
+                <view class="util">￥</view>
+                <view class="num">8.99/斤</view>
+              </view>
+            </view>
+            <view class="activity_ls_im">
+              <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId=120515853025875" class="im_img">
+                <image src="../../images/goods_info2.png"></image>
+              </navigator>
+              <view class="im_name">四川安岳柠檬</view>
+              <view class="im_price">
+                <view class="util">￥</view>
+                <view class="num">9.99/斤</view>
+              </view>
+            </view>
+            <view class="activity_ls_im">
+              <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId=120515853025875" class="im_img">
+                <image src="../../images/goods_info3.png"></image>
+              </navigator>
+              <view class="im_name">山东无花果</view>
+              <view class="im_price">
+                <view class="util">￥</view>
+                <view class="num">9.99/斤</view>
+              </view>
+            </view>
+            <view class="activity_ls_im">
+              <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId=120515853025875" class="im_img">
+                <image src="../../images/goods_info4.png"></image>
+              </navigator>
+              <view class="im_name">黑美人西瓜</view>
+              <view class="im_price">
+                <view class="util">￥</view>
+                <view class="num">6.99/斤</view>
+              </view>
+            </view>
+          </view>
+          
+        </view>
+
+      </view> -->
+
+      <!-- 专区 -->
+      <view class="special" wx:if="{{item.layoutType == 2}}">
+        <view class="special_ls">
+          <view class="special_box" style="width: {{244* item.layoutModels.length}}rpx;">
+            
+            <view class="special_im" 
+            wx:for="{{item.layoutModels}}"
+            wx:for-item="val"
+            wx:for-index="idx"
+            wx:key="idx"
+            bindtap="topagehandle" 
+            data-url="/pages/activity/arrondi?title={{val.title}}&id={{val.id}}&labelType=0">
+              <view class="im_tit">{{val.title}}</view>
+              <view class="im_info">
+                <view class="info_fl">
+                  <view class="info_txt">{{val.remark}}</view>
+                  <!-- <view class="info_btn">></view> -->
+                  <view class="info_btn">
+                    <view class="arrow"></view>
+                    <!-- <image src="../../images/next.png"></image> -->
+                  </view>
+                </view>
+                <view class="info_fr">
+                  <image src="{{baseUrl + val.imgId+ '?appId='+appId + '&width=200&height=200'}}"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 新品推荐 -->
+      <view class="hot_goods" wx:if="{{item.layoutType == 3}}">
+        <!-- <view class="menu_tit">
+          <view>产品推荐</view>
+        </view> -->
+        <view class="hot_tabs">
+          <view class="tabs_box">
+            <view 
+            wx:for="{{item.layoutModels}}"
+            wx:for-item="val"
+            wx:for-index="idx"
+            wx:key="idx"
+            class="tabs_im {{item.active == val.id ? 'active': ''}}" 
+            bindtap="changeTab" 
+            data-index="{{index}}"
+            data-val="{{val.id}}">{{val.title}}</view>
+          </view>
+        </view>
+        
+        <view class="goods_list tow" >
+          <!-- <view class="goods_item" wx:for="{{goods}}" wx:key="index" >
+              <navigator hover-class="noshadow" class="goods_img" url="/pages/detail/detail?goodsId={{item.goodsId}}">
+                <image src="{{item.image || '../../images/good_default.png'}}" binderror="imageError" data-idx="{{index}}" data-name="goods"></image>
+              </navigator>
+              <view class="goods_info">
+                <view class="goods_tit">{{item.itemName}}</view>
+                <view class="goods_gg">规格:{{item.skuSpec}}</view>
+                <view class="goods_nav">
+                  <view class="nav_fl">
+                    <view class="price">￥{{price(item.goodsPrice)}}</view>
+                    <view class="old_price" wx:if="{{item.skuUnderlinePrice}}">￥{{price(item.skuUnderlinePrice)}}</view>
+                  </view>
+                  <view class="btn_txt" bindtap="addCar" data-num="{{item.number}}" data-id='{{item.goodsId}}'>
+                    加入购物车
+                  </view>
+                </view>
+              </view>
+          </view> -->
+        
+          <view class="goods_item" wx:for="{{item.list}}" wx:for-item="val" wx:for-index="idx" wx:key="index" >
+              <navigator hover-class="noshadow" class="goods_img" url="/pages/detail/detail?goodsId={{val.goodsId}}">
+                <image src="{{baseUrl + val.goodsImgId+ '?appId='+appId +'&width=200&height=200'}}" ></image>
+                <view class="img_tip" wx:if="{{val.goodsLabels && val.goodsLabels[0].icon}}">
+                  <image mode="widthFix" src="{{baseUrl + val.goodsLabels[0].icon + '?appId='+appId+'&width=200&height=200'}}"></image>
+                </view>
+              </navigator>
+              <view class="goods_info">
+                <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{val.goodsId}}" class="goods_tit">
+                  <view class="goods_tab" wx:if="{{val.isShowItemSupplier==1 && val.itemSupplier }}">{{val.itemSupplier}}</view>
+                  <view class="txt">{{val.itemName}}</view>
+                </navigator>
+                <view class="goods_nav">
+                  <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{val.goodsId}}" class="nav_fl">
+                    <view class="price">
+                      <view class="util">￥</view>
+                      <!-- <view class="num">{{(userInfo.merchantMemberId && userInfo.status == 1) ? price(val.goodsPrice): '***'}}</view>
+                      <view class="l">/{{val.skuUnit}}</view> -->
+                      <view class="num">{{(userInfo.merchantMemberId && userInfo.status == 1) ? val.settleStyle==1?price(val.goodsPrice):price(val.basicSkuPrice): '***'}}</view>
+                      <view class="l">/{{val.settleStyle==1?val.skuUnit:val.basicUnit}}</view>
+                    </view>
+                    <view class="sale">销量{{val.sales}}</view>
+                  </navigator>
+                  <view class="btn" bindtap="addCar" data-num="{{val.number}}" data-id='{{val.goodsId}}'><image src="../../images/add_car.png" mode="widthFix"></image></view>
+                </view>
+              </view>
+          </view>
+
+          <!-- <view class="goods_item">
+              <navigator hover-class="noshadow" class="goods_img" url="/pages/detail/detail?goodsId=">
+                <image src="" ></image>
+                <view class="img_tip">
+                  <image src="../../images/recom.png"></image>
+                </view>
+              </navigator>
+              <view class="goods_info">
+                <view class="goods_tit">
+                  <view class="goods_tab" >戴戴果园</view>
+                  <view class="txt">水果</view>
+                </view>
+                <view class="goods_nav">
+                  <view class="nav_fl">
+                    <view class="price">
+                      <view class="util">￥</view>
+                      <view class="num">10</view>
+                      <view class="l">/箱</view>
+                    </view>
+                    <view class="sale">销量100</view>
+                  </view>
+                  <view class="btn" bindtap="addCar" data-num="{{val.number}}" data-id='{{val.goodsId}}'><image src="../../images/add_car.png" mode="widthFix"></image></view>
+                </view>
+              </view>
+          </view>
+
+          <view class="goods_item">
+              <navigator hover-class="noshadow" class="goods_img" url="/pages/detail/detail?goodsId=">
+                <image src="" ></image>
+                <view class="img_tip">
+                  <image src="../../images/recom.png"></image>
+                </view>
+              </navigator>
+              <view class="goods_info">
+                <view class="goods_tit">
+                  <view class="goods_tab" >戴戴果园</view>
+                  <view class="txt">水果</view>
+                </view>
+                <view class="goods_nav">
+                  <view class="nav_fl">
+                    <view class="price">
+                      <view class="util">￥</view>
+                      <view class="num">10</view>
+                      <view class="l">/箱</view>
+                    </view>
+                    <view class="sale">销量100</view>
+                  </view>
+                  <view class="btn" bindtap="addCar" data-num="{{val.number}}" data-id='{{val.goodsId}}'><image src="../../images/add_car.png" mode="widthFix"></image></view>
+                </view>
+              </view>
+          </view>
+          <view class="goods_item">
+              <navigator hover-class="noshadow" class="goods_img" url="/pages/detail/detail?goodsId=">
+                <image src="" ></image>
+                <view class="img_tip">
+                  <image src="../../images/recom.png"></image>
+                </view>
+              </navigator>
+              <view class="goods_info">
+                <view class="goods_tit">
+                  <view class="goods_tab" >戴戴果园</view>
+                  <view class="txt">水果</view>
+                </view>
+                <view class="goods_nav">
+                  <view class="nav_fl">
+                    <view class="price">
+                      <view class="util">￥</view>
+                      <view class="num">10</view>
+                      <view class="l">/箱</view>
+                    </view>
+                    <view class="sale">销量100</view>
+                  </view>
+                  <view class="btn" bindtap="addCar" data-num="{{val.number}}" data-id='{{val.goodsId}}'><image src="../../images/add_car.png" mode="widthFix"></image></view>
+                </view>
+              </view>
+          </view> -->
+
+        </view>
+      </view>
+  </block>
+</view>

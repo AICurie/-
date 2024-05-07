@@ -1,0 +1,21 @@
+<!--pages/player/res.wxml-->
+<view class="player_res">
+  <view class="success">
+    <view class="player_tit"><icon type="{{status?'success':'warn'}}" size="40" color="{{status?'#5FD556':'#EF2322'}}"></icon><text>{{status?'支付成功':'支付失败'}}</text></view>
+    <view class="text_list">
+      <view class="item_tit" wx:if='{{status}}'>您的商品正在备货中…</view>
+      <view class="item_tit" wx:else>系统未收到你的货款，请等待扣款或选择其他方式重新支付</view>
+      <view class="text_item" wx:if='{{orderId || orderId != null}}'>订单编号：{{orderId}}</view>
+      <!-- <view class="text_item" wx:if="{{status}}">获得积分：172</view> -->
+    </view>
+    <view class="res_btn" wx:if="{{status}}">
+      <view class="idx_btn" bindtap="index">返回首页</view>
+      <view class="info_btn" bindtap="detail">查看订单{{time}}</view>
+    </view>
+    <view class="res_btn" wx:else>
+      <view class="idx_btn" bindtap="changeStatus">重新支付</view>
+      <view class="info_btn" bindtap="back">返回购物车</view>
+    </view>
+  </view>
+  
+</view>

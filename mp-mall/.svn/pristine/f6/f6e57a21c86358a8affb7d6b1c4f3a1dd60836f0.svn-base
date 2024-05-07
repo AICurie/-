@@ -1,0 +1,42 @@
+/* pages/safety/safety.wxss */
+.safety {
+  height: 100vh;
+  background-color: #f2f2f2;
+}
+.safety_list {
+  padding: 0 20rpx;
+  background-color: #fff;
+}
+.safety_item {
+  display: flex;
+  padding: 30rpx 0;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+.safety_item .item_fr {
+  display: flex;
+  align-items: center;
+}
+
+.arrow {
+  width: 16rpx;
+  height: 16rpx;
+  transform: rotateZ(-45deg);
+  border-right: 2rpx solid #333333;
+  border-bottom: 2rpx solid #333333;
+}
+.del {
+  color: #0679FF;
+}
+.quit {
+  left: 0;
+  top: 80%;
+  /* color: #EF2322; */
+  color: #127f30;
+  text-align: center;
+  width: 100%;
+  padding: 26rpx 0;
+  position: fixed;
+  /* transform: translateY(-50%); */
+  /* background-color: #fff; */
+}

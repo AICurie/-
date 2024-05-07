@@ -1,0 +1,4 @@
+<view class="start">
+  <image bindload="countHandle" mode="widthFix" binderror="countHandle" src="{{image}}"></image>
+  <view class="skip" bindtap="skipHandle">跳过({{count}})</view>
+</view>

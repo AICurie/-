@@ -1,0 +1,134 @@
+<view class="detail">
+  <wxs src="../order/price.wxs" module="price"></wxs>
+  <wxs src="./status.wxs" module="aftersaleStatus"></wxs>
+  <wxs src="./type.wxs" module="aftersaleType"></wxs>
+  <block wx:for="{{item.detail}}" wx:for-item="val" wx:key="index">
+    <view class="status_info">
+      <view class="status_tit">{{val.applyStatus == 0 ?'售后服务申请成功' : aftersaleStatus(val.applyStatus)}}</view>
+      <!-- 待审核 -->
+      <view class="status_desc" wx:if="{{val.applyStatus == 0}}">您的订单售后服务申请成功，请您保持手机畅通，耐心等待，我们客服人员马上为您处理</view>
+      <!-- 待退款 -->
+      <view class="status_desc" wx:elif="{{val.applyStatus == 1}}">您的订单售后服务审批成功，请您保持手机畅通，耐心等待，我们取货人员确认商品后为您退款</view>
+      <!-- 已取消 -->
+      <view class="status_desc" wx:elif="{{val.applyStatus == 9}}">本次售后申请已取消，如有需要可再次申请或联系客付为您解答</view>
+      <!-- 已退款 -->
+      <view class="status_desc" wx:elif="{{val.applyStatus == 3}}">预计<text style="color: #FF0000;">24小时内</text>到账，请您保持手机畅通，耐心等待，时间内未退款，请联系客服人员</view>
+      <!-- 已拒绝 -->
+      <view class="status_desc" wx:elif="{{val.applyStatus == 2}}">您的订单售后服务经过确认，不符合售后条件。</view>
+      <view class="status_txt">问题描述: {{val.applyDesc}}</view>
+    </view>
+    <view class="goods_info">
+        <view class="info_box" >
+          <view class="goods_tit">
+            <view class="goods_fl">
+              <!-- <image src="{{val.image}}"></image> -->
+              <image src="{{baseUrl + val.imgId + '?appId=' + appId+'&width=200&height=200'}}"></image>
+            </view>
+            <view class="goods_fr">
+              <view class="goods_name">
+                <view class="name_fl">
+                  <view class="tab" wx:if="{{val.isShowItemSupplier && val.itemSupplier }}">
+                    {{val.itemSupplier }}
+                  </view>
+                  <view class="text {{val.isShowItemSupplier&&val.itemSupplier ?'tab_text':''}}">{{val.itemName}}</view>
+                </view>
+              </view>
+              <view class="goods_price">
+                <view class="price_txt">按实收数量结算</view>
+                <view class="price_box">
+                  <view class="price">
+                    <view class="util">￥</view>
+                    <view class="num">{{price(val.skuPrice)}}</view>
+                  </view>
+                  <view class="goods_num">x{{val.skuSum}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        
+    </view>
+  </block>
+
+  <view class="after_info">
+    <view class="info_item">
+      <view class="item_label">售后类型:</view>
+      <view class="item_val">{{aftersaleType(item.detail[0].applyType)}}</view>
+    </view>
+    <view class="info_item">
+      <view class="item_label">订单地址:</view>
+      <view class="item_val">{{item.distribution.customerAddress}}</view>
+    </view>
+    <view class="info_item">
+      <view class="item_label">下单时间:</view>
+      <view class="item_val">{{item.orderDate}}</view>
+    </view>
+    <view class="info_item">
+      <view class="item_label">联系电话:</view>
+      <view class="item_val">{{item.distribution.customerMobileNo}}</view>
+    </view>
+    <view class="info_item">
+      <view class="item_label">联系人:</view>
+      <view class="item_val">{{item.distribution.customerName}}</view>
+    </view>
+  </view>
+
+  <view class="recom" wx:if="{{recom.length > 0}}">
+        <view class="recom_tit">
+          <view class="recom_tit_bx">
+            <view class="div"></view>
+            <view class="tit">为您推荐</view>
+            <view class="div"></view>
+          </view>
+        </view>
+        <view class="recom_box">
+          <view class="recom_item" wx:for="{{recom}}" wx:key="index">
+            <navigator hover-class="noshadow"  class="item_img" url="/pages/detail/detail?goodsId={{item.goodsId}}">
+              <image src="{{baseUrl + item.goodsImgId + '?appId=' + appId+'&width=200&height=200'}}"></image>
+            </navigator>
+            <view class="item_info">
+              <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="info_tit">
+                <view class="tab" wx:if="{{item.isShowItemSupplier==1 && item.itemSupplier }}">{{item.itemSupplier}}</view>
+                <view class="text ">{{item.itemName}}</view>
+              </navigator>
+              <view class="add_car">
+                <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="in_fl" >
+                  <view class="price">
+                    <view class="util">￥</view>
+                    <view class="num">{{(userInfo.merchantMemberId && userInfo.status == 1) ? item.settleStyle==1?price(item.goodsPrice):price(item.basicSkuPrice): '***'}}</view>
+                      <view class="l">/{{item.settleStyle==1?item.skuUnit:item.basicUnit}}</view>
+                  </view>
+                  <view class="sales">销量{{item.sales}}</view>
+                </navigator>
+                <view class="in_fr" bindtap="addCar" data-num="{{item.number}}" data-id='{{item.goodsId}}'>
+                  <image src="../../images/add_car.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+          <!-- <view class="recom_item">
+            <view class="item_img">
+              <image src="../../images/list9.png"></image>
+            </view>
+            <view class="item_info">
+              <view class="info_tit">
+                <view class="text">无花果</view>
+              </view>
+              <view class="add_car">
+                <view class="in_fl">
+                  <view class="price">
+                    <view class="util">￥</view>
+                    <view class="num">6.99</view>
+                    <view class="price_txt">/斤</view>
+                  </view>
+                  <view class="sales">销量999</view>
+                </view>
+                <view class="in_fr">
+                  <image src="../../images/add_car.png"></image>
+                </view>
+              </view>
+            </view>
+          </view> -->
+        </view>
+      </view>
+</view>

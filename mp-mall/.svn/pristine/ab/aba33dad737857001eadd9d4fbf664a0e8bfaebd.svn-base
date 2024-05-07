@@ -1,0 +1,91 @@
+.demand {
+  padding: 20rpx;
+  min-height: 100vh;
+  background-color: #F1F1F1;
+}
+
+.phone {
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+.phone .val {
+  flex: 1;
+  padding-left: 20rpx;
+}
+.phone .val input {
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  border: 1rpx solid #F1F1F1;
+}
+.text {
+  padding: 20rpx;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+.text textarea {
+  width: 100%;
+  height: 200rpx;
+}
+.imgs {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+  padding: 0 20rpx 20rpx;
+  background-color: #fff;
+}
+.imgs .add {
+  width: 152rpx;
+  height: 152rpx;
+  display: flex;
+  margin-top: 20rpx;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx dashed #F1F1F1;
+}
+.imgs .add image {
+  width: 40rpx;
+  height: 40rpx;
+}
+.imgs .comment_img {
+  width: 152rpx;
+  height: 152rpx;
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+  position: relative;
+}
+.imgs .comment_img:nth-child(4n) {
+  margin-right: 20rpx;
+}
+.imgs .comment_img .close {
+  top: -16rpx;
+  width: 40rpx;
+  height: 40rpx;
+  right: -16rpx;
+  position: absolute;
+}
+
+.imgs .comment_img .close image {
+  width: 100%;
+  height: 100%;
+}
+.imgs .comment_img image {
+  width: 100%;
+  height: 100%;
+}
+.sub_btn {
+  width: 320rpx;
+  color: #fff;
+  height: 72rpx;
+  text-align: center;
+  line-height: 72rpx;
+  border-radius: 10rpx;
+  margin: 160rpx auto 0;
+  /* background-color: #F65110; */
+  /* background:  linear-gradient(to right, #5ad563 0%, #36af62 100%); */
+  background: linear-gradient(to right, #60b533  0%, #60b732 100%);
+}

@@ -1,0 +1,108 @@
+
+<view class="coupon">
+  <wxs src="./price.wxs" module="price"></wxs>
+  <wxs src="./time.wxs" module="time"></wxs>
+  <!-- <view class="coupon_tab">
+    <view class="tab_item {{tab == '1' ? 'active' : ''}}" data-val="1" bindtap="tabHandle">未使用</view>
+    <view class="tab_item {{tab == '2' ? 'active' : ''}}" data-val="2" bindtap="tabHandle">已使用</view>
+    <view class="tab_item {{tab == '3' ? 'active' : ''}}" data-val="3" bindtap="tabHandle">已过期</view>
+  </view> -->
+  <view class="coupon_more" bindtap="toReceive">
+    <view class="more_fl">
+      <view class="fl_ico">
+        <image src="../../images/coupon_more.png"></image>
+      </view>
+      <view class="fl_name">领取更多优惠</view>
+    </view>
+    <view class="more_fr">
+      <view class="fr_txt">领券中心</view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="coupon_ls">
+    <!-- <view class="coupon_item" wx:for="{{list}}" wx:key="index">
+      <view class="item_box">
+        <view class="item_fl">
+          <view class="num">
+            <text style="font-size: 26rpx">￥</text>
+            <text style="font-size: 38rpx; font-weight: 700;">{{item.normalCouponInformation && price(item.normalCouponInformation.couponAmount)}}</text>
+          </view>
+          <view class="name">商品优惠券</view>
+        </view>
+        <view class="item_ml">
+          <view class="item_tit">满{{item.normalCouponInformation && price(item.normalCouponInformation.transactionMinimum)}}可用</view>
+          <view class="item_date">有效期至{{item.availableEndTime}}</view>
+        </view>
+        <view class="item_fr">去使用</view>
+      </view>
+      <view class="item_bg">
+        <image src="../../images/coupon_bg.png"></image>
+      </view>
+    </view> -->
+    
+    <view class="coupon_item" wx:for="{{list}}" wx:key="index">
+      <view class="item_box {{tab != 1 ? 'invalid' : ''}}">
+        <view class="item_fl">
+          <view class="num">￥{{price(item.normalCouponInformation.couponAmount)}}</view>
+          <view class="name">满{{price(item.normalCouponInformation.transactionMinimum)}}可用</view>
+        </view>
+        <view class="item_ml">
+          <view class="item_tit">
+          {{item.couponName}}
+            <!-- <text>全场</text>通用券 -->
+          </view>
+          <view class="item_date">有效期至{{time(item.availableEndTime)}}</view>
+        </view>
+        <view class="item_fr" bindtap="toPathHandle" data-url="/pages/menu/menu" wx:if="{{tab==1}}">去使用</view>
+        <view class="item_img" wx:if="{{tab==2}}">
+          <image src="../../images/coupon2.png"></image>
+        </view>
+        <view class="item_img" wx:if="{{tab==3}}">
+          <image src="../../images/coupon3.png"></image>
+        </view>
+      </view>
+    </view>
+    <!-- <view class="coupon_item">
+      <view class="item_box {{tab != 1 ? 'invalid' : ''}}">
+        <view class="item_fl">
+          <view class="num">￥40</view>
+          <view class="name">满100可用</view>
+        </view>
+        <view class="item_ml">
+          <view class="item_tit">
+            <text>西瓜</text>通用券
+          </view>
+          <view class="item_date">有效期至2022.02.28</view>
+        </view>
+        <view class="item_fr" wx:if="{{tab==1}}">去使用</view>
+        <view class="item_img" wx:if="{{tab==2}}">
+          <image src="../../images/coupon2.png"></image>
+        </view>
+        <view class="item_img" wx:if="{{tab==3}}">
+          <image src="../../images/coupon3.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="coupon_item">
+      <view class="item_box {{tab != 1 ? 'invalid' : ''}}">
+        <view class="item_fl">
+          <view class="num">￥40</view>
+          <view class="name">满100可用</view>
+        </view>
+        <view class="item_ml">
+          <view class="item_tit">
+            <text>西瓜</text>通用券
+          </view>
+          <view class="item_date">有效期至2022.02.28</view>
+        </view>
+        <view class="item_fr" wx:if="{{tab==1}}">去使用</view>
+        <view class="item_img" wx:if="{{tab==2}}">
+          <image src="../../images/coupon2.png"></image>
+        </view>
+        <view class="item_img" wx:if="{{tab==3}}">
+          <image src="../../images/coupon3.png"></image>
+        </view>
+      </view>
+    </view> -->
+  </view>
+</view>

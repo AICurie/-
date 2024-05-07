@@ -1,0 +1,9 @@
+module.exports = function(status){
+  status = Number(status)
+  switch(status){
+    case 1: return '报损';
+    case 2: return '折价';
+    case 3: return '退货';
+    default:return '其他';
+  }
+}

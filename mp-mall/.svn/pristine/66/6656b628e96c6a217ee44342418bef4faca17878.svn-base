@@ -1,0 +1,241 @@
+.evaluate {
+  min-height: 100vh;
+  padding: 20rpx;
+  background-color: #F1F1F1;
+}
+.goods_info {
+  padding: 20rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+.goods_tit {
+  padding: 0 0 20rpx;
+  display: flex;
+  border-bottom: 1rpx solid #A8A8A8;
+  justify-content: space-between;
+}
+.goods_tit .goods_fl {
+  width: 172rpx;
+  height: 172rpx;
+}
+.goods_tit .goods_fl image {
+  width: 100%;
+  height: 100%;
+}
+.goods_tit .goods_fr {
+  flex: 1;
+  display: flex;
+  margin-left: 20rpx;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.goods_tit .goods_fr .goods_name {
+  display: flex;
+  justify-content: space-between;
+}
+.goods_tit .goods_fr .goods_name .name_fl {
+  flex: 1;
+  display: flex;
+}
+.goods_tit .goods_fr .goods_name .name_fl .tab {
+  width: 140rpx;
+  height: 40rpx;
+  color: #fff;
+  line-height: 40rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  position: absolute;
+  text-align: center;
+  border-radius: 10rpx;
+  /* background-color: #c69c6d; */
+  /* background: linear-gradient(to right, #5ad563 0%, #36af62 100%); */
+  background: linear-gradient(to right, #60b533  0%, #60b732 100%);
+}
+.goods_tit .goods_fr .goods_name .name_fl .tab.active {
+  color: #fefb58;
+  background: linear-gradient(to right, #f54327 0%, #f54327 100%);
+}
+.goods_tit .goods_fr .goods_name .name_fl .tab image {
+  width: 100%;
+  height: 100%;
+}
+.goods_tit .goods_fr .goods_name .name_fl .text {
+  font-size: 30rpx;
+  font-weight: 700;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+}
+.goods_tit .goods_fr .goods_name .name_fl .text.tab_text {
+  text-indent: 140rpx;
+}
+.goods_tit .goods_fr .goods_price {
+  display: block;
+  padding: 0  ;
+}
+.goods_tit .goods_fr .goods_price .price_txt {
+  font-size: 20rpx;
+  color: #999;
+}
+.goods_tit .goods_fr .goods_price .price_box {
+  display: flex;
+  align-items: flex-end;
+}
+.goods_tit .goods_fr .goods_price .price_box .price {
+  display: flex;
+  align-items: flex-end;
+}
+.goods_tit .goods_fr .goods_price .price_box .price .util {
+  font-size: 20rpx;
+  color: #FF0000;
+}
+.goods_tit .goods_fr .goods_price .price_box .price .num {
+  font-size: 32rpx;
+  color: #FF0000;
+  font-weight: 700;
+  height: 38rpx;
+  padding-left: 0;
+}
+.goods_tit .goods_fr .goods_price .price_box .goods_num {
+  font-size: 20rpx;
+  color: #999;
+}
+.goods_info .evaluate_ls {
+  display: flex;
+  padding: 20rpx;
+  align-items: center;
+}
+.evaluate_ls_press {
+  position: relative;
+  margin-left: 40rpx;
+}
+.evaluate_ls_press .prees_imgs {
+  display: flex;
+}
+.evaluate_ls_press .prees_imgs image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+.evaluate_ls_press .prees_imgs image:last-child {
+  margin-right: 0;
+}
+.evaluate_ls_ress {
+  color: #ddd;
+  margin-left: 20rpx;
+}
+.evaluate_ls_press .slider {
+  top: 0;
+  left: -26rpx;
+  margin: 0;
+  opacity: 0;
+  width: 116%;
+  height: 100%;
+  position: absolute;
+}
+.goods_info .comment {
+  padding: 20rpx;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+  background-color: #F1F1F1;
+}
+.goods_info .comment .comment_ipt {
+
+}
+.goods_info .comment .comment_ipt textarea {
+  width: 100%;
+  height: 140rpx;
+}
+.goods_info .comment .comment_imgs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.goods_info .comment .comment_imgs .comment_add {
+  width: 152rpx;
+  height: 152rpx;
+  display: flex;
+  margin-top: 20rpx;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx dashed #ddd;
+}
+.goods_info .comment .comment_imgs .comment_add image {
+  width: 40rpx;
+  height: 40rpx;
+}
+.evaluate .evaluate_img {
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  background-color: #fff;
+}
+.evaluate .evaluate_img .comment_imgs {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 0rpx 20rpx 20rpx;
+}
+.evaluate .evaluate_img .comment_imgs .comment_img {
+  width: 152rpx;
+  height: 152rpx;
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+  position: relative;
+}
+
+.evaluate .evaluate_img .comment_imgs .comment_img:nth-child(4n) {
+  margin-right: 20rpx;
+}
+.evaluate .evaluate_img .comment_imgs .comment_img .close {
+  top: -16rpx;
+  width: 40rpx;
+  height: 40rpx;
+  right: -16rpx;
+  position: absolute;
+
+}
+.evaluate .evaluate_img .comment_imgs .comment_img .close image {
+  width: 100%;
+  height: 100%;
+}
+.evaluate .evaluate_img .comment_imgs .comment_img image {
+  width: 100%;
+  height: 100%;
+}
+.evaluate .evaluate_img .comment_imgs .comment_add {
+  width: 152rpx;
+  height: 152rpx;
+  display: flex;
+  margin-top: 20rpx;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx dashed #ddd;
+}
+.evaluate .evaluate_img .comment_imgs .comment_add image {
+  width: 40rpx;
+  height: 40rpx;
+}
+.sub_box {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  height: 120rpx;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+.sub_box .sub_btn {
+  width: 320rpx;
+  height: 72rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 76rpx;
+  border-radius: 10rpx;
+  /* background-color: #f65110; */
+  /* background:  linear-gradient(to right, #5ad563 0%, #36af62 100%); */
+  background: linear-gradient(to right, #60b533  0%, #60b732 100%);
+}

@@ -1,0 +1,187 @@
+<!--pages/menu/menu.wxml-->
+<view class="menu">
+  <view class="bar_header " >
+    <view class="bar_item " style="height:{{statusBarHeight + 42}}px;top:0px;line-height:{{statusBarHeight + 62}}px;">
+      <text style="color: #1D202B;height: {{isIos?'32px':'29px'}};line-height: {{isIos?'32px':'29px'}};margin-bottom: {{isIos?'6px':'4px'}};">分类</text>
+      <navigator style="height: {{isIos?'31px':'29px'}};line-height: {{isIos?'31px':'29px'}};margin-bottom: {{isIos?'6px':'4px'}};" url="/pages/search/search" hover-class="noshadow" class="search"><image src="../../images/search.png" ></image>输入商品名称</navigator>
+    </view>
+  </view>
+  <!-- <view class="search_box">
+    <navigator hover-class="noshadow" url="/pages/search/search" class="search"><image src="../../images/search.png" ></image><input placeholder="输入商品名称" disabled></input></navigator>
+  </view> -->
+  <view class="menu_box" style="padding-top: {{statusBarHeight + 42}}px;">
+    <view class="menu_scroll">
+      <view class="scroll_box" style="min-width: {{200 *scroll.length}}rpx; display: flex; ">
+        <view wx:for="{{scroll}}" bindtap="tabsHandle" data-item="{{item}}" wx:key="index" class="scroll_item {{item.catagoryId == scroll_act? 'active' : ''}}">
+          <text>{{item.catagoryName}}</text>
+        </view>
+        <!-- <view class="scroll_item">进口水果</view>
+        <view class="scroll_item">休闲零食</view>
+        <view class="scroll_item">包装辅料</view> -->
+      </view>
+    </view>
+    <view class="menu_flex">
+      <view  class="menu_left">
+        <view class="menu_left_box">
+          <view class="menu_left_item {{item.catagoryId==parentid?'active':''}}" wx:for="{{list}}" wx:key="index">
+            <view class="menu_item_name" bindtap="changeIdx" data-item="{{item}}" data-parentId="{{item.catagoryId}}" data-idx="{{index}}" data-status="1"> 
+              <view><image src="{{item.image}}" wx:if='{{item.imgId}}'></image>{{item.catagoryName}}</view>
+            </view>
+            <view class="second_list" hidden="{{item.catagoryId!=parentid || hidden}}">
+              <view bindtap="changeIdx" data-item="{{item}}" data-catagoryCode="{{val.catagoryCode}}" data-status="2" data-type="{{val.catagoryId}}"  wx:for="{{item.list}}" wx:for-item="val" wx:for-index="key" wx:key="key">
+                <view class="second_item {{val.catagoryId == catagoryId?'active':''}}">{{val.catagoryName}}</view>
+              </view>
+            </view>
+          </view>
+          <!-- <view class="menu_left_item {{item.name==list_act || item.isOpen ?'active':''}}" wx:for="{{list}}" wx:key="index">
+            <view class="menu_item_name" bindtap="changeAct" data-parentId="{{item.catagoryId}}" data-idx="{{index}}" data-status="1"> 
+              <view>{{item.catagoryName}}</view>
+            </view>
+            <view class="second_list" hidden="{{!item.isOpen}}">
+              <view bindtap="changeAct" data-catagoryCode="{{val.catagoryCode}}" data-status="2" data-idx="{{index}}" data-key="{{key}}" data-type="{{val.catagoryId}}" class="second_item {{catagoryName == list_act?'active':''}}" wx:for="{{item.list}}" wx:for-item="val" wx:for-index="key" wx:key="key">
+                <view>{{val.catagoryName}}</view>
+              </view>
+            </view>
+          </view> -->
+        </view>
+      </view>
+      <view class="menu_right">
+        <view class="seckill" wx:if="{{false}}">
+            <view class="seckill_tit">
+            <view class="tit_fl">
+              <view class="tit_type">
+              爆品秒杀
+                <!-- <image src="../../images/seckill.png"></image> -->
+              </view>
+                <swiper class="tit_news" autoplay circular vertical wx:if="{{notices.length > 0}}">
+                  <swiper-item wx:for="{{2}}" wx:key="index" class="news_item">
+                    <view style="text-align: center;">
+                      <image src="../../images/goods.png"></image>
+                      <text>{{index + 1}}分钟之前买过</text>
+                    </view>
+                  </swiper-item>
+                </swiper>
+            </view>
+            
+            <!-- <view class="tit_fr">
+              <view class="tit_more">
+                <text>更多好货</text>
+                <image src="../../images/next.png"></image>
+              </view>
+            </view> -->
+
+            </view>
+
+            <view class="seckill_ls">
+              <view class="seckill_ls_box" style="min-width: {{150*4}}rpx;">
+                <view class="seckill_ls_im">
+                  <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId=120515853025875" class="im_img">
+                    <image src="../../images/goods_info.png"></image>
+                  </navigator>
+                  <!-- <view class="im_name">陕西软籽石榴</view> -->
+                  <view class="im_price">
+                    <view class="util">￥</view>
+                    <view class="num">8.99/斤</view>
+                  </view>
+                </view>
+                <view class="seckill_ls_im">
+                  <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId=120515853025875" class="im_img">
+                    <image src="../../images/goods_info2.png"></image>
+                  </navigator>
+                  <!-- <view class="im_name">四川安岳柠檬</view> -->
+                  <view class="im_price">
+                    <view class="util">￥</view>
+                    <view class="num">9.99/斤</view>
+                  </view>
+                </view>
+                <view class="seckill_ls_im">
+                  <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId=120515853025875" class="im_img">
+                    <image src="../../images/goods_info3.png"></image>
+                  </navigator>
+                  <!-- <view class="im_name">山东无花果</view> -->
+                  <view class="im_price">
+                    <view class="util">￥</view>
+                    <view class="num">9.99/斤</view>
+                  </view>
+                </view>
+                <view class="seckill_ls_im">
+                  <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId=120515853025875" class="im_img">
+                    <image src="../../images/goods_info4.png"></image>
+                  </navigator>
+                  <!-- <view class="im_name">黑美人西瓜</view> -->
+                  <view class="im_price">
+                    <view class="util">￥</view>
+                    <view class="num">6.99/斤</view>
+                  </view>
+                </view>
+              </view>
+              
+            </view>
+        </view>
+        <view class="sort_menu">
+          <view class="sort_item {{goodsOrderby=='TYPE_SORT_ASC'?'active':''}}" bindtap="changeSort" data-item="TYPE_SORT_ASC">综合推荐</view>
+          <view class="sort_item {{goodsOrderby=='SALES_DESC'?'active':''}}" bindtap="changeSort" data-item="SALES_DESC">销量</view>
+          <view class="sort_item {{goodsOrderby=='price'?'active':''}}" bindtap="changeSort" data-item="price">
+            <view>价格</view>
+            <view class="sort_arrow_box">
+              <view class="sort_arrow top {{goodsOrderby=='price'&&sort_up?'active':''}}"></view>
+              <view class="sort_arrow btm {{goodsOrderby=='price'&&!sort_up?'active':''}}"></view>
+            </view>  
+          </view>
+        </view>
+        <scroll-view scroll-y class="goods_list" bindscrolltolower="getMore" wx:if="{{goods.length > 0}}">
+          <wxs src="../order/price.wxs" module="price"></wxs>
+          <view class="goods_item" wx:for="{{goods}}" wx:key="index">
+            <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="goods_image">
+              <image src="{{item.image}}" mode="aspectFill"></image>
+              <view class="img_tip" wx:if="{{item.goodsLabels && item.goodsLabels[0].icon}}">
+                <image mode="widthFix" src="{{baseUrl + item.goodsLabels[0].icon + '?appId='+appId+'&width=200&height=200'}}"></image>
+              </view>
+            </navigator>
+            <view class="goods_info" bindtap="detail" data-id="{{item.goodsId}}">
+              <view class="goods_tit">
+                <view class="tab" wx:if="{{item.isShowItemSupplier == 1 && item.itemSupplier }}">{{item.itemSupplier }}</view>
+                <view class="text {{item.isShowItemSupplier == 1&&item.itemSupplier ?'tab_txt':''}}">{{item.goodsName}}</view>
+              </view>
+              <view class="goods_price">
+                <view class="price_box">
+                  <view class="price_now">
+                    <view class="util">￥</view>
+                    <view class="num">
+                      {{((!userInfo.merchantMemberId || userInfo.status != 1) || item.skuHiddenPrice) ? '***' : 
+                      item.settleStyle==1?(price(item.goodsPrice)+'/'+item.skuUnit):
+                      
+                      (price(item.basicSkuPrice)+'/'+item.basicUnit)}}<!-- 1号位基础单位价格 --><!-- 2号位基础单位 -->
+                    </view>
+                  </view>
+                  <view class="price">{{item.settleStyle == 0 ? '按斤结算': '按箱结算'}}</view>
+                </view>
+              </view>
+              <view class="goods_sales" >
+                <view class="sales_num">
+                  <view class="old">￥
+                  <!-- 3号位市场价后返回 -->
+                  {{(userInfo.merchantMemberId && userInfo.status == 1) ? 
+                  price(item.skuUnderlinePrice) : '***'}}/
+                  {{item.settleStyle == 1 ? item.skuUnit : item.basicUnit}}</view>
+                  <view class="now">
+
+                  约￥{{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : 
+                  item.settleStyle==0?price(item.goodsPrice):
+                  price(item.basicSkuPrice)}}元/{{item.settleStyle == 0 ? item.skuUnit : item.basicUnit}} <!-- 4号位价格  -->
+                  </view>
+                </view>
+                <view class="btn" catchtap="addCar" data-num="{{item.number}}" data-id='{{item.goodsId}}'><image src="../../images/add_car.png" mode="widthFix"></image></view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+        <view class="vido" wx:else>
+            <image src="../../images/{{search_nicht}}" mode="widthFix"></image>
+            <view>暂无商品</view>
+        </view>
+      </view>
+    </view>
+    
+  </view>
+</view>

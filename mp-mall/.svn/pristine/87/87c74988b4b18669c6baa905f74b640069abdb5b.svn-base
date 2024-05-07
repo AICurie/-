@@ -1,0 +1,11 @@
+module.exports = function(status){
+  status = Number(status)
+  switch(status){
+    case 1: 
+      return '直播中';
+    case 2: 
+      return '休息中';
+    default: 
+      return '未知状态'
+  }
+}

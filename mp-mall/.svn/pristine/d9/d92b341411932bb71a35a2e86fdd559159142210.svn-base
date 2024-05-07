@@ -1,0 +1,31 @@
+/* pages/help/help.wxss */
+/* pages/safety/safety.wxss */
+.safety {
+  height: 100vh;
+  background-color: #f2f2f2;
+}
+.safety_list {
+  padding: 0 20rpx;
+  background-color: #fff;
+}
+.safety_item {
+  display: flex;
+  padding: 20rpx 0;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+.safety_item .item_fr {
+  display: flex;
+  align-items: center;
+}
+
+.arrow {
+  width: 20rpx;
+  height: 20rpx;
+  transform: rotateZ(-45deg);
+  border-right: 1rpx solid #333333;
+  border-bottom: 1rpx solid #333333;
+}
+.del {
+  color: #0679FF;
+}

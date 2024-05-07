@@ -1,0 +1,151 @@
+<view class="retreat">
+  <view class="retreat_info">
+    <view class="info_tit">
+      <view class="tit_fl">退款成功</view>
+      <view class="tit_fr">
+        <view class="util">￥</view>
+        <view class="num">1620.80</view>
+      </view>
+    </view>
+    <view class="info_time">2022.1.18  12:06:21</view>
+    <view class="info_nav">
+      <view class="nav_fl">退还微信钱包</view>
+      <view class="nav_fr">
+        <view class="util">￥</view>
+        <view class="num">1620.80</view>
+      </view>
+    </view>
+    <view class="info_btns">
+      <view class="btn_item">查看钱款去向</view>
+    </view>
+  </view>
+
+  <view class="mail">
+    <view class="mail_txt">寄件详情</view>
+    <view class="arrow"></view>
+  </view>
+
+  <view class="activity">
+    <view class="activity_tit">
+    <view class="tit_fl">
+      <view class="tit_txt">是否重新购买？为您精选好物</view>
+    </view>
+    
+
+    </view>
+
+    <view class="activity_ls">
+      <view class="activity_ls_box" style="min-width: {{200*4}}rpx;">
+        <view class="activity_ls_im">
+          <view class="im_img">
+            <image src="../../images/goods_info.png"></image>
+          </view>
+          <view class="im_name">陕西软籽石榴</view>
+          <view class="im_price">
+            <view class="util">￥</view>
+            <view class="num">8.99/斤</view>
+          </view>
+        </view>
+        <view class="activity_ls_im">
+          <view class="im_img">
+            <image src="../../images/goods_info2.png"></image>
+          </view>
+          <view class="im_name">四川安岳柠檬</view>
+          <view class="im_price">
+            <view class="util">￥</view>
+            <view class="num">9.99/斤</view>
+          </view>
+        </view>
+        <view class="activity_ls_im">
+          <view class="im_img">
+            <image src="../../images/goods_info3.png"></image>
+          </view>
+          <view class="im_name">山东无花果</view>
+          <view class="im_price">
+            <view class="util">￥</view>
+            <view class="num">9.99/斤</view>
+          </view>
+        </view>
+        <view class="activity_ls_im">
+          <view class="im_img">
+            <image src="../../images/goods_info4.png"></image>
+          </view>
+          <view class="im_name">黑美人西瓜</view>
+          <view class="im_price">
+            <view class="util">￥</view>
+            <view class="num">6.99/斤</view>
+          </view>
+        </view>
+      </view>
+      
+    </view>
+
+  </view>
+
+  <view class="mail">
+    <view class="mail_txt">协商历史</view>
+    <view class="arrow"></view>
+  </view>
+
+  <view class="mail">
+    <view class="mail_txt">参与用户调研</view>
+    <view class="arrow"></view>
+  </view>
+
+  <view class="goods_info">
+    <view class="info_tit">退款信息</view>
+    <view class="goods_box">
+      <view class="goods_fl">
+        <image src="../../images/list2.png"></image>
+      </view>
+      <view class="goods_fr">
+        <view class="fr_item">
+          <view class="goods_name">进口西梅</view>
+          <view class="goods_price">
+            <view class="util">￥</view>
+            <view class="num">1620.80</view>
+          </view>
+        </view>
+        <view class="fr_item">
+          <view class="item_txt">按实收斤数结算</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="info_item">
+      <view class="item_label">退款原因</view>
+      <view class="item_val">坏果很多</view>
+    </view>
+    <view class="info_item">
+      <view class="item_label">退款金额</view>
+      <view class="item_price">
+        <view class="util">￥</view>
+        <view class="num">1620.80</view>
+      </view>
+    </view>
+    <view class="info_item">
+      <view class="item_label">申请件数</view>
+      <view class="item_val">1</view>
+    </view>
+    <view class="info_item">
+      <view class="item_label">申请时间</view>
+      <view class="item_val">2021.12.18  14:37</view>
+    </view>
+    <view class="info_item">
+      <view class="item_label">退款编号</view>
+      <view class="item_num">
+        <view class="txt">147894357489745648974658</view>
+        <view class="shu">|</view>
+        <view class="btn">复制</view>
+      </view>
+    </view>
+    <view class="info_end">
+      <image src="../../images/consult.png"></image>
+    </view>
+  </view>
+
+  <!-- <view class="retreat_btm">
+    <view class="retreat_btn">售后评价</view>
+  </view> -->
+</view>
+

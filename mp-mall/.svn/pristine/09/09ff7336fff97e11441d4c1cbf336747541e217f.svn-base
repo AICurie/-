@@ -1,0 +1,177 @@
+<view class="auth">
+  <view class="user_info">
+    <view class="info_fl">
+      <!-- <view class="avatar" wx:if="{{!userInfo.mobile}}"><image src="{{'../../images/icon_avatar.png'}}"></image></view> -->
+      <!-- <view class="avatar" wx:else>
+        <view class="img"><open-data type="userAvatarUrl"></open-data></view>
+      </view> -->
+      <view class="avatar" >
+        <view class="img"><open-data type="userAvatarUrl"></open-data></view>
+      </view>
+      <view class="name">
+        <open-data type="userNickName"></open-data>
+      </view>
+      
+    </view>
+    <!-- <view class="info_fr">
+      <view class="btn">编辑基本信息</view>
+    </view> -->
+  </view>
+  <view class="auth_box">
+    <view class="auth_tit">
+      <view wx:if="{{showBtn || (!showBtn && type=='1')}}" class="tit_item {{type == '1' ? 'active': ''}}" data-val="1" bindtap="changTab">店铺认证</view>
+      <view wx:if="{{showBtn || (!showBtn && type=='0')}}" class="tit_item {{type == '0' ? 'active': ''}}" data-val="0" bindtap="changTab">团体认证</view>
+    </view>
+
+    <view class="item_box" hidden="{{type != '1'}}">
+      <view class="auth_item">
+        <view class="item_label"><text>*</text> 店铺名称</view>
+        <view class="item_val">
+          <input type="text" disabled="{{!showBtn}}" bindinput="inputHandle" value="{{shop.entName}}" data-str="shop.entName" placeholder="请录入"/>
+        </view>
+      </view>
+      <view class="auth_item">
+        <view class="item_label"><text>*</text>联系人</view>
+        <view class="item_val">
+          <input type="text" disabled="{{!showBtn}}" bindinput="inputHandle" value="{{shop.userName}}" data-str="shop.userName" placeholder="请录入"/>
+        </view>
+      </view>
+      <view class="auth_item">
+        <view class="item_label"><text>*</text>联系人手机号码</view>
+        <view class="item_val">
+          <input type="number" disabled="{{!showBtn}}" maxlength="11" bindinput="inputHandle" value="{{shop.mobile}}" data-str="shop.mobile" placeholder="请录入"/>
+        </view>
+      </view>
+      <view class="auth_item">
+        <view class="item_label"><text>*</text>所属地区</view>
+        <view class="item_val">
+          <view class="val_box" bindtap="showCity" disabled="{{!showBtn}}">
+            <input placeholder="请选择" value="{{shop.province + shop.city + shop.area}}" disabled></input>
+          </view>
+        </view>
+      </view>
+      <!-- <view class="area" bindtap="getLocation">{{areainfo || '店铺详细地址如街道、门牌号，小区等'}}</view> -->
+      <view class="area">
+        <view class="label"><text>*</text>详细地址</view>
+        <view class="val">
+          <textarea disabled="{{!showBtn}}" bindinput="inputHandle" value="{{shop.address}}" data-str="shop.address" placeholder="店铺详细地址如街道、门牌号，小区等"></textarea>
+        </view>
+      </view>
+      <view class="auth_item">
+        <view class="item_label"><text>*</text>获取定位</view>
+        <view class="item_val">
+          <view class="val_box" bindtap="getLocation" data-str="shop" disabled="{{!showBtn}}">
+            {{shop.lat && shop.lng ? '已获取': '点击获取'}}
+          </view>
+          <image src="../../images/location.png"></image>
+        </view>
+      </view>
+      <view class="auth_item">
+        <view class="item_label">服务专员</view>
+        <view class="item_val">
+          <input disabled="{{!showBtn}}" bindinput="inputHandle" maxlength="6" value="{{recommender}}" data-str="recommender" type="text" placeholder="请录入"/>
+        </view>
+      </view>
+      <view class="auth_img">
+        <view class="img_label"><text>*</text> 店面照片</view>
+        <view class="img_val" disabled="{{!showBtn}}" bindtap="upimgHandle" data-str="facadeImg">
+          <view class="val_img" wx:if="{{facadeImg}}">
+            <image src="{{baseUrl + facadeImg+'?appId='+appId}}"></image>
+          </view>
+          <view class="val_box" wx:else>
+            <image src="../../images/goods_add.png"></image>
+          </view>
+        </view>
+      </view>
+      <view class="auth_img">
+        <view class="img_label">营业执照</view>
+        <view class="img_val" disabled="{{!showBtn}}" bindtap="upimgHandle" data-str="businessLicenseImg">
+          <view class="val_img" wx:if="{{businessLicenseImg}}">
+            <image src="{{baseUrl + businessLicenseImg+'?appId='+appId}}"></image>
+          </view>
+          <view class="val_box" wx:else>
+            <image src="../../images/goods_add.png"></image>
+          </view>
+        </view>
+      </view>
+      
+    </view>
+    <view class="item_box" hidden="{{type != '0'}}">
+      <view class="auth_item">
+        <view class="item_label"><text>*</text>人员名称</view>
+        <view class="item_val">
+          <input type="text" disabled="{{!showBtn}}" bindinput="inputHandle" value="{{team.entName}}" data-str="team.entName" placeholder="请录入"/>
+        </view>
+      </view>
+      <view class="auth_item">
+        <view class="item_label"><text>*</text>联系人</view>
+        <view class="item_val">
+          <input type="text" disabled="{{!showBtn}}" bindinput="inputHandle" value="{{team.userName}}" data-str="team.userName" placeholder="请录入"/>
+        </view>
+      </view>
+      <view class="auth_item">
+        <view class="item_label"><text>*</text>联系人手机号码</view>
+        <view class="item_val">
+          <input type="number" disabled="{{!showBtn}}" maxlength="11" bindinput="inputHandle" value="{{team.mobile}}" data-str="team.mobile" placeholder="请录入"/>
+        </view>
+      </view>
+      <view class="auth_item">
+        <view class="item_label"><text>*</text>团体收货地址</view>
+        <view class="item_val">
+          <view class="val_box" bindtap="showCity">
+            <input disabled="{{!showBtn}}" placeholder="请选择" value="{{team.province + team.city + team.area}}" disabled></input>
+          </view>
+        </view>
+      </view>
+      <!-- <view class="area" bindtap="getLocation">{{areainfo || '店铺详细地址如街道、门牌号，小区等'}}</view> -->
+
+      <view class="area">
+        <view class="label"><text>*</text>详细地址</view>
+        <view class="val">
+          <textarea disabled="{{!showBtn}}" bindinput="inputHandle" value="{{team.address}}" data-str="team.address" placeholder="店铺详细地址如街道、门牌号，小区等"></textarea>
+        </view>
+      </view>
+      <view class="auth_item">
+        <view class="item_label"><text>*</text>获取定位</view>
+        <view class="item_val">
+          <view class="val_box" disabled="{{!showBtn}}" bindtap="getLocation" data-str="team">
+            {{team.lat && team.lng ? '已获取': '点击获取'}}
+          </view>
+          <image src="../../images/location.png"></image>
+        </view>
+      </view>
+      <view class="auth_item">
+        <view class="item_label">服务专员</view>
+        <view class="item_val">
+          <input type="text" disabled="{{!showBtn}}" maxlength="6" bindinput="inputHandle" value="{{recommender}}" data-str="recommender" placeholder="请录入"/>
+        </view>
+      </view>
+      <view class="auth_img">
+        <view class="img_label"><text>*</text>上传身份证正反面</view>
+        <view class="img_val">
+          <view disabled="{{!showBtn}}" class="val_img" wx:if="{{idCradFront}}" bindtap="upimgHandle" data-str="idCradFront">
+            <image src="{{baseUrl + idCradFront+'?appId='+appId}}"></image>
+          </view>
+          <view disabled="{{!showBtn}}" class="val_box" wx:else bindtap="upimgHandle" data-str="idCradFront">
+            <image src="../../images/goods_add.png"></image>
+          </view>
+          <view disabled="{{!showBtn}}" class="val_img" wx:if="{{idCradBack}}" bindtap="upimgHandle" data-str="idCradBack">
+            <image src="{{baseUrl + idCradBack+'?appId='+appId}}"></image>
+          </view>
+          <view disabled="{{!showBtn}}" class="val_box" wx:else bindtap="upimgHandle" data-str="idCradBack">
+            <image src="../../images/goods_add.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="auth_btn">
+      <!-- <view class="btn" bindtap="subHandle">点击认证</view> -->
+      <button wx:if="{{showBtn}}" class="btn" open-type="getUserInfo" bindgetuserinfo="subHandle">提交认证</button>
+      <button wx:else class="btn dis" >提交认证</button>
+    </view>
+
+  </view>
+
+  <nyz_area_picker show="{{show}}" bindsureSelectArea="changeCity"></nyz_area_picker>
+  <canvas canvas-id='CanvasId' style='position:fixed;left: 9999px;width:{{canvasWidth || 750}}px;height:{{ canvasHeight }}px' class='myCanvas'></canvas>
+</view>

@@ -1,0 +1,30 @@
+.message {
+  padding: 20rpx;
+  min-height: 100vh;
+  background-color: #F1F1F1;
+}
+.message .message_box {
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+.message .message_box .box_tit {
+  padding: 20rpx;
+  display: flex;
+  
+  justify-content: space-between;
+  border-bottom: 1rpx solid #F1F1F1;
+}
+.message .message_box .box_tit view {
+  color: #807B7A;
+}
+.message .message_box .box_info {
+  padding: 20rpx;
+}
+.message .message_box .box_info .info_tit {
+  color: #000;
+  font-size: 30rpx;
+}
+.message .message_box .box_info .info_txt {
+  color: #847F7F;
+  margin-top: 20rpx;
+}

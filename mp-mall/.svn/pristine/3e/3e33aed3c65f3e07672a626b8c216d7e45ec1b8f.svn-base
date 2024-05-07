@@ -1,0 +1,46 @@
+<view class="comment">
+  <view class="comment_tab">
+    <view class="tab_item {{tab == 1?'active':''}}" bindtap="changtab" data-val="1">全部</view>
+    <view class="tab_item {{tab == 2?'active':''}}" bindtap="changtab" data-val="2">最新</view>
+    <view class="tab_item {{tab == 3?'active':''}}" bindtap="changtab" data-val="3">有图</view>
+  </view>
+  <view class="comment_box">
+    <view class="comment_item" wx:for="{{list}}" wx:key="index">
+      <view class="user_info">
+        <view class="info_fl">
+          <view class="avatar">
+            <image src="../../images/icon_avatar.png" mode="widthFix"></image>
+          </view>
+          <view class="name">{{item.commentName || "匿名用户"}}</view>
+        </view>
+        <view class="info_fr">{{item.commentDate}}</view>
+      </view>
+      <!-- <view class="goods_info">分类：240斤装</view> -->
+      <view class="comment_txt">{{item.commentContent}}</view>
+      <view class="comment_imgs" wx:if="{{item.commentExtendModel && item.commentExtendModel.imgIds}}">
+        <view class="img" wx:for="{{item.commentExtendModel.imgIds}}"
+        bindtap="viewImage"
+        data-item="{{item.commentExtendModel.imgIds}}"
+        data-idx="{{idx}}"
+        wx:for-item="val"
+        wx:for-index="idx"
+        wx:key="idx">
+          <image src="{{baseUrl + val+'?appId='+appId+'&width=200&height=200'}}" mode="aspectFit"></image>
+        </view>
+      </view>
+    </view>
+    <!-- <view class="comment_item">
+      <view class="user_info">
+        <view class="info_fl">
+          <view class="avatar">
+            <image src="../../images/icon_avatar.png"></image>
+          </view>
+          <view class="name">用户151****1122</view>
+        </view>
+        <view class="info_fr">2022-1-1</view>
+      </view>
+      <view class="goods_info">分类：240斤装</view>
+      <view class="comment_txt">非常甜，非常好吃。</view>
+    </view> -->
+  </view>
+</view>

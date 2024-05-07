@@ -1,0 +1,15 @@
+
+<view class="message">
+  <view class="message_box">
+    <view class="box_tit">
+      <view class="tit_txt">{{detail.title}}</view>
+      <view class="tit_time">{{detail.sendTime}}</view>
+    </view>
+    <view class="box_info">
+      <view class="info_tit">{{detail.content}}</view>
+      <!-- <view class="info_txt">
+        上市时间：2022.3.2号
+      </view> -->
+    </view>
+  </view>
+</view>

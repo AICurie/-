@@ -1,0 +1,63 @@
+<view class="aftersale">
+  <wxs src="../order/price.wxs" module="price"></wxs>
+  <view class="goods_info">
+      <view  class="goods_tit">
+        <view class="goods_fl">
+          <image src="{{baseUrl + goodInfo.imgId+'?appId='+appId+'&width=200&height=200'}}"></image>
+        </view>
+        <view class="goods_fr">
+          <view class="goods_name">
+            <view class="name_fl">
+              <view class="tab " wx:if="{{goodInfo.isShowItemSupplier && goodInfo.itemSupplier}}">{{goodInfo.itemSupplier}}</view>
+              <view class="text {{goodInfo.isShowItemSupplier&&goodInfo.itemSupplier?'tab_text':''}}">{{goodInfo.itemName}}</view>
+            </view>
+          </view>
+          <view class="goods_price">
+            <view class="price_txt">按实收数量结算</view>
+            <view class="price_box">
+              <view class="price">
+                <view class="util">￥</view>
+                <view class="num">{{price(goodInfo.skuPrice)}}</view>
+              </view>
+              <view class="goods_num">(共{{goodInfo.skuSum}}{{goodInfo.skuUnit}})</view>
+            </view>
+          </view>
+        </view>
+      </view>
+  </view>
+  <view class="cause_box">
+    <view class="cause_item" wx:for="{{list}}" wx:key="index" data-type="{{item.id}}" bindtap="topagehandle">
+      <view class="item_fl">
+        <image wx:if="{{item.applyTypeName == '报损'}}" src="../../images/cause2.png"></image>
+        <image wx:elif="{{item.applyTypeName == '折价'}}" src="../../images/cause3.png"></image>
+        <image wx:elif="{{item.applyTypeName == '退货'}}" src="../../images/cause1.png"></image>
+        <text>{{item.applyTypeName}}</text>
+      </view>
+      <view class="item_fr">
+        <!-- <view class="fr_txt">2022-02-18前可申请</view> -->
+        <view class="fr_txt">选择</view>
+        <view class="arrow"></view>
+      </view>
+    </view>
+    <!-- <view class="cause_item" bindtap="topagehandle" data-url="/pages/aftersale/cause">
+      <view class="item_fl">
+        <image src="../../images/cause3.png"></image>
+        <text>折价</text>
+      </view>
+      <view class="item_fr">
+        <view class="fr_txt">商品降价，申请补偿差价</view>
+        <view class="arrow"></view>
+      </view>
+    </view>
+    <view class="cause_item" bindtap="topagehandle" data-url="/pages/aftersale/cause">
+      <view class="item_fl">
+        <image src="../../images/cause1.png"></image>
+        <text>退货</text>
+      </view>
+      <view class="item_fr">
+        <view class="fr_txt">2022-02-18前可申请</view>
+        <view class="arrow"></view>
+      </view>
+    </view> -->
+  </view>
+</view>

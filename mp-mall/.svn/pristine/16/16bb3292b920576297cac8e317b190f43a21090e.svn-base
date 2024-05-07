@@ -1,0 +1,73 @@
+<view class="arrondi">
+  <wxs src="../order/price.wxs" module="price"></wxs>
+  <view class="seckill_box">
+    <view class="seckill_ls">
+      <view class="goods_item" wx:for="{{list}}" wx:key="index">
+        <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}&skuSource=2" class="goods_image">
+          <image src="{{baseUrl+item.goodsImgId+'?appId='+appId+'&width=200&height=200'}}" ></image>
+          <view class="img_tip" wx:if="{{item.goodsLabels && item.goodsLabels[0].icon}}">
+            <image mode="widthFix" src="{{baseUrl + item.goodsLabels[0].icon + '?appId='+appId+'&width=200&height=200'}}"></image>
+          </view>
+        </navigator>
+        <!-- <view class="goods_info" bindtap="detail" data-id="189995469980307">
+          <view class="goods_tit">
+            <view class="tab">戴戴果园</view>
+            <view class="text tab_txt">新疆蜜瓜50斤A级(网纹瓜)</view>
+          </view>
+          <view class="goods_price">
+            <view class="price_box">
+              <view class="price_now">
+                <view class="util">￥</view>
+                <view class="num">4.1/斤</view>
+              </view>
+            </view>
+          </view>
+          <view class="goods_sales" >
+            <view class="sales_num">
+              <view class="old">￥150.75/件</view>
+              <view class="now">约￥98.6元/件</view>
+              <view class="sales_txt">按实收斤数结算</view>
+            </view>
+          </view>
+          <view class="amount">
+            <view class="amount_fl">
+              <view class="amount_item">
+                <view class="amount_tit">毛重</view>
+                <view class="amount_txt">约45斤</view>
+              </view>
+              <view class="amount_ls">
+                <view class="amount_item">
+                  <view class="amount_tit">净重</view>
+                  <view class="amount_txt">约41斤</view>
+                </view>
+                <view class="amount_item">
+                  <view class="amount_tit">净单价</view>
+                  <view class="amount_txt">约4.1/斤</view>
+                </view>
+              </view>
+            </view>
+            <view class="btn" bindtap="addCar" data-num="{{item.number}}" data-id='189995469980307'><image src="../../images/add_car.png" mode="widthFix"></image></view>
+          </view>
+        </view> -->
+        <view class="goods_info"  bindtap="detail" data-id="{{item.goodsId}}">
+            <view class="goods_tit">
+              <view class="goods_tab" wx:if="{{item.isShowItemSupplier && item.itemSupplier }}">{{item.itemSupplier }}</view>
+              <view class="txt">{{item.itemName}}</view>
+            </view>
+            <view class="unprice">￥{{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : price(item.skuUnderlinePrice)}}/{{item.skuUnit}}</view>
+            <view class="goods_nav">
+              <view class="nav_fl">
+                <view class="price">
+                  <view class="util">￥</view>
+                  <view class="num">{{(!userInfo.merchantMemberId || userInfo.status != 1 || item.skuHiddenPrice) ? '***' : price(item.skuActivityPrice)}}</view>
+                  <view class="l">/{{item.skuUnit}}</view>
+                </view>
+                <!-- <view class="sale">销量{{item.sales}}</view> -->
+              </view>
+              <view class="btn" catchtap="addCar" data-num="{{item.number}}" data-id='{{item.skuId}}'><image src="../../images/add_car.png" mode="widthFix"></image></view>
+            </view>
+          </view>
+      </view>
+    </view>
+  </view>
+</view>

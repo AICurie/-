@@ -1,0 +1,19 @@
+module.exports = function(status = 1,supplyStatus=null){
+  status = Number(status)
+  switch(status){
+    case 1: return '待付款';
+    break;
+    case 2: return '待发货';
+    break;
+    case 3: return '待收货';
+    break;
+    case 4: return '待收货';
+    break;
+    case 5: return supplyStatus==0?'待付差价':'完成';
+    break;
+    case 6: return '待评价';
+    break;
+    case 9: return '已取消';
+    break;
+  }
+}

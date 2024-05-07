@@ -1,0 +1,58 @@
+<!--pages/address/add.wxml-->
+<view class="add">
+  <view class="user_name add_item">
+    <view class="item_fl">收货人</view>
+    <view class="item_fr">
+      <view class="name_ipt"><input placeholder="收货人姓名"  bindinput="changeipt" data-item='name' value="{{name}}"></input></view>
+    </view>
+  </view>
+   <view class="user_sex add_item">
+        <view class="sex_item {{sex==1?'active':''}}" bindtap="changeActive" data-name='sex' data-item='1'>先生</view>
+        <view class="sex_item {{sex==2?'active':''}}" bindtap="changeActive" data-name='sex' data-item='2'>女士</view>
+  </view>
+  <view class="user_phon add_item">
+    <view class="item_fl">手机号</view>
+    <view class="item_fr"><input type="number" maxlength="11" placeholder="收货人手机号" bindinput="changeipt" data-item='phone' value="{{phone}}"></input></view>
+  </view>
+  <view class="user_city add_item">
+    <view class="item_fl">收货区域</view>
+    <view class="item_fr" bindtap="showCity"><input placeholder="小区,街道" value="{{province + city + area}}" disabled></input></view>
+    <view class="arrow"></view>
+  </view>
+  <view class="user_live add_item">
+    <view class="item_fl">街道</view>
+    <view class="item_fr"><input placeholder="请输入街道" bindinput="changeipt" data-item='street' value="{{street}}"></input></view>
+  </view>
+  <view class="user_live add_item">
+    <view class="item_fl">详细地址</view>
+    <view class="item_fr"><input placeholder="楼号，门牌，例：10号楼801室" bindinput="changeipt" data-item='customerAddressDetail' value="{{customerAddressDetail}}"></input></view>
+  </view>
+  <view class="user_live add_item">
+    <view class="item_fl">邮编</view>
+    <view class="item_fr"><input placeholder="请输入邮编" bindinput="changeipt" data-item='postcode' value="{{postcode}}"></input></view>
+  </view>
+  <!-- <view class="user_live add_item">
+    <view class="item_fl">经纬度</view>
+    <view class="item_fr"><input placeholder="输入详细地址后自动填入" disabled value="{{lat && lng && lat + ',' + lng}}"></input></view>
+  </view> -->
+  <view class="user_tag add_item">
+    <view class="item_fl">标签(选填)</view>
+    <view class="item_fr">
+      <view class="tag_list">
+        <view class="tag_item {{tag=='公司'?'active':''}}" bindtap="changeActive" data-name='tag' data-item='公司'>公司</view>
+        <view class="tag_item {{tag=='家'?'active':''}}" bindtap="changeActive" data-name='tag' data-item='家'>家</view>
+         <view class="tag_item {{tag=='学校'?'active':''}}" bindtap="changeActive" data-name='tag' data-item='学校'>学校</view>
+        <view class="tag_item {{tag=='其他'?'active':''}}" bindtap="changeActive" data-name='tag' data-item='其他'>其他</view>
+      </view>
+      <!-- <view class="add_tag">
+        <view class="tag_btn">自定义</view> -->
+        <!-- <view class="zdy_tag">
+          <view class="tag_name"><input placeholder="最多十个字符"></input></view>
+        </view> -->
+      <!-- </view> -->
+    </view>
+  </view>
+  <view class="add_btn" bindtap="keepHandle">保存</view>
+
+  <nyz_area_picker show="{{show}}" bindsureSelectArea="changeCity"></nyz_area_picker>
+</view>

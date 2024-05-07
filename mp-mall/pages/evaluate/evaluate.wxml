@@ -1,0 +1,62 @@
+<view class="evaluate">
+  <wxs src="../order/price.wxs" module="price"></wxs>
+  <view class="goods_info">
+      <view  class="goods_tit">
+        <view class="goods_fl">
+          <image src="{{baseUrl + item.imgId+'?appId='+appId+'&width=200&height=200'}}"></image>
+        </view>
+        <view class="goods_fr">
+          <view class="goods_name">
+            <view class="name_fl">
+              <view class="tab " wx:if="{{item.isShowItemSupplier && item.itemSupplier}}">{{item.itemSupplier}}</view>
+              <view class="text {{item.isShowItemSupplier&&item.itemSupplier?'tab_text':''}}">{{item.itemName}}</view>
+            </view>
+          </view>
+          <view class="goods_price">
+            <view class="price_txt">按实收数量结算</view>
+            <view class="price_box">
+              <view class="price">
+                <view class="util">￥</view>
+                <view class="num">{{price(item.skuPrice)}}</view>
+              </view>
+              <!-- <view class="goods_num">(共{{item.skuSum}}{{item.skuUnit}})</view> -->
+              <view class="goods_num">x{{item.skuSum}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="evaluate_ls">
+        <view class="evaluate_ls_label">评价</view>
+        <view class="evaluate_ls_press">
+          <view class="prees_imgs">
+            <image wx:for="{{5}}" wx:key="item" src="{{((item*1+1) * 20 <= star) ? '../../images/star_act.png' : '../../images/star.png'}}"></image>
+          </view>
+          <slider class="slider" value="{{star}}" step="{{20}}" bindchange="slider1change" left-icon="cancel" right-icon="success_no_circle"/>
+        </view>
+        <view class="evaluate_ls_ress">{{star>80?'非常好':star>60?'好':star>40?'一般':star>20?'差':'非常差'}}</view>
+      </view>
+      <view class="comment">
+        <view class="comment_ipt">
+          <textarea value="{{commentContent}}" bindinput="inputhandle" data-str="commentContent" placeholder="请输入评价"></textarea>
+        </view>
+        
+      </view>
+  </view>
+  <view class="evaluate_img">
+    <view class="comment_imgs">
+      <view class="comment_img" wx:for="{{images}}" wx:key="index">
+        <image src="{{baseUrl + item+'?appId='+appId+'&width=200&height=200'}}" mode="aspectFill"></image>
+        <view class="close" bindtap="delImage" data-idx="{{index}}">
+          <image src="../../images/close_red.png"></image>
+        </view>
+      </view>
+      <view class="comment_add"  wx:if="{{images.length < 3}}" bindtap="uphandle">
+        <image src="../../images/goods_add.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="sub_box">
+    <view class="sub_btn" bindtap="subHandle">提交评论</view>
+  </view>
+  <canvas canvas-id='CanvasId' style='position:fixed;left: 9999px;width:{{canvasWidth || 750}}px;height:{{ canvasHeight }}px' class='myCanvas'></canvas>
+</view>

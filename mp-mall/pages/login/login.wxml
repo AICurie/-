@@ -1,0 +1,30 @@
+<!--pages/login/login.wxml-->
+<view class="login">
+  <!-- <view class="image">
+    <image src="../../images/login_img.png"></image>
+  </view> -->
+  <view class="logo">
+    <image src="../../images/logo.png"></image>
+  </view>
+  <view class="login_box">
+    <view class="treaty">
+      <view class="checkbox {{check? 'active': ''}}" bindtap="checkhandle">
+          <view class="box"></view>
+      </view>
+      <text bindtap="checkhandle">点击即代表您同意</text>
+    <navigator url="/pages/treaty/treaty?status=1">《服务协议》,</navigator>
+    <navigator url="/pages/treaty/treaty?status=2">《隐私政策》</navigator>
+    <!-- <navigator >《服务协议》,</navigator>
+    <navigator >《隐私政策》</navigator> -->
+  </view>
+    <!-- <view class="tit">最好的维本生鲜</view> -->
+    <view class="phone" bindtap="mobile">使用手机号码登录/注册</view>
+    <button hidden="{{check}}" class="wechat" type="primary" bindtap="checktip"><image src="../../images/wechat.png" mode="widthFix"></image>微信用户一键登录</button>
+    <button hidden="{{!check}}" class="wechat" type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"><image src="../../images/wechat.png" mode="widthFix"></image>微信用户一键登录</button>
+    
+      
+  </view>
+  <view class="bottom">
+    <image src="../../images/login_btm.png"></image>
+  </view>
+</view>

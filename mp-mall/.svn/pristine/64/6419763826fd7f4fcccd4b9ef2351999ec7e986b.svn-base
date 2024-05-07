@@ -1,0 +1,11 @@
+module.exports = function(status){
+  status = Number(status)
+  switch(status){
+    case 0: return '待审核';
+    case 1: return '待退款';
+    case 2: return '已拒绝';
+    case 3: return '已退款';
+    case 9: return '已取消';
+    default:return '未知状态';
+  }
+}

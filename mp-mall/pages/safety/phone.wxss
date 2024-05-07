@@ -1,0 +1,46 @@
+/* pages/safety/phone.wxss */
+.phone {
+  width: 100%;
+  height: 100vh;
+  background-color: #f2f2f2;
+}
+.txt {
+  color: #9B9B9B;
+  padding: 20rpx;
+}
+.ipt {
+  display: flex;
+  height: 88rpx;
+  line-height: 88rpx;
+  align-items: center;
+  background-color: #fff;
+  border: 1rpx solid #f0f0f0;
+  justify-content: space-between;
+}
+.ipt input {
+  flex: 1;
+  padding-left: 20rpx;
+}
+.code_btn {
+  color: #3D96FF;
+  line-height: 88rpx;
+  padding: 0 20rpx;
+  border-left: 1rpx solid #f0f0f0;
+}
+.code_btn.disabled {
+  color: #DCDCDC;
+}
+.btn {
+  color: #fff;
+  width: 90%;
+  height: 80rpx;
+  left: 50%;
+  bottom: 40rpx;
+  line-height: 80rpx;
+  text-align: center;
+  position: absolute;
+  border-radius: 40rpx;
+  /* background-color: #EF2322; */
+  transform: translateX(-50%);
+  background: linear-gradient(to right, #5ad563 0%, #36af62 100%);
+}

@@ -1,0 +1,22 @@
+<view class="safety">
+  <view class="safety_list">
+    <view class="safety_item">
+      <view>版本号</view>
+      <view class="item_fr" >
+        <view>{{version}}</view>
+      </view>
+    </view>
+    <view class="safety_item">
+      <view>运营主体</view>
+      <view class="item_fr" >
+        <view>浙江维本生物科技股份有限公司</view>
+      </view>
+    </view>
+    <view class="safety_item">
+      <view>技术支持</view>
+      <view class="item_fr" >
+        <view>浙江启宏健坤科技有限公司</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,40 @@
+.message {
+  min-height: 100vh;
+  background-color: #F1F1F1;
+}
+.message .message_ls {
+  padding: 10rpx 20rpx;
+
+}
+.message .message_ls .item {
+  padding: 20rpx;
+  margin: 10rpx 0;
+  position: relative;
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+.message .message_ls .item.act::after {
+  top: 10rpx;
+  right: 10rpx;
+  content: "";
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  position: absolute;
+  background-color: #f54327;
+}
+.message .message_ls .item .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.message .message_ls .item .title .txt {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+.message .message_ls .item .title .time {
+
+}
+.message .message_ls .item .info {
+  padding-top: 10rpx;
+}

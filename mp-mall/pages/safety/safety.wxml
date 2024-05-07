@@ -1,0 +1,33 @@
+<!--pages/safety/safety.wxml-->
+<view class="safety">
+  <view class="safety_list">
+    <navigator url="/pages/address/address" hover-class="noshadow" class="safety_item">
+      <view>地址管理</view>
+      <view class="item_fr">
+         <view class="arrow"></view>
+      </view>
+    </navigator>
+    <navigator url="/pages/safety/phone" hover-class="noshadow" class="safety_item">
+      <view>手机号</view>
+      <view class="item_fr">
+        <view>{{mobile}}</view>
+         <view class="arrow"></view>
+      </view>
+    </navigator>
+    <view class="safety_item" bindtap="call">
+      <view>注销账号</view>
+      <view class="item_fr" >
+        <view class="del">联系客服</view>
+         <view class="arrow"></view>
+      </view>
+    </view>
+    <navigator url="/pages/safety/info" hover-class="noshadow" class="safety_item">
+      <view>版本及环境</view>
+      <view class="item_fr" >
+        <view>{{version}}</view>
+        <view class="arrow"></view>
+      </view>
+    </navigator>
+    <view class="quit" bindtap="logout">退出登录</view>
+  </view>
+</view>

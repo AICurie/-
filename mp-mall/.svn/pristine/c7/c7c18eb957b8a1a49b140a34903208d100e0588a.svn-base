@@ -1,0 +1,126 @@
+.collage {
+  overflow: hidden;
+  min-height: 100vh;
+  background-color: #F1F1F1;
+}
+.collage .collage_ls {
+  overflow: hidden;
+}
+.collage .collage_ls .collage_item {
+  display: flex;
+  min-height: 120rpx;
+  align-items: center;
+  margin: 20rpx;
+  padding: 0 20rpx;
+  border-radius: 10rpx;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.collage .collage_ls .collage_item .item_fl {
+  font-size: 30rpx;
+  color: #000;
+  font-weight: 700;
+}
+.collage .collage_ls .collage_item .item_fl text {
+  color: #60b533;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+.collage .collage_ls .collage_item .item_fr {
+  display: flex;
+  align-items: center;
+}
+.collage .collage_ls .collage_item .item_fr .item_time {
+  color: #999;
+}
+.collage .collage_ls .collage_item .item_fr .item_btn {
+  color: #fff;
+  padding: 10rpx 20rpx;
+  border-radius: 40rpx;
+  margin-left: 20rpx;
+  background: linear-gradient(to right, #60b533 0%, #60b732 100%);
+}
+
+.collage_pop {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, .3);
+}
+.collage_pop .pop_box {
+  left: 50%;
+  top: 46%;
+  width: 80%;
+  min-height: 520;
+  position: absolute;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  transform: translate(-50%, -50%);
+}
+.collage_pop .pop_box .box_tit {
+  height: 100rpx;
+  color: #333;
+  font-size: 32rpx;
+  line-height: 100rpx;
+  text-align: center;
+  background-color: #fff;
+}
+.collage_pop .pop_box .box_desc {
+  padding: 0 30rpx;
+  background-color: #fff;
+  border-top: 1rpx solid #f2f2f2;
+}
+.collage_pop .pop_box .box_desc .desc_item {
+  padding: 20rpx 0;
+  color: #333;
+}
+.collage_pop .pop_box .box_desc .desc_item text {
+  font-size: 32rpx;
+  color: #60b533;
+}
+.collage_pop .pop_box .box_desc .desc_txt {
+  color: #999;
+  font-size: 26rpx;
+  padding: 20rpx 0;
+}
+.collage_pop .pop_box .box_desc .desc_txt text {
+  color: #000;
+  font-weight: 700;
+}
+.collage_pop .pop_box .box_avatar {
+  display: flex;
+  margin-top: 20rpx;
+  padding: 30rpx 0 50rpx;
+  background-color: #fff;
+  justify-content: space-around;
+}
+.collage_pop .pop_box .box_avatar .avatar_item {
+  width: 100rpx;
+  height: 100rpx;
+  padding: 4rpx;
+  display: flex;
+  color: #999;
+  border-radius: 50%;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: center;
+  border: 1rpx dashed #999;
+}
+.collage_pop .pop_box .box_avatar .avatar_item image {
+  width: 100%;
+  height: 100%;
+}
+.collage_pop .pop_box .box_avatar .avatar_item.act {
+  border: 1rpx solid #60b533;
+}
+.collage_pop .pop_box .pop_btn {
+  width: 100%;
+  height: 80rpx;
+  color: #fff;
+  line-height: 80rpx;
+  text-align: center;
+  background: linear-gradient(to right, #60b533  0%, #60b732 100%);
+}

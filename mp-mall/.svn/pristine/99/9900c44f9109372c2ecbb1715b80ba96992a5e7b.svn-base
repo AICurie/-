@@ -1,0 +1,26 @@
+<!--pages/player/player.wxml-->
+<view class="player">
+  <view class="player_tit">待支付</view>
+  <view class="time">
+    <view class="tit">请在 <text>30分钟</text> 之内支付，超时订单将被取消</view>
+    <view class="num">订单号：{{orderId}}</view>
+  </view>
+  <view class="player_mode">
+    <view class="mode_tit">支付方式</view>
+    <view class="mode_list">
+      <view class="mode_item" bindtap="changePlayer" data-item="{{true}}">
+        <view class="item_fl">
+          <image src="../../images/wechat_player.png"></image>
+          <text>微信支付</text>
+        </view>
+        <view class="item_fr"><icon type="{{wechat ?'success':'circle'}}" color="{{wechat?'#1AE11A':''}}"></icon></view>
+      </view>
+    </view>
+  </view>
+  <wxs src="../order/price.wxs" module="p"></wxs>
+  <view class="player_price">合计： <text>￥{{p(price)}}</text></view>
+  <view class="player_btn">
+    <view class="player_fl" bindtap="back">稍后支付</view>
+    <view class="player_fr" bindtap="player">支付</view>
+  </view>
+</view>

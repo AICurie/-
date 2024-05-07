@@ -1,0 +1,315 @@
+.retreat {
+  padding: 20rpx;
+  min-height: 100vh;
+  padding-bottom: 124rpx;
+  box-sizing: border-box;
+  background-color: #F1F1F1;
+}
+.retreat_info {
+  padding: 20rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+.retreat_info .info_tit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.retreat_info .info_tit .tit_fl {
+  color: #F15A24;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+.retreat_info .info_tit .tit_fr {
+  display: flex;
+  align-items: flex-end;
+}
+.retreat_info .info_tit .tit_fr .util {
+  font-size: 20rpx;
+  color: #F15A24;
+}
+.retreat_info .info_tit .tit_fr .num {
+  font-size: 32rpx;
+  color: #F15A24;
+  font-weight: 700;
+}
+.retreat_info .info_time {
+  color: #999;
+  font-size: 20rpx;
+}
+
+.retreat_info .info_nav {
+  display: flex;
+  margin-top: 20rpx;
+  align-items: center;
+  justify-content: space-between;
+}
+.retreat_info .info_nav .nav_fl {
+  color: #333;
+}
+.retreat_info .info_nav .nav_fr {
+  display: flex;
+  align-items: flex-end;
+}
+.retreat_info .info_nav .nav_fr .util {
+  font-size: 20rpx;
+  color: #333;
+}
+.retreat_info .info_nav .nav_fr .num {
+  color: #333;
+}
+.retreat_info .info_btns {
+  display: flex;
+  margin-top: 20rpx;
+  justify-content: flex-end;
+}
+.retreat_info .info_btns .btn_item {
+  color: #fff;
+  padding: 10rpx 20rpx;
+  border-radius: 30rpx;
+  background: linear-gradient(to right, #60b533 0%, #60b732 100%);
+}
+.mail {
+  height: 84rpx;
+  display: flex;
+  padding: 0 20rpx;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+  align-items: center;
+  background-color: #fff;
+  justify-content: space-between;
+}
+.mail .mail_txt {
+  color: #333;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+.arrow {
+  width: 16rpx;
+  height: 16rpx;
+  transform: rotateZ(-45deg);
+  border-right: 1rpx solid #333333;
+  border-bottom: 1rpx solid #333333;
+}
+
+.activity {
+  padding: 20rpx;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+  background-color: #fff; 
+}
+.activity .activity_tit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.activity .activity_tit .tit_fl {
+  display: flex;
+  align-items: center;
+}
+.activity .activity_tit .tit_fl .tit_txt {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+.activity .activity_tit .tit_fl .tit_type image {
+  width: 140rpx;
+  height: 56rpx;
+}
+.activity .activity_tit .tit_fl .tit_news {
+  height: 40rpx;
+  min-width: 260rpx;
+  margin-left: 10rpx;
+  /* line-height: 50rpx; */
+}
+.activity .activity_tit .tit_fl .tit_news view {
+  display: flex;
+  height: 40rpx;
+  padding: 0 4rpx;
+  align-items: center;
+  border-radius: 25rpx;
+  background-color: #FFBB77;
+}
+.activity .activity_tit .tit_fl .tit_news image {
+  width: 40rpx;
+  height: 40rpx;
+}
+.activity .activity_tit .tit_fl .tit_news text {
+  /* margin-top: 10rpx; */
+  flex: 1;
+  height: 39rpx;
+}
+.activity .activity_tit .tit_fr .tit_more {
+  display: flex;
+  padding: 0rpx 12rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 40rpx;
+  align-items: center;
+  background-color: #603813;
+}
+.activity .activity_tit .tit_fr .tit_more text {
+  color: #c69c6d;
+  font-size: 28rpx;
+}
+.activity .activity_tit .tit_fr .tit_more image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.activity .activity_ls {
+  padding: 20rpx;
+  overflow-x: auto;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+  background-color: #FFEFDF;
+}
+.activity .activity_ls .activity_ls_im {
+  display: inline-block;
+  margin-right: 20rpx;
+}
+.activity .activity_ls .activity_ls_im:last-child {
+  margin-right: 0;
+}
+.activity .activity_ls .activity_ls_im image {
+  width: 180rpx;
+  height: 180rpx;
+}
+.activity .activity_ls .activity_ls_im .im_name {
+  font-size: 26rpx;
+}
+.activity .activity_ls .activity_ls_im .im_price {
+  display: flex;
+  align-items: flex-end;
+}
+.activity .activity_ls .activity_ls_im .im_price .util {
+  font-size: 22rpx;
+  color: #FF0000;
+}
+.activity .activity_ls .activity_ls_im .im_price .num {
+  font-size: 32rpx;
+  color: #FF0000;
+  font-weight: 700;
+}
+.goods_info {
+  padding: 20rpx;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+.goods_info .info_tit {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.goods_info .goods_box {
+  margin-top: 20rpx;
+  display: flex;
+}
+.goods_info .goods_box .goods_fl {
+  width: 172rpx;
+  height: 172rpx;
+}
+.goods_info .goods_box .goods_fl image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+}
+.goods_info .goods_box .goods_fr {
+  flex: 1;
+  padding-left: 20rpx;
+}
+.goods_info .goods_box .goods_fr .fr_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.goods_info .goods_box .goods_fr .fr_item .goods_name {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+.goods_info .goods_box .goods_fr .fr_item .goods_price {
+  display: flex;
+  align-items: center;
+}
+.goods_info .goods_box .goods_fr .fr_item .goods_price .util {
+  font-size: 20rpx;
+  color: #FF0000;
+}
+.goods_info .goods_box .goods_fr .fr_item .goods_price .num {
+  font-size: 32rpx;
+  color: #FF0000;
+  font-weight: 700;
+}
+.goods_info .goods_box .goods_fr .fr_item .item_txt {
+  font-size: 24rpx;
+  color: #999;
+}
+.goods_info .info_item {
+  display: flex;
+  margin-top: 20rpx;
+  align-items: center;
+  justify-content: space-between;
+}
+.goods_info .info_item .item_label {
+  
+}
+.goods_info .info_item .item_val {
+  color: #999;
+}
+.goods_info .info_item .item_price {
+  display: flex;
+  align-items: flex-end;
+}
+.goods_info .info_item .item_price .util {
+  font-size: 20rpx;
+  color: #999;
+}
+.goods_info .info_item .item_price .num {
+  font-size: 32rpx;
+  color: #999;
+}
+.goods_info .info_item .item_num {
+  display: flex;
+}
+.goods_info .info_item .item_num .txt {
+  color: #999;
+}
+.goods_info .info_item .item_num .shu {
+  color: #999;
+  margin-left: 20rpx;
+}
+.goods_info .info_item .item_num .btn {
+  padding-left: 20rpx;
+  color: #F15A24;
+}
+.goods_info .info_end {
+  padding-top: 20rpx;
+  text-align: center;
+  margin-top: 20rpx;
+  border-top: 1rpx solid #ddd;
+}
+.goods_info .info_end image {
+  width: 160rpx;
+  height: 70rpx;
+}
+.retreat .retreat_btm {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 104rpx;
+  position: fixed;
+  padding: 0 20rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #fff;
+  justify-content: flex-end;
+}
+.retreat .retreat_btm .retreat_btn {
+  width: 156rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 30rpx;
+  text-align: center;
+  border: 1rpx solid #333;
+}

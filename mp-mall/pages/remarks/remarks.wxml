@@ -1,0 +1,22 @@
+<!--pages/remarks/remaks.wxml-->
+<view class="remaks">
+  <view class="content">
+    <textarea placeholder="填写商品，配送补充说明" bindinput="changeIpt" value="{{customerRemark}}"></textarea>
+  </view>
+  <!-- 最近输入 -->
+  <!-- <view class="quick">
+    <view class="quick_tit">最近输入</view>
+    <view class="quick_list">
+      <view class="quick_item">无接触配送</view>
+    </view>
+  </view> -->
+  <!-- 快捷输入 -->
+  <view class="quick">
+    <view class="quick_tit">快捷输入</view>
+    <view class="quick_list">
+      <view class="quick_item" wx:for="{{list}}" wx:key="item" bindtap="changeItem" data-item="{{item}}">{{item}}</view>
+    </view>
+  </view>
+
+  <view class="remaks_btn" bindtap="btn">完成</view>
+</view>

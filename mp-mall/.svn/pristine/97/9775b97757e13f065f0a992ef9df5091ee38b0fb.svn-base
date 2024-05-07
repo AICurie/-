@@ -1,0 +1,9 @@
+<!--pages/reason/reason.wxml-->
+
+<view class="reason">
+  <view class="box">
+    <view class="tit">取消理由</view>
+    <view class="info">{{cancelReason}}</view>
+  </view>
+ 
+</view>

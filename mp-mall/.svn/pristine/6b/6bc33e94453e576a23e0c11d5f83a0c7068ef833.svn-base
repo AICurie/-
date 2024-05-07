@@ -1,0 +1,28 @@
+
+<view class="demand">
+  <view class="phone">
+    <view class="label">手机号码：</view>
+    <view class="val">
+      <input type="text" maxlength="11" bindinput="changeStr" data-str="proposeMobile" value="{{proposeMobile}}" placeholder="留下您的号码，方便联系您"/>
+    </view>
+  </view>
+
+  <view class="text">
+    <textarea bindinput="changeStr" data-str="content" value="{{content}}" placeholder="提交您宝贵的意见，我们加以改正，做的更让您满意....."></textarea>
+  </view>
+
+  <view class="imgs">
+    <view class="comment_img" wx:for="{{imgIdList}}" wx:key="index">
+        <image src="{{baseUrl+item+'?appId='+appId+'&width=200&height=200'}}" mode="aspectFill"></image>
+        <view class="close" bindtap="delImage" data-idx="{{index}}">
+          <image src="../../images/close_red.png"></image>
+        </view>
+      </view>
+    <view class="add" wx:if="{{imgIdList.length < 3}}" bindtap="uphandle">
+      <image src="../../images/goods_add.png"></image>
+    </view>
+  </view>
+
+  <view class="sub_btn" bindtap="subHandle">提交需求</view>
+
+</view>

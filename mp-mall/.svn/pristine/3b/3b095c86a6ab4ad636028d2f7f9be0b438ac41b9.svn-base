@@ -1,0 +1,14 @@
+/**app.wxss**/
+
+view,text {
+  color: #333;
+  font-size: 28rpx;
+  font-family: "微软雅黑";
+}
+/* navigator.navigator-hover {
+  background-color: none;
+  opacity: 1;
+} */
+.noshadow {
+  hover-class:none ;
+}

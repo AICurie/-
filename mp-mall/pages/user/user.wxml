@@ -1,0 +1,213 @@
+<!-- wx:if="{{userInfo.mobile}}" -->
+<view class="user" >
+  <wxs src="../order/price.wxs" module="price"></wxs>
+  <!-- 用户信息 -->
+  <view class="userinfo">
+    <view class="user_box">
+      <!-- <view class="avatar" wx:if="{{!userInfo.mobile}}"><image src="{{'../../images/icon_avatar.png'}}"></image></view>
+      <view class="avatar" wx:else>
+        <view class="img"><open-data type="userAvatarUrl"></open-data></view>
+      </view> -->
+      <view class="avatar">
+        <view class="img"><open-data type="userAvatarUrl"></open-data></view>
+      </view>
+      <view class="user_info" >
+        <view class="name" bindtap="topagehandle" data-url="/pages/login/auth">
+          <view class="user_name" wx:if="{{userInfo.entName && userInfo.status==1}}">{{userInfo.entName}}</view>
+          <open-data wx:else type="userNickName"></open-data>
+          <view class="auth" >
+            <view class="txt">{{userInfo.status == 0 ? '待审核' : userInfo.status == 1 ? '已认证' : userInfo.status == 3 ? '已冻结' : '去认证'}}</view>
+            <view class="arrow"></view>
+            <!-- <image src="../../images/next.png"></image> -->
+          </view>
+        </view>
+        <view class="info_item" wx:if="{{userInfo.userCode}}">客户编号：{{userInfo.userCode}}</view>
+        <view class="info_item" wx:if="{{userInfo.ranking}}">积分排名：{{userInfo.ranking}}</view>
+        <view class="info_item" wx:if="{{userInfo.salesmanMobile}}" bindtap="bindCallHandle" data-num="{{userInfo.salesmanMobile}}">服务专员：{{userInfo.salesmanMobile}}</view>
+      </view>
+      <view class="user_msg {{msgCount > 0 ? 'act':''}}" bindtap="topagehandle" data-url="/pages/user/message">
+        <image  src="../../images/message.png"></image>
+      </view>
+      <view class="user_set" bindtap="topagehandle" data-url="/pages/safety/safety">
+        <image src="../../images/set.png"></image>
+      </view>
+    </view>
+  </view>
+  <!-- <view wx:if="{{!userInfo.subscribe || userInfo.subscribe == 0}}">
+      <view wx:if="{{(scene == 1011 || scene == 1047 || scene == 1124)}}" style="margin: 10px;">
+        <official-account bindload="official" binderror="official"></official-account>
+      </view>
+      <view wx:else class="weui-panel weui-panel_access">
+        <view class="weui-panel__hd"><text>{{company}}关联的公众号</text></view>
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_appmsg">
+            <view class="weui-media-box__hd">
+              <image class="weui-media-box__thumb" src="../../images/{{logo}}"></image>
+            </view>
+            <view class="weui-media-box__bd weui-media">
+              <h4 class="weui-media-box__title">{{company}}</h4>
+              <view class="weui-media-box__desc">{{descrption}}</view>
+            </view>
+            <view class="weui-cell__ft">
+              <button class="weui-btn weui-btn_mini" type="primary" plain="true" bindtap="follow">查看</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view> -->
+    
+  <view class="module">
+      <!-- 我的订单 -->
+      <!--  wx:if="{{!memberLimit || (memberLimit && userInfo.merchantMemberId)}}" -->
+    <view class="orider">
+      <!-- <navigator class="tit" hover-class="noshadow" url="/pages/order/order">
+        <view class="tit_txt">我的订单</view>
+        <view  class="all_orider"><view>我的订单</view><view class="orider_arrow"></view></view>
+      </navigator> -->
+      <view class="orider_list">
+        <navigator hover-class="noshadow" url="/pages/order/order?status=7" class="orider_item">
+          <view class="item_ico">
+            <image src="../../images/etc_player.png" mode="widthFix"></image>
+            <view class="num" wx:if="{{supplying>0}}">{{supplying}}</view>
+          </view>
+          <view class="item_txt">待补差价</view>
+        </navigator>
+        <!-- <navigator hover-class="noshadow" url="/pages/order/order?status=2" class="orider_item">
+          <view class="item_ico">
+            <image src="../../images/etc_deliver.png" mode="widthFix"></image>
+            <view class="num" wx:if="{{deliver}}">{{deliver}}</view>
+          </view>
+          <view class="item_txt">待发货</view>
+        </navigator> -->
+        <navigator hover-class="noshadow" url="/pages/order/order?status=4" class="orider_item">
+          <view class="item_ico">
+            <image src="../../images/etc_take.png" mode="widthFix"></image>
+            <view class="num" wx:if="{{receiving}}">{{receiving}}</view>
+          </view>
+          <view class="item_txt">待收货</view>
+        </navigator>
+        <navigator hover-class="noshadow" url="/pages/order/order?status=5" class="orider_item">
+          <view class="item_ico">
+            <image src="../../images/etc_evaluate.png" mode="widthFix"></image>
+            <view class="num" wx:if="{{deliver}}">{{deliver}}</view>
+          </view>
+          <view class="item_txt">评价</view>
+        </navigator>
+        <navigator url="/pages/order/invalid" hover-class="noshadow" class="orider_item">
+          <view class="item_ico">
+            <image src="../../images/after_sale.png" mode="widthFix"></image>
+          </view>
+          <view class="item_txt">售后</view>
+        </navigator>
+        <navigator url="/pages/order/order" hover-class="noshadow" class="orider_item">
+          <view class="item_ico">
+            <image src="../../images/etc_all.png" mode="widthFix"></image>
+          </view>
+          <view class="item_txt">全部订单</view>
+        </navigator>
+      </view>
+    </view>
+    <view class="module_list">
+      
+     <!-- <navigator hover-class="noshadow" url="/pages/safety/safety" class="module_item">
+        <image src="../../images/integral.png" mode="widthFix"></image>
+        <view>我的积分</view>
+      </navigator> -->
+      <navigator hover-class="noshadow" url="/pages/integral/integral" class="module_item">
+        <image src="../../images/integral.png" mode="widthFix"></image>
+        <view>我的积分</view>
+      </navigator>
+      <view bindtap="toCoupon" hover-class="noshadow" url="/pages/coupon/index" class="module_item">
+        <image src="../../images/coupon.png" mode="widthFix"></image>
+        <view>优惠券</view>
+      </view>
+        <navigator hover-class="noshadow" url="/pages/demand/demand" class="module_item">
+        <image src="../../images/demand.png" mode="widthFix"></image>
+        <view>需求填报</view>
+      </navigator>
+      <!-- wx:if="{{userInfo.merchantMemberId}}" -->
+      <!-- <navigator hover-class="noshadow" url="/pages/address/address" class="module_item" wx:if="{{!memberLimit || (memberLimit && userInfo.merchantMemberId)}}">
+        <image src="../../images/live.png" mode="widthFix"></image>
+        <view>收货地址</view>
+      </navigator> -->
+      <!-- <navigator hover-class="noshadow" url="/pages/address/address" class="module_item">
+        <image src="../../images/realinfo.png" mode="widthFix"></image>
+        <view>平台资讯</view>
+      </navigator> -->
+      <button open-type="contact" bindcontact="handleContact" class="module_item">
+        <image src="../../images/realinfo.png" mode="widthFix"></image>
+        <view>平台咨询</view>
+      </button>
+    </view>
+
+    <!-- <view class="advert_box">
+      <view class="advert">
+        <image src="../../images/advert.png"></image>
+      </view>
+    </view> -->
+    
+    <view class="recom" wx:if="{{recom.length > 0}}">
+        <view class="recom_tit">
+          <view class="recom_tit_bx">
+            <view class="div"></view>
+            <view class="tit">为您推荐</view>
+            <view class="div"></view>
+          </view>
+        </view>
+        <view class="recom_box">
+          <view class="recom_item" wx:for="{{recom}}" wx:key="index">
+            <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="item_img">
+              <image src="{{baseUrl+item.goodsImgId+'?appId='+appId+'&width=200&height=200'}}"></image>
+            </navigator>
+            <view class="item_info">
+              <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="info_tit">
+                <view class="tab" wx:if="{{item.isShowItemSupplier==1 && item.itemSupplier }}">{{item.itemSupplier}}</view>
+                <view class="text">{{item.itemName}}</view>
+              </navigator>
+              <view class="add_car">
+                <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="in_fl">
+                  <view class="price">
+                    <view class="util">￥</view>
+                     <!-- <view class="num">{{(userInfo.merchantMemberId && userInfo.status == 1) ? price(item.goodsPrice): '***'}}</view>
+                    <view class="price_txt">/{{item.skuUnit}}</view> -->
+                    <view class="num">{{(userInfo.merchantMemberId && userInfo.status == 1) ? item.settleStyle==1?price(item.goodsPrice):price(item.basicSkuPrice): '***'}}</view>
+                    <view class="price_txt">/{{item.settleStyle==1?item.skuUnit:item.basicUnit}}</view>
+                  </view>
+                  <view class="sales">销量{{item.sales}}</view>
+                </navigator>
+                <view class="in_fr" bindtap="addCar" data-num="{{item.number}}" data-id='{{item.goodsId}}'>
+                  <image src="../../images/add_car.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+          <!-- <view class="recom_item">
+            <view class="item_img">
+              <image src="../../images/list9.png"></image>
+            </view>
+            <view class="item_info">
+              <view class="info_tit">
+                <view class="text">无花果</view>
+              </view>
+              <view class="add_car">
+                <view class="in_fl">
+                  <view class="price">
+                    <view class="util">￥</view>
+                    <view class="num">6.99</view>
+                    <view class="price_txt">/斤</view>
+                  </view>
+                  <view class="sales">销量999</view>
+                </view>
+                <view class="in_fr">
+                  <image src="../../images/add_car.png"></image>
+                </view>
+              </view>
+            </view>
+          </view> -->
+        </view>
+      </view>
+
+  </view>
+
+ 
+</view>

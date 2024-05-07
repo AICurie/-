@@ -1,0 +1,40 @@
+<!--pages/address/address.wxml-->
+<view class="address">
+    <view class="address_list">
+      <view class="address_item" wx:for="{{list}}" wx:key="index" bindtap="{{choice?'choice':''}}" data-idx='{{index}}'>
+        <view class="address_tit">
+          <view class="user">
+              <view class="user_name">{{item.customerName}}{{item.customerGender == 1? '先生':'女士'}}</view>
+              <view class="user_phone">{{item.customerMobileNo}}</view>
+              <view class="address_tag" wx:if='{{item.customerLabel}}'>{{item.customerLabel}}</view>
+          </view>
+          <!-- <view class="choice" wx:if='{{choice}}' bindtap="choice" data-idx='{{index}}'>
+            <icon type="{{idx==index?'success':'circle'}}" color="{{idx==index?'#EF2322':''}}"></icon>
+          </view> -->
+        </view>
+        <view class="address_info">{{item.customerAddress}}</view>
+        <view class="fn_btn" >
+          <view class="fl_box" wx:if='{{!choice}}'>
+              <view class="fn_left" wx:if="{{item.isDefault!=1}}" bindtap="changeDefault" data-id='{{item.id}}'>
+                <icon type="circle"></icon>
+                <view>设为默认</view>
+              </view>
+              <view class="fn_left" wx:else>
+                <icon type="success" color="#60b533"></icon>
+                <view class="default">设为默认</view>
+              </view>
+          </view>
+         <view class="fl_box" wx:else></view>
+          <view class="fn_right">
+            <view  catchtap="del" data-idx="{{index}}" data-id='{{item.id}}'>删除</view>
+            <wxs src="./address.wxs" module="toString"></wxs>
+            <view class="edit" data-item="{{toString(item)}}" catchtap="edit">修改</view>
+            <!-- <navigator url="/pages/address/add?item={{toString(item)}}">修改</navigator> -->
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <navigator url="/pages/address/add" class="address_btn">添加新地址</navigator>
+    
+</view>

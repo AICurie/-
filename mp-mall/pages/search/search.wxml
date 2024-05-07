@@ -1,0 +1,125 @@
+<!--pages/search/search.wxml-->
+<view class="search_body">
+  <view class="bar_header " style="height:{{statusBarHeight + 42}}px;">
+    <view class="bar_item " style="height:{{statusBarHeight + 42}}px;top:0px;line-height:{{statusBarHeight + 62}}px;">
+      <!-- <text style="color: #fff;height: {{isIos?'32px':'29px'}};line-height: {{isIos?'32px':'29px'}};margin-bottom: {{isIos?'6px':'4px'}};">{{name||'维本生鲜'}}</text> -->
+      <!-- <navigator style="height: {{isIos?'31px':'29px'}};line-height: {{isIos?'31px':'29px'}};margin-bottom: {{isIos?'6px':'4px'}};" url="/pages/search/search" hover-class="noshadow" class="search"><image src="../../images/search.png" ></image>输入商品名称</navigator> -->
+      <image bindtap="backhandle" style="height: {{isIos?'22px':'22px'}};width: {{isIos?'22px':'22px'}};margin-bottom: {{isIos?'12px':'8px'}}; margin-left: 20rpx;" src="../../images/back.png"></image>
+      <view class="search" style="height: {{isIos?'31px':'31px'}};line-height: {{isIos?'31px':'30px'}};margin-bottom: {{isIos?'7px':'3.5px'}}; margin-left: 20rpx;">
+        <view class="search_fl">
+          <image src="../../images/search.png" mode="widthFix"></image>
+          <input placeholder="输入商品名称" bindinput="changeKey" value="{{key}}" confirm-type="search" bindconfirm="search"></input>
+        </view>
+        <view class="search_fr" hidden="{{key.length == 0}}" bindtap="reset"><image src="../../images/cancel.png" mode="widthFix"></image></view>
+      </view>
+    </view>
+  </view>
+  
+    <!-- <view class="search_box">
+      <view class="search">
+        <view class="search_fl">
+          <image src="../../images/search.png" mode="widthFix"></image>
+          <input placeholder="输入商品名称" bindinput="changeKey" value="{{key}}" confirm-type="search" bindconfirm="search"></input>
+        </view>
+        <view class="search_fr" hidden="{{key.length == 0}}" bindtap="reset"><image src="../../images/cancel.png" mode="widthFix"></image></view>
+      </view>
+      <view class="cancel" hidden="{{!status}}" bindtap="cancel">取消</view>
+    </view> -->
+    <view class="history" hidden="{{status || search.length == 0}}">
+      <view class="history_tit">
+        <view>历史搜索</view>
+        <view class="del" bindtap="cleSearch">
+          <image src="../../images/del.png" ></image>
+        </view>
+      </view>
+      <view class="history_list">
+        <view class="history_item "wx:for="{{search}}" wx:key="index" bindtap="searchTap" data-item="{{item}}">{{item}}</view>
+      </view>
+    </view>
+    <wxs src="../order/price.wxs" module="price"></wxs>
+    <view class="goods_list" hidden="{{!status}}">
+      
+      <view class="goods_box" wx:if="{{goods.length > 0}}">
+       <!-- <view class="goods_item" wx:for="{{goods}}" wx:key="index">
+          <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="goods_image"><image src="{{item.image ? item.image : '../../images/good_default.png'}}"  binderror="imageError" data-idx="{{index}}"></image></navigator>
+          <view class="goods_info" bindtap="detail" data-id="{{item.goodsId}}">
+            <view class="goods_tit">{{item.goodsName}}</view>
+            <view class="goods_desc">规格：{{item.skuSpec}}</view>
+            <view class="goods_price">
+              <view class="price_box">
+                <text class="rebate" wx:if="{{item.discount && item.discount > 0}}">{{item.discount}}折</text>
+                <wxs src="../order/price.wxs" module="price"></wxs>
+                <text class="price_now">￥{{item.skuHiddenPrice? '***': price(item.goodsPrice)}}</text>
+              </view>
+            </view>
+            <view class="goods_sales" >
+              <view class="sales_num">销量：{{item.salesVolume == 0 ? 800 : item.salesVolume}}</view>
+              <view class="goods_btn"  catchtap="addCar" data-id='{{item.goodsId}}' data-num="{{item.number}}">
+                <view>加入购物车</view>
+                <view class="spot"></view>
+              </view>
+            </view>
+          </view>
+        </view> -->
+      
+        <view class="goods_item" wx:for="{{goods}}" wx:key="index">
+          <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="goods_image">
+            <image src="{{item.image}}" ></image>
+            <view class="img_tip" wx:if="{{item.goodsLabels && item.goodsLabels[0].icon}}">
+              <image mode="widthFix" src="{{baseUrl + item.goodsLabels[0].icon + '?appId='+appId+'&width=200&height=200'}}"></image>
+            </view>
+          </navigator>
+          <view class="goods_info" bindtap="detail" data-id="{{item.goodsId}}">
+            <view class="goods_tit">
+              <view class="tab" wx:if="{{item.isShowItemSupplier && item.itemSupplier }}">{{item.itemSupplier }}</view>
+              <view class="text {{item.isShowItemSupplier && item.itemSupplier ?'tab_txt':''}}">{{item.goodsName}}</view>
+            </view>
+            <view class="goods_price">
+              <view class="price_box">
+                <view class="price_now">
+                  <view class="util">￥</view>
+                  <view class="num">
+                    {{(!userInfo.merchantMemberId || userInfo.status != 1 || item.skuHiddenPrice) ? '***' : item.settleStyle==1?(price(item.goodsPrice)+'/'+item.skuUnit):(price(item.basicSkuPrice)+'/'+item.basicUnit)}}
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="goods_sales" >
+              <view class="sales_num">
+                <view class="old">￥{{(!userInfo.merchantMemberId || userInfo.status != 1 || item.skuHiddenPrice) ? '***' : price(item.skuUnderlinePrice)}}/{{item.skuUnit}}</view>
+                <view class="now">
+                  约￥{{(!userInfo.merchantMemberId || userInfo.status != 1 || item.skuHiddenPrice) ? '***' : item.settleStyle==0?price(item.goodsPrice):price(item.basicSkuPrice)}}元/{{item.settleStyle == 0 ? item.skuUnit : item.basicUnit}}
+                </view>
+                <view class="sales_txt">{{item.settleStyle == 0 ? '按斤结算': '按箱结算'}}</view>
+              </view>
+            </view>
+            <view class="amount">
+              <view class="amount_fl">
+                <view class="amount_item" wx:if="{{item.isShowSkuWeight == 1}}">
+                  <view class="amount_tit">毛重</view>
+                  <view class="amount_txt">约{{item.skuWeight}}{{item.basicUnit}}</view>
+                </view>
+                <view class="amount_ls">
+                  <view class="amount_item" wx:if="{{item.isShowNetWeight == 1}}">
+                    <view class="amount_tit">净重</view>
+                    <view class="amount_txt">约{{item.netWeight}}{{item.basicUnit}}</view>
+                  </view>
+                  <view class="amount_item" wx:if="{{item.isShowNetWeightPrice == 1}}">
+                    <view class="amount_tit">净单价</view>
+                    <view class="amount_txt">约{{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***':price(item.netWeightPrice)}}/{{item.basicUnit}}</view>
+                  </view>
+                </view>
+              </view>
+              <view class="btn" catchtap="addCar" data-num="{{item.number}}" data-id='{{item.goodsId}}'><image src="../../images/add_car.png" mode="widthFix"></image></view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+         <view class="vido" wx:else>
+          <!-- <image src="../../images/{{search_nicht}}" mode="widthFix"></image> -->
+          <!-- <view>未找到该商品</view> -->
+          <view>{{vido_txt}}</view>
+      </view>
+    </view>
+</view>

@@ -1,0 +1,20 @@
+<!--pages/order/list.wxml-->
+<view class="goods_list">
+  <view class="goods_item" wx:for="{{goods}}" wx:key="index">
+    <view class="goods_image"><image src="{{item.image ? item.image : '../../images/good_default.png'}}" binderror="imageError" data-idx="{{index}}"></image></view>
+    <view class="item_info">
+      <view class="goods_tit">{{item.name || item.itemName}}</view>
+      <view class="goods_desc" wx:if="{{item.skuSpec}}">规格：{{item.skuSpec}}</view>
+      
+      <view class="goods_price">
+        <view class="price_box">
+          <!-- <text class="rebate" wx:if="{{item.discount && item.discount!=0}}">{{item.discount}}折</text> -->
+          <wxs src="./price.wxs" module="price"></wxs>
+          <text class="price_now" wx:if="{{item.skuPrice}}">￥{{item.skuHiddenPrice? '***':price(item.skuPrice)}}</text>
+          <text class="price_old" wx:if="{{!item.skuHiddenPrice && price(item.skuUnderlinePrice) && item.skuUnderlinePrice}}">￥{{price(item.skuUnderlinePrice)}}</text>
+        </view>
+        <view class="num" wx:if="{{item.qty || item.skuSum}}">{{item.qty || item.skuSum}}</view>
+      </view>
+    </view>
+  </view>
+</view>

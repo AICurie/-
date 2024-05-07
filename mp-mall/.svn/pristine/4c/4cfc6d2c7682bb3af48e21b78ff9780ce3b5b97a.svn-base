@@ -1,0 +1,93 @@
+<!--pages/integral/integral.wxml-->
+<view class="integral">
+  <!-- <view class="nowIntegral">当前积分：{{point}}</view> -->
+  <view class="integral_tit">
+    <view class="integral_tit_box">
+      <view class="integral_tit_fl">
+        <view class="fl_item">
+          <view class="item_txt">当前积分</view>
+          <view class="item_num">{{point}}</view>
+        </view>
+        <view class="fl_item">
+          <view class="item_txt">当前积分排名</view>
+          <view class="item_num">{{ranking}}</view>
+        </view>
+      </view>
+      <view class="integral_tit_fr">
+        <view class="fr_item">
+          <view class="item_txt">总积分</view>
+          <view class="item_num">{{pointTotal}}</view>
+        </view>
+        <view class="fr_item">
+          <view class="item_txt">已使用积分</view>
+          <view class="item_num">{{pointTotalSpend}}</view>
+        </view>
+      </view>
+    </view>
+    
+    <image class="bg" src="../../images/integral_bg.png"></image>
+  </view>
+  <view class="integral_box">
+    <!-- 下单 消费 -->
+    <!-- <view class="tit">积分明细</view> -->
+    <view class="list">
+      <!-- <view class="item" wx:for="{{list}}" wx:key="index">
+        <view class="item_fl">
+          <view class="item_name">{{item.typeDesc}}</view>
+          <view class="item_time">{{item.crdTimestamp}}</view>
+        </view>
+        <view class="item_fr">
+          <text class="add" wx:if="{{item.type==1 || item.type==4}}">+{{item.point}}</text>
+          <text class="reduce" wx:else>-{{item.point}}</text>
+        </view>
+      </view> -->
+      <view class="item" wx:for="{{list}}" wx:key="index">
+        <view class="item_fl">
+          <view class="item_name">{{item.typeDesc}}</view>
+          <view class="item_time">{{item.crdTimestamp}}</view>
+        </view>
+        <view class="item_fr">
+          <text class="add" wx:if="{{item.type==1 || item.type==4}}">+{{item.point}}</text>
+          <text class="reduce" wx:else>-{{item.point}}</text>
+        </view>
+      </view>
+      <!-- <view class="item" >
+        <view class="item_fl">
+          <view class="item_name">下单</view>
+          <view class="item_time">2021-08-04 10:00</view>
+        </view>
+        <view class="item_fr">
+          <text class="add" >+500</text>
+        </view>
+      </view>
+      <view class="item" >
+        <view class="item_fl">
+          <view class="item_name">消费</view>
+          <view class="item_time">2021-08-03 14:30</view>
+        </view>
+        <view class="item_fr">
+          <text class="reduce">-1234</text>
+        </view>
+      </view>
+      <view class="item" >
+        <view class="item_fl">
+          <view class="item_name">消费</view>
+          <view class="item_time">2021-08-02 10:30</view>
+        </view>
+        <view class="item_fr">
+          <text class="reduce">-500</text>
+        </view>
+      </view>
+      <view class="item" >
+        <view class="item_fl">
+          <view class="item_name">下单</view>
+          <view class="item_time">2021-08-02 17:00</view>
+        </view>
+        <view class="item_fr">
+          <text class="add" >+500</text>
+        </view>
+      </view> -->
+    </view>
+  </view>
+ 
+</view>

@@ -1,0 +1,456 @@
+<!--pages/detail/detail.wxml-->
+<!-- wx:if="{{goodsInfo}}" -->
+<view class="detail" >
+  <wxs src="../order/price.wxs" module="price"></wxs>
+  <wxs src="../activity/surplus.wxs" module="surplus"></wxs>
+  <swiper bindchange="changecurrent" style="height:{{screenWidth}}px;">
+    <swiper-item wx:for="{{videos}}" wx:key="index">
+      <video id="mv" loop="{{true}}"	show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" enable-progress-gesture="{{false}}" autoplay="{{true}}" src="{{item}}">
+        <!-- <cover-view class="img_tip" wx:if="{{goodsInfo.goodsLabels && goodsInfo.goodsLabels[0].icon}}">
+          <cover-image mode="widthFix" src="{{baseUrl + goodsInfo.goodsLabels[0].icon + '?appId='+appId+'&width=200&height=200'}}"></cover-image>
+        </cover-view> -->
+      </video>
+      <!-- <video id="mv" loop="{{true}}"	show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" enable-progress-gesture="{{false}}" autoplay="{{true}}" src="https://vali-g1.cp31.ott.cibntv.net/youku/657249c4b914b7203d38f37dc/030008010061DD3E71F8B7EC31956026E319E0-EADE-43C3-8F87-42131B0DC0D7.mp4?sid=164457728900010007447_00_B77fbb24bb5f2ecf70b80588798aadbcd&sign=6c0055ac456b24dcb24fd1a9a870cb7f&ctype=50&si=183&psid=edc3df2013a6677aa0221cacf402e49043346"></video> -->
+      <!-- <video id="mv" loop="{{true}}"	show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" enable-progress-gesture="{{false}}" autoplay="{{true}}" src="https://mp.trial.langmeta.com/api/files/2c90b5bb75084a5a017511955be0000c?appId=wx50b049105610b4ef"></video> -->
+      
+    </swiper-item>
+    <swiper-item wx:for="{{imgs}}" wx:key="index" bindtap="viewImage" data-idx="{{index}}">
+      <image src="{{item ? item : '../../images/good_default.png'}}" mode="aspectFill" binderror="imageError" data-idx="{{index}}"></image>
+      <view class="img_tip" wx:if="{{goodsInfo.goodsLabels && goodsInfo.goodsLabels[0].icon}}">
+        <image mode="widthFix" src="{{baseUrl + goodsInfo.goodsLabels[0].icon + '?appId='+appId+'&width=200&height=200'}}"></image>
+      </view>
+      <!-- <image src="../../images/list2.png"></image> -->
+    </swiper-item>
+    
+  </swiper>
+  
+  <view class="goods_num">
+    <view class="goods_num_fl">
+      <view class="goods_price">
+        <view class="util">￥</view>
+        <view class="num">
+        <!-- {{price(goodsInfo.goodsPrice)}} -->
+        <!-- 按箱结算 展示销售计量单位价格  按斤结算展示基础计量单位价格 -->
+        {{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : goodsInfo.settleStyle==1?(goodsInfo.skuActivityPrice ? price(goodsInfo.skuActivityPrice) :price(goodsInfo.goodsPrice)):price(goodsInfo.basicSkuPrice)}}
+        </view>
+        <!-- 按箱结算 展示销售计量单位  按斤结算展示基础计量单位 -->
+        <view class="numa">/{{goodsInfo.settleStyle==1?goodsInfo.skuUnit:goodsInfo.basicUnit}}</view>
+      </view>
+      <view class="goods_now_prices">
+        <view class="price_old">￥{{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : price(goodsInfo.skuUnderlinePrice)}}/{{goodsInfo.settleStyle==1?goodsInfo.skuUnit:goodsInfo.basicUnit}}</view>
+        <!-- 按斤结算 展示销售计量单位价格  按箱结算展示基础计量单位价格 -->
+        <!-- <view class="price_now">约￥{{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : goodsInfo.settleStyle==0?price(goodsInfo.goodsPrice):price(goodsInfo.basicSkuPrice)}}/{{goodsInfo.settleStyle == 0 ? goodsInfo.skuUnit : goodsInfo.basicUnit}}</view> -->
+        <!-- 按斤结算 秒杀活动展示秒杀活动价格，非秒杀展示销售价格  -->
+        <!-- 按箱结算 秒杀活动展示换算后的基础单位价格，非秒杀展示基础单位价格 -->
+        <!-- <view class="price_now">约￥
+          {{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : goodsInfo.settleStyle==0?(skuSource == 1 ? price(goodsInfo.skuActivityPrice) : price(goodsInfo.goodsPrice)):price(goodsInfo.basicSkuPrice)}}/
+          {{goodsInfo.settleStyle == 0 ? goodsInfo.skuUnit : goodsInfo.basicUnit}}
+        </view> -->
+
+        <view class="price_now">约￥
+          {{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : goodsInfo.settleStyle==0?(skuSource == 1 ? price(goodsInfo.skuActivityPrice) : price(goodsInfo.goodsPrice)):price(goodsInfo.basicSkuPrice)}}/
+          {{goodsInfo.settleStyle == 0 ? goodsInfo.skuUnit : goodsInfo.basicUnit}}
+        </view>
+
+      </view>
+    </view>
+    <view class="goods_num_fr">
+      <view class="goods_stock">
+        <view>已售{{goodsInfo.salesVolume}}{{goodsInfo.skuUnit}}</view>
+        <view wx:if="{{!goodsInfo.skuHiddenStock}}">剩余{{goodsInfo.stock}}{{goodsInfo.skuUnit}}</view>
+        <!-- <view wx:else>剩余{{goodsInfo.stock}}{{goodsInfo.settleStyle==1?goodsInfo.skuUnit:goodsInfo.basicUnit}}</view> -->
+      </view>
+      
+      <view class="goods_time" wx:if="{{endTimeStamp && nowTimeStamp}}">
+        <view class="time_txt">{{(goodsInfo && goodsInfo.switchStatus==0 && nowTimeStamp < endTimeStamp) ? '距结束': '已结束'}}</view>
+        <view class="time_box" wx:if="{{nowTimeStamp < endTimeStamp && goodsInfo && goodsInfo.switchStatus==0}}">
+          <view class="time_box_im">{{surplus(endTimeStamp-nowTimeStamp).h}}</view>
+          <view class="time_box_l">:</view>
+          <view class="time_box_im">{{surplus(endTimeStamp-nowTimeStamp).m}}</view>
+          <view class="time_box_l">:</view>
+          <view class="time_box_im">{{surplus(endTimeStamp-nowTimeStamp).s}}</view>
+        </view>
+      </view>
+
+      <view class="jieusan" wx:else>
+        {{goodsInfo.settleStyle == 0 ? '按斤结算': '按箱结算'}}
+      </view>
+
+    </view>
+  </view>
+  <view class="goods_box">
+    <view class="goods_desc">
+      <view class="goods_name">
+        <view class="goods_tab" wx:if="{{goodsInfo.isShowItemSupplier && goodsInfo.itemSupplier }}">{{goodsInfo.itemSupplier }}</view>
+        <!-- <view class="goods_txt tab_txt">{{goodsInfo.itemName}}</view> -->
+        <view class="goods_txt {{goodsInfo.isShowItemSupplier && goodsInfo.itemSupplier ?'tab_txt':''}}">{{goodsInfo.itemName}}</view>
+        <!-- <view class="share_btn">分享</view> -->
+        <view class="share_btn" bindtap="showShare">
+          <image src="../../images/share_ioc.png"></image>
+          
+        </view>
+      </view>
+      <!-- <view class="goods_more">
+        <view class="goods_price">
+         
+          <text class="now_price">￥{{goodsInfo.skuHiddenPrice ? '***' : price(goodsInfo.goodsPrice)}}</text> 
+          <text class="old_price" wx:if="{{!goodsInfo.skuHiddenPrice && goodsInfo.skuUnderlinePrice}}">￥{{price(goodsInfo.skuUnderlinePrice)}}</text>
+        </view>
+        <view class="goods_stock">
+          <view class="stock" wx:if="{{goodsInfo.stock}}">库存：{{goodsInfo.stock}}</view>
+          <view class="sales">销量：{{goodsInfo.salesVolume}}</view>
+        </view>
+      </view> -->
+    
+      
+
+      <view class="goods_specs">
+        <view class="specs_fl">
+            <view class="goods_info_txt">{{goodsInfo.skuFeatures}}</view>
+            <view class="specs_box">
+              <view class="specs_item" wx:if="{{goodsInfo.isShowSkuWeight == 1}}">
+              <view class="specs_txt">毛重</view>
+              <view class="specs_num">约{{goodsInfo.skuWeight}}{{goodsInfo.basicUnit}}</view>
+            </view>
+            <view class="specs_ls">
+              <view class="specs_item" wx:if="{{goodsInfo.isShowNetWeight == 1}}">
+                <view class="specs_txt">净重</view>
+              <view class="specs_num">约{{goodsInfo.netWeight}}{{goodsInfo.basicUnit}}</view>
+              </view>
+              <view class="specs_item" wx:if="{{goodsInfo.isShowNetWeightPrice == 1}}">
+                <view class="specs_txt">净单价</view>
+              <view class="specs_num">约{{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : price(goodsInfo.netWeightPrice)}}/{{goodsInfo.basicUnit}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        
+        <view class="spec" wx:if="{{!skuSource || skuSource == 0}}">
+        <!-- {{skuItem.id == item.id?'active':''}} -->
+          <view wx:for="{{goodsInfo.skus}}" wx:key="index" class="spec_item " bindtap="showSkuHandle">
+            {{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : price(item.skuPrice)}}/{{item.skuUnit}}({{item.skuWeight}}{{item.basicUnit}})
+          </view>
+          <!-- <view class="spec_item {{skuTab == 3?'active':''}}" bindtap="showSkuHandle">135.88/箱(10箱)</view> -->
+        </view>
+      </view>
+
+    </view>
+    <!-- <view class="goods_info">
+      <view class="info_item" wx:if="{{goodsInfo.delivery}}">
+        <view class="info_name">配送</view>
+        <view class="info_desc">{{goodsInfo.delivery}}</view>
+      </view>
+      <view class="info_item">
+        <view class="info_name">产地</view>
+        <view class="info_desc">{{goodsInfo.skuMadein}}</view>
+      </view>
+      <view class="info_item" bindtap="showSkuHandle">
+        <view class="info_name">规格</view>
+        <view class="info_desc">{{goodsInfo.skuSpec}}</view>
+        <view class="info_btn">
+          <view class="btn_item"></view>
+        </view>
+      </view>
+    </view> -->
+    
+    <!-- <view class="youhui" bindtap="toPageHandle" data-url="/pages/coupon/receive">
+      <view class="youhui_tit">优惠</view>
+      <view class="youhui_desc red">领券</view>
+      <view class="youhui_img">
+        <image src="../../images/coupon_db.png"></image>
+        <view class="youhui_img_box">
+          <view class="box_fl">
+            <view class="fl_util">￥</view>
+            <view class="fl_num">10</view>
+          </view>
+          <view class="box_fr">
+            <view class="fr_tit">店铺优惠券</view>
+            <view class="fr_btn">满100试用</view>
+          </view>
+        </view>
+      </view>
+      <view class="youhui_btn">
+        <view class="btn_txt">领券</view>
+        <view class="btn_item red"></view>
+      </view>
+    </view> -->
+
+    <!-- <view class="youhui">
+      <view class="youhui_tit">活动</view>
+      <view class="youhui_desc ">爆品</view>
+      <view class="youhui_desc ">更多爆品秒杀商品</view>
+      <view class="youhui_btn">
+        <view class="btn_txt">抢购</view>
+        <view class="btn_item red"></view>
+      </view>
+    </view> -->
+
+    <view class="collage" wx:if="{{goodsInfo.goodsGroupBuyingExtVoList && goodsInfo.goodsGroupBuyingExtVoList.length > 0}}">
+      <view class="collage_tit">
+        <view class="tit">进行中的拼团</view>
+        <view class="collage_btn" bindtap="toPageHandle" data-url="/pages/detail/collage?id={{goodsInfo.id}}">
+          <view class="btn_txt">全部拼团</view>
+          <view class="btn_item"></view>
+        </view>
+      </view>
+      <view class="collage_ls">
+        <view class="collage_item" wx:for="{{goodsInfo.goodsGroupBuyingExtVoList}}" wx:key="index">
+          <view class="item_fl">还差<text>{{item.groupPeopleSurplus}}</text>人成团</view>
+          <view class="item_fr">
+            <view class="item_time" wx:if="{{item.groupBuyingEndTimeStamp > nowTimeStamp}}">
+            {{surplus(item.groupBuyingEndTimeStamp-nowTimeStamp).h}}:
+            {{surplus(item.groupBuyingEndTimeStamp-nowTimeStamp).m}}:
+            {{surplus(item.groupBuyingEndTimeStamp-nowTimeStamp).s}}
+            </view>
+            <view class="collage_btn" bindtap="showCollage" data-item="{{item}}">一起拼</view>
+          </view>
+        </view>
+        <!-- <view class="collage_item">
+          <view class="item_fl">还差<text>2</text>人成团</view>
+          <view class="item_fr">
+            <view class="item_time">02:50:11</view>
+            <view class="collage_btn" bindtap="showCollage">一起拼</view>
+          </view>
+        </view> -->
+      </view>
+    </view>
+
+    <view class="youhui">
+      <view class="youhui_tit">售后标准</view>
+      <view class="youhui_flex">{{goodsInfo.afterSalesStandard}}</view>
+    </view>
+    <view class="tip">出现未在售后赔付范围内争议、以平台最终判断为准</view>
+
+    <view class="comment" wx:if="{{comments && comments.length > 0}}">
+      <view class="comment_tit">
+        <view class="tit_txt">评价</view>
+        <view class="tit_more" bindtap="toMoreHandle">
+          <view class="more_txt">查看更多评价</view>
+          <view class="btn_item"></view>
+        </view>
+      </view>
+      <view class="comment_box">
+        <view class="comment_item" wx:for="{{comments}}" wx:key="index">
+          <view class="item_user">
+            <view class="avatar">
+              <image src="../../images/icon_avatar.png"></image>
+            </view>
+            <view class="name">{{item.commentName || "匿名用户"}}</view>
+          </view>
+          <view class="comment_nav">{{item.commentContent}}</view>
+          <view class="comment_imgs" wx:if="{{item.commentExtendModel && item.commentExtendModel.imgIds.length > 0}}">
+            <view class="imgs_item" 
+            wx:for="{{item.commentExtendModel.imgIds}}" 
+            wx:for-item="val"
+            wx:for-index="idx"
+            wx:key="idx">
+              <image src="{{baseUrl + val+'?appId='+appId+'&width=200&height=200'}}" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="recom" wx:if="{{recom.length > 0}}">
+        <view class="recom_tit">
+          <view class="recom_tit_bx">
+            <view class="div"></view>
+            <view class="tit">为您推荐</view>
+            <view class="div"></view>
+          </view>
+        </view>
+        <view class="recom_box">
+          <view class="recom_item" wx:for="{{recom}}" wx:key="index">
+            <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="item_img">
+              <image src="{{baseUrl+item.goodsImgId+'?appId='+appId+'&width=200&height=200'}}"></image>
+            </navigator>
+            <view class="item_info">
+              <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="info_tit">
+                <view class="tab" wx:if="{{item.isShowItemSupplier==1 && item.itemSupplier }}">{{item.itemSupplier}}</view>
+                <view class="text">{{item.itemName}}</view>
+              </navigator>
+              <view class="add_car">
+                <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="in_fl">
+                  <view class="price">
+                    <view class="util">￥</view>
+                    <view class="num">{{(userInfo.merchantMemberId && userInfo.status == 1) ? item.settleStyle==1?price(item.goodsPrice):price(item.basicSkuPrice): '***'}}</view>
+                    <view class="price_txt">/{{item.settleStyle==1?item.skuUnit:item.basicUnit}}</view>
+                  </view>
+                  <view class="sales">销量{{item.sales}}</view>
+                </navigator>
+                <view class="in_fr" bindtap="addCars" data-num="{{item.number}}" data-id='{{item.goodsId}}'>
+                  <image src="../../images/add_car.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    <view class="goods_detail">
+      <view class="goods_tit" bindtap="back">商品详情</view>
+      <rich-text nodes="{{goodsInfo.itemDesc}}"></rich-text>
+      <!-- <image src="../../images/list2.png" mode="widthFix"></image> -->
+    </view>
+  </view>
+<!-- wx:if="{{goodsInfo.availableFlag == 1}}" -->
+  <view class="detail_btm" >
+    <view class="car_btn" bindtap="goIndex">
+      <view class="car_ico">
+        <image src="../../images/index.png" mode="widthFix"></image>
+      </view>
+      <view class="car_txt" >首页</view>
+    </view>
+    <view class="car_btn" bindtap="goCar">
+      <view class="car_ico">
+        <image src="../../images/car.png" mode="widthFix"></image>
+        <view wx:if="{{goodsInfo.isShopping == 1}}">{{goodsInfo.number}}</view>
+      </view>
+      <view class="car_txt" >购物车</view>
+    </view>
+    
+    <!-- <view class="car_btn" bindtap="showShare">
+      <view class="car_ico">
+        <image src="../../images/share.png" mode="widthFix"></image>
+      </view>
+      <view class="car_txt" >分享</view>
+    </view> -->
+
+    <view class="car_right">
+        <view class="goods_btn" bindtap="addCar" wx:if="{{!skuSource || skuSource == 0}}">
+          <view>加入购物车</view>
+        </view>
+        <view class="goods_btn" bindtap="addCar" wx:elif="{{goodsInfo && goodsInfo.switchStatus==0}}">
+          <view>立即抢购</view>
+        </view>
+        <view class="goods_btn dis" wx:else>
+          <view>{{goodsInfo.switchStatus == 1 ? "未开始" : "已结束"}}</view>
+        </view>
+    </view>
+  </view>
+</view>
+
+<view class="sku_body" hidden="{{showSku}}" bindtap="close" wx:if="{{goodsInfo.skus && goodsInfo.skus.length > 0}}">
+  <view class="sku_box" catchtap="stop">
+    <view class="close" bindtap="close">
+      <image src="../../images/cancel.png"></image>
+    </view>
+    <view class="sku_tit">
+      <view class="sku_ico">
+        <image src="{{imgs[0]}}"></image>
+      </view>
+      <view class="sku_info">
+        <view class="sku_name">
+          <view class="suk_tab" wx:if="{{skuItem.isShowItemSupplier && skuItem.itemSupplier }}">
+            {{skuItem.itemSupplier }}
+          </view>
+          <view class="sku_name_txt {{skuItem.isShowItemSupplier && skuItem.itemSupplier ?'tab_txt':''}}">{{skuItem.itemName}}</view>
+        </view>
+        <view class="sku_prices">
+          <view class="peices_fl">
+            <view class="peices_fl_top">
+              <view class="util">￥</view>
+              <view class="num">
+                {{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : goodsInfo.settleStyle==1?price(skuItem.skuPrice):price(skuItem.basicSkuPrice)}}/{{skuItem.settleStyle==1?skuItem.skuUnit:skuItem.basicUnit}}
+              </view>
+            </view>
+            <view class="peices_fl_all">
+              <view class="util">￥</view>
+              <view class="num" >
+                {{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : goodsInfo.settleStyle==1?price(skuItem.basicSkuPrice):price(skuItem.skuPrice)}}/{{skuItem.settleStyle==1?skuItem.basicUnit:skuItem.skuUnit}}
+              </view>
+            </view>
+          </view>
+          <view class="peices_fr">
+            <view class="goods_info_txt">{{skuItem.skuFeatures}}</view>
+            <view class="specs_box">
+                <view class="specs_item" wx:if="{{skuItem.isShowSkuWeight == 1}}">
+                <view class="specs_txt">毛重</view>
+                <view class="specs_num">约{{skuItem.skuWeight}}{{skuItem.basicUnit}}</view>
+              </view>
+              <view class="specs_ls">
+                <view class="specs_item" wx:if="{{skuItem.isShowNetWeight == 1}}">
+                  <view class="specs_txt">净重</view>
+                <view class="specs_num">约{{skuItem.netWeight}}{{skuItem.basicUnit}}</view>
+                </view>
+                <view class="specs_item" wx:if="{{skuItem.isShowNetWeightPrice == 1}}">
+                  <view class="specs_txt">净单价</view>
+                <view class="specs_num">约{{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***':price(skuItem.netWeightPrice)}}/{{skuItem.basicUnit}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- <view class="sku_price">￥{{goodsInfo.skuHiddenPrice ? '***' : price(goodsInfo.goodsPrice)}}</view>
+        <view class="sku_stock" wx:if="{{goodsInfo.stock}}">库存: {{goodsInfo.stock}}</view>
+        <view class="sku_sales" wx:if="{{goodsInfo.sales}}">销量: {{goodsInfo.sales}}</view> -->
+      </view>
+    </view>
+    <view class="sku_nav">
+      <view class="nav_tit">商品规格</view>
+      <view class="sku_list">
+        <!-- <view class="sku_item {{skuId == item.id ? 'active':''}}" wx:for="{{goodsInfo.skus}}" wx:key="index" bindtap="changeSku" data-item="{{item}}">
+          {{item.skuSpec}}
+        </view> -->
+        <!-- <view class="sku_item {{skuTab == 1?'active':''}}" data-val="1" bindtap="changeSku" >143.10/箱(1箱)</view>
+        <view class="sku_item {{skuTab == 2?'active':''}}" data-val="2" bindtap="changeSku" >138.88/箱(5箱)</view>
+        <view class="sku_item {{skuTab == 3?'active':''}}" data-val="3" bindtap="changeSku" >135.88/箱(10箱)</view> -->
+        <view wx:for="{{goodsInfo.skus}}" wx:key="index" class="sku_item {{skuItem.id == item.id?'active':''}}" data-val="{{item}}" bindtap="changeSku" >
+          {{(!userInfo.merchantMemberId || userInfo.status != 1) ? '***' : price(item.skuPrice)}}/{{item.skuUnit}}({{item.skuWeight}}{{item.basicUnit}})
+        </view>
+      </view>
+    </view>
+    <view class="sku_btn" bindtap="addCarHandle">确定</view>
+  </view>
+</view>
+
+<view class="share_bod" hidden="{{share}}">
+  <view class="share_box">
+    <view class="share_btn">
+      <button class="share_item" open-type="share">
+        <image src="../../images/wchat.png"></image>
+        <view>分享给好友</view>
+      </button>
+    </view>
+    <view class="cancel" bindtap="showShare">取消</view>
+  </view>
+</view>
+<!-- <view class="fenxiang">
+ <image src="../../images/fenxiang.png" class="imgss"></image>分享
+</view> -->
+
+<view class="collage_body" hidden="{{isHideCollage}}">
+  <view class="collage_box">
+    <view class="box_close"><image bindtap="hideCollage" src="../../images/cancel.png"></image></view>
+    <view class="collage_box_tit">一起参与拼团</view>
+    <view class="collage_box_desc">
+      <view class="desc_tab" wx:if="{{goodsInfo.isShowItemSupplier && goodsInfo.itemSupplier }}">{{goodsInfo.itemSupplier }}</view>
+      <view class="desc_txt {{goodsInfo.isShowItemSupplier && goodsInfo.itemSupplier ?'tab_txt': ''}}">{{goodsInfo.itemName}}</view>
+    </view>
+    <view class="collage_box_time" wx:if="{{goodsGroupBuying.groupBuyingEndTimeStamp && goodsGroupBuying.groupBuyingEndTimeStamp > nowTimeStamp}}">
+      结束倒计时: {{surplus(goodsGroupBuying.groupBuyingEndTimeStamp-nowTimeStamp).h}}:
+            {{surplus(goodsGroupBuying.groupBuyingEndTimeStamp-nowTimeStamp).m}}:
+            {{surplus(goodsGroupBuying.groupBuyingEndTimeStamp-nowTimeStamp).s}}
+    </view>
+    <view class="collage_box_time" wx:elif="{{goodsGroupBuying.groupBuyingEndTimeStamp && goodsGroupBuying.groupBuyingEndTimeStamp < nowTimeStamp}}">
+      已结束
+    </view>
+    <view class="collage_box_users">
+      <view class="user_item" wx:for="{{goodsGroupBuying.goodsGroupBuyingUserVoList}}" wx:key="index">
+        <view class="avatar">
+          <image src="../../images/icon_avatar.png"></image>
+        </view>
+        <view class="ava_tab" wx:if="{{index == 0}}">团长</view>
+      </view>
+      <view class="user_item" wx:for="{{goodsGroupBuying.groupPeopleSurplus}}" wx:key="index">
+        <view class="avatar">?</view>
+      </view>
+    </view>
+    <view class="collage_box_users_desc">
+      还剩{{goodsGroupBuying.groupPeopleSurplus}}个参团名额，赶紧来参团吧
+    </view>
+    <view class="collage_box_btn" bindtap="addCar">
+      {{goodsGroupBuying.groupPeopleSurplus>0?(goodsGroupBuying.groupBuyingEndTimeStamp<nowTimeStamp?'已结束':'确认拼团'):'该团已成团，立即开团'}}
+    </view>
+  </view>
+</view>

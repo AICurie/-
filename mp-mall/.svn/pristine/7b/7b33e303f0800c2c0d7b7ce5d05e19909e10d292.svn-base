@@ -1,0 +1,153 @@
+
+<view class="orider">
+  <view class="tabber">
+    <view class="tabber_item {{status == 0?'active':''}}" bindtap="changeStatus" data-idx="0">全部</view>
+    <view class="tabber_item {{status == 7?'active':''}}" bindtap="changeStatus" data-idx="7">待补差价</view>
+    <view class="tabber_item {{status == 1?'active':''}}" bindtap="changeStatus" data-idx="1">待付款</view>
+     <view class="tabber_item {{status == 2?'active':''}}" bindtap="changeStatus" data-idx="2">待发货</view>
+    <view class="tabber_item {{status == 4?'active':''}}" bindtap="changeStatus" data-idx="4">待收货</view>
+    <view class="tabber_item {{status == 6?'active':''}}" bindtap="changeStatus" data-idx="6">待评价</view>
+  </view>
+  <scroll-view class="orider_box" scroll-y bindscrolltolower="getMore">
+    <view class="orider_list" wx:if="{{list.length > 0}}">
+      <wxs src="./util.wxs" module="util"></wxs>
+      <wxs src="./price.wxs" module="price"></wxs>
+      <view class="orider_item" wx:for="{{list}}" wx:key="index" 
+      wx:if="{{item.orderStatus == status || (status == 6 && item.orderStatus == 5) || (status == 7 && item.supplyStatus == 0) || status == 0 }}">
+        <view class="goods_info">
+          <navigator url="/pages/order/info?id={{item.orderNo}}" hover-class="none" class="goods_tit">
+            <view class="goods_fl">
+              <view class="goods_city">{{item.distribution.customerAddress}}</view>
+              <view class="goods_time">{{item.orderDate}} 下单</view>
+            </view>
+            <view class="goods_status">
+              
+              <view class="red" >{{util(item.orderStatus,item.supplyStatus)}}</view>
+            </view>
+          </navigator>
+          <navigator url="/pages/order/info?id={{item.orderNo}}" hover-class="none" class="goods_nav">
+            <view class="goods_img">
+              <image src="{{key.image ? key.image : '../../images/good_default.png'}}" wx:for="{{item.detail}}" wx:for-item="key" wx:key="idx" wx:for-index='idx' wx:if="{{idx<4}}" binderror="imageError" data-index="{{index}}" data-idx="{{idx}}"></image>
+            </view>
+            <view class="goods_all">
+              <view class="goods_num">共{{item.detailTotal}}件</view>
+              <view class="arrow"></view>
+            </view>
+          </navigator>
+          <view class="goods_price">
+            <view class="price_txt">订单金额</view>
+              <wxs src="./price.wxs" module="price"></wxs>
+            <view class="price_num">￥{{price(item.orderRealPrice)}}</view>
+          </view>
+           <view class="goods_price">
+            <view class="price_txt">订单编号</view>
+            <view >{{item.orderNo}}</view>
+          </view>
+          <view class="fn_list" >
+            <view class="fn_item" wx:if="{{item.orderStatus == 1 || item.orderStatus == 2 || item.orderStatus == 3 && item.cancelBtnFlag}}" bindtap="cancel" data-ids="{{item.orderId}}" data-id="{{item.orderNo}}">取消订单</view>
+            <view class="fn_item active" wx:if="{{item.orderStatus == 1}}" data-id="{{item.orderNo}}" bindtap="player">去支付</view>
+            <!-- <view class="fn_item active" wx:if="{{item.orderStatus==4 && item.logisticsType != 2}}" bindtap="finish" data-id="{{item.orderId}}">确认收货</view> -->
+          </view>
+        </view>
+      </view>
+      
+      <!-- <view class="orider_item" wx:for="{{list}}" wx:key="index">
+        <view class="goods_info">
+          <block wx:for="{{item.detail}}" wx:for-item="val" 
+            wx:for-index="idx"
+            wx:key="idx">
+            <navigator 
+            url="/pages/order/info?id={{item.orderNo}}" hover-class="none" class="goods_tit">
+              <view class="goods_fl">
+                <image src="{{val.image}}"></image>
+              </view>
+              <view class="goods_fr">
+                <view class="goods_name">
+                  <view class="name_fl">
+                    <view class="tab" wx:if="{{val.isShowSkuSupplier && val.itemSupplier }}">{{val.itemSupplier }}</view>
+                    <view class="text {{val.isShowSkuSupplier && val.itemSupplier  ? 'tab_text' : ''}}">{{val.itemName}}</view>
+                  </view>
+                  <view class="name_fr red" wx:if="{{idx == 0}}">{{util(item.orderStatus)}}</view>
+                </view>
+                <view class="goods_price">
+                  <view class="price_txt">按实收数量结算</view>
+                  <view class="price_box">
+                    <view class="price">
+                      <view class="util">￥</view>
+                      <view class="num">{{price(val.skuPrice)}}</view>
+                    </view>
+                    <view class="goods_num">(共{{val.skuSum}}{{val.skuUnit}})</view>
+                  </view>
+                </view>
+              </view>
+            </navigator>
+            <view class="fn_list" >
+              <view class="fn_item" wx:if="{{item.orderStatus >= 5}}" bindtap="topagehandle" data-url="/pages/aftersale/index">申请售后</view>
+              <view class="fn_item active" wx:if="{{item.orderStatus == 1}}" data-id="{{item.orderNo}}" bindtap="player">去支付</view>
+              <view class="fn_item active" wx:if="{{item.orderStatus >= 5}}">再次购买</view>
+              <view class="fn_item active" wx:if="{{item.orderStatus == 5}}" data-item="{{val}}" bindtap="toEvaluate" data-id="{{item.orderId}}">去评价</view>
+            </view>
+          </block>
+          <view class="goods_all_price">
+            <view class="price_item">
+              <view class="im_txt">总价</view>
+              <view class="util">￥</view>
+              <view class="num">{{price(item.orderPrice)}}</view>
+            </view>
+            <view class="price_item">
+              <view class="im_txt">总价</view>
+              <view class="util">￥</view>
+              <view class="num">{{price(item.orderPrice)}}</view>
+            </view>
+            <view class="price_item active">
+              <view class="im_txt">实付款</view>
+              <view class="util">￥</view>
+              <view class="num">{{price(item.orderRealPrice)}}</view>
+            </view>
+          </view>
+          
+        </view>
+      </view> -->
+    
+    </view>
+      <view class="vido" wx:else>
+          <!-- <image src="../../images/{{search_nicht}}" mode="widthFix"></image> -->
+          <view>暂无订单</view>
+      </view>
+      <!-- <view class="recom" wx:if="{{recom.length > 0}}">
+        <view class="recom_tit">
+          <view class="recom_tit_bx">
+            <view class="div"></view>
+            <view class="tit">为您推荐</view>
+            <view class="div"></view>
+          </view>
+        </view>
+        <view class="recom_box">
+          <view class="recom_item" wx:for="{{recom}}" wx:key="index">
+            <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="item_img">
+              <image src="{{baseUrl+item.goodsImgId+'?appId='+appId+'&width=200&height=200'}}"></image>
+            </navigator>
+            <view class="item_info">
+              <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="info_tit">
+                <view class="tab" wx:if="{{item.isShowItemSupplier==1 && item.itemSupplier }}">{{item.itemSupplier}}</view>
+                <view class="text">{{item.itemName}}</view>
+              </navigator>
+              <view class="add_car">
+                <navigator hover-class="noshadow" url="/pages/detail/detail?goodsId={{item.goodsId}}" class="in_fl">
+                  <view class="price">
+                    <view class="util">￥</view>
+                    <view class="num">{{(userInfo.merchantMemberId && userInfo.status == 1) ? item.settleStyle==1?price(item.goodsPrice):price(item.basicSkuPrice): '***'}}</view>
+                    <view class="price_txt">/{{item.settleStyle==1?item.skuUnit:item.basicUnit}}</view>
+                  </view>
+                  <view class="sales">销量{{val.sales}}</view>
+                </navigator>
+                <view class="in_fr" bindtap="addCar" data-num="{{item.number}}" data-id='{{item.goodsId}}'>
+                  <image src="../../images/add_car.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view> -->
+  </scroll-view>
+</view>

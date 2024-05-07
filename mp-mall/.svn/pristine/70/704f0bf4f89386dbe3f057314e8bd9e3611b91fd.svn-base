@@ -1,0 +1,13 @@
+<!--pages/safety/phone.wxml-->
+<view class="phone">
+  <view class="txt">新手机</view>
+  <view class="ipt">
+    <input type="number" maxlength="11" bindinput="changeipt" data-item='phone' placeholder="请输入新手机号"></input>
+  </view>
+  <view class="txt">验证码</view>
+    <view class="ipt">
+    <input placeholder="请输入验证码" bindinput="changeipt" data-item='code'></input>
+     <view class="code_btn {{disabled?'disabled':''}}" bindtap="getcode">{{code_txt}}</view>
+  </view>
+  <view class="btn" bindtap="changePhone">确定</view>
+</view>

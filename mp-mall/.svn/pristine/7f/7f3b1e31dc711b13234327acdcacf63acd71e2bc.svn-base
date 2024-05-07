@@ -1,0 +1,10 @@
+module.exports = function(price) {
+    if (isNaN(price)) {
+      return 0
+    }
+    // if (price >= 1) {
+      return (price/100).toFixed(2)
+    // } else {
+    //   return Number(price).toFixed(2)
+    // }
+}

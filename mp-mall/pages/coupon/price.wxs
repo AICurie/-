@@ -1,0 +1,7 @@
+module.exports = function(price) {
+  if (price >= 1) {
+    return (price/100)
+  } else {
+    return Number(price)
+  }
+}

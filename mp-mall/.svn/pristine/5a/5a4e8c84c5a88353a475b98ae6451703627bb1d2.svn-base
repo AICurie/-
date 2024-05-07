@@ -1,0 +1,24 @@
+<!--pages/help/help.wxml-->
+<view class="safety">
+  <view class="safety_list">
+    <view class="safety_item" bindtap="call">
+      <view>联系我们</view>
+      <view class="item_fr" >
+        <view>{{mobile}}</view>
+         <view class="arrow"></view>
+      </view>
+    </view>
+    <navigator url="/pages/treaty/treaty?status=1" class="safety_item">
+      <view>用户服务协议</view>
+    </navigator>
+    <navigator url="/pages/treaty/treaty?status=2" class="safety_item">
+      <view>用户隐私政策</view>
+    </navigator>
+    <view class="safety_item">
+      <view>版本及环境</view>
+      <view class="item_fr" >
+        <view>{{version}}</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+
+module.exports = function(str) {
+  if (str && typeof str == 'string') {
+    return str.split(' ')[0];
+  }
+  return str;
+}

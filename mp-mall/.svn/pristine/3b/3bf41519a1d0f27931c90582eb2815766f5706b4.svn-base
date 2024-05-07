@@ -1,0 +1,5 @@
+<!--pages/treaty/treaty.wxml-->
+<view class="tyeaty">
+  <rich-text nodes="{{text}}"></rich-text>
+</view>
+

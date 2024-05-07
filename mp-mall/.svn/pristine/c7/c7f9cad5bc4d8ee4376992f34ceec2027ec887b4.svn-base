@@ -1,0 +1,224 @@
+<!--pages/orider/create.wxml-->
+<view class="create">
+<!-- 收获地址 -->
+<wxs src="./price.wxs" module="price"></wxs>
+  <view class="delivery">
+    <navigator url="/pages/address/address?choice={{true}}" class="city_box">
+      <view class="city_fl" wx:if='{{address && address.id}}'>
+        <view class="city_tit">
+          <view class="tag" wx:if="{{address.customerLabel}}">{{address.customerLabel}}</view>
+          <view class="city_live">{{address.customerAddress}}</view>
+        </view>
+        <view class="user_phone"><text>{{address.customerName}}{{address.customerGender==1?'先生':'女士'}}</text> <text>{{address.customerMobileNo}}</text></view>
+      </view>
+      <view class="city_fl" wx:else>选择配送地址</view>
+      <view class="arrow"></view>
+    </navigator>
+    <view class="line_img"><image src="../../images/line.png"></image></view>
+    <view class="delivery_time">
+      <text>配送时间:</text>
+      <text class="time">{{template.expectedDelivery || '预计' + date + '配送'}}</text>
+      <!-- <text class="time">{{'预计' + date + '配送'}}</text> -->
+    </view>
+  </view>
+  <!-- 商品信息 -->
+  <!-- <view class="goods_info">
+    <navigator url="/pages/order/list" hover-class="noshadow" class="goods_box">
+      <view class="goods_nav">
+        <view class="goods_img">
+          <image src="{{key.image || '../../images/good_default.png'}}" wx:for="{{goods}}" wx:for-item="key" wx:key="key" wx:if='{{index <= 3}}'  binderror="imageError" data-idx="{{index}}"></image>
+        </view>
+        <view class="goods_all">
+          <view class="goods_num">共{{goods.length}}件</view>
+          <view class="arrow"></view>
+        </view>
+      </view>
+    </navigator>
+  </view> -->
+  
+  <view class="goods_info" wx:for="{{goods}}" wx:key="index">
+      <view  class="goods_tit">
+        <view class="goods_fl">
+          <image src="{{item.image || baseUrl + item.imgId + '?appId='+appId+'&width=200&height=200'}}"></image>
+        </view>
+        <view class="goods_fr">
+          <view class="goods_name">
+            <view class="name_fl">
+              <view class="tab" wx:if="{{item.isShowItemSupplier && item.itemSupplier}}">
+                  {{item.itemSupplier}}
+                </view>
+              <view class="text {{item.isShowItemSupplier && item.itemSupplier?'tab_text':''}}">{{item.name || item.itemName}}</view>
+            </view>
+          </view>
+          <view class="goods_price">
+            <view class="price_txt">按实收数量结算</view>
+            <view class="price_box">
+              <view class="price">
+                <view class="util">￥</view>
+                <view class="num">{{item.price}}</view>
+                
+              </view>
+              <!-- <view class="num">
+                x{{item.qty}}
+              </view> -->
+              <view class="goods_num">x{{item.qty}}</view>
+              <!-- <view class="goods_num">(共{{item.skuWeight}}{{item.skuUnit}})</view> -->
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+ 
+  <view class="price_block">
+    <!-- 配送费 -->
+    <!-- <view class="item_flex" hidden="{{!template.templateId}}">
+      <view>配送费</view>
+       <view class="prices">{{template.fee <= 0 ? '包邮' : '￥' + price(template.fee)}}</view>
+    </view> -->
+      <!-- 配送方式 -->
+      <!-- bindtap="showTplPop" -->
+      <view class="item_flex" >
+      <view>配送方式</view>
+      <!-- <view class="prices">平台自营配送</view> -->
+       <view class="prices">{{template.templateName}}</view>
+       <!-- {{template.fee <= 0 ? (template.templateId?'(包邮)':'') : '￥' + price(template.fee)}} -->
+       <!-- <view class="arrow"></view> -->
+    </view>
+    <!-- <view class="item_flex" wx:if="{{template.pickUpAddress}}">
+      <view>自提地址</view>
+       <view class="prices">{{template.pickUpAddress}}</view>
+    </view> -->
+    <!-- 使用积分 -->
+    <view class="integral item_flex" hidden="{{!online}}" wx:if="{{pointOffset}}">
+        <view>
+          <view>使用积分折抵现金(<text>积分：{{amtPoint > 0 ? ('-'+amtPoint) : point}}</text>)</view>
+        </view>
+        <!-- bindtap="changeIntegral" -->
+        <view class="price" bindtap="{{point > 0 ?'showPoint':''}}">
+          <block wx:if="{{chaPrice > 0}}" class="num">
+            -￥{{price(chaPrice)}}
+          </block>
+          <block wx:else>
+            不使用积分
+          </block>
+          <icon type="{{price(chaPrice)>0 ?'success':'circle'}}" color="{{price(chaPrice)>0?'#D9001B':''}}"></icon>
+          
+        </view>
+    </view>
+
+    <!-- 备注 -->
+    <navigator url="/pages/remarks/remarks" class="remarks item_flex">
+      <view>备注</view>
+      <view><input placeholder="补充说明" value="{{customerRemark}}" disabled></input> <view class="arrow"></view></view>
+    </navigator>
+
+  </view>
+
+  <view class="price_block">
+    <view class="goods_price">
+      <view>商品金额</view>
+      <view class="price">
+        <view class="num">￥{{price(allPrice)}}</view>
+      </view>
+    </view>
+    <view class="goods_price">
+      <view>运费</view>
+      <view class="price">
+        <view class="num">{{template.fee <= 0 ? '￥0' : '￥' + price(template.fee)}}</view>
+      </view>
+    </view>
+    <view class="goods_price">
+      <view>积分</view>
+      <view class="price">
+        <view class="num">
+          -￥{{chaPrice > 0 ? price(chaPrice) : 0}}
+        </view>
+      </view>
+    </view>
+    <view class="goods_price">
+      <view>优惠券</view>
+      <view class="price">
+        <view class="" style="font-size: 24rpx;color: #999;">
+          <!-- -￥{{chaPrice > 0 ? price(chaPrice) : 0}}
+          -￥0 -->
+          系统会以最优方式自动使用优惠券
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="orider_price">
+    <text>实付</text>
+    <text>￥{{price((showPrice*1) + (template.fee*1) || 0)}}</text>
+  </view>
+  
+  <view  class="player item_flex" bindtap="{{signed ? 'open':''}}">
+      <view>支付方式</view>
+      <view><view >{{online?'在线支付':'货到付款'}}</view> <view class="arrow" wx:if="{{signed}}"></view></view>
+  </view>
+  
+  <!-- 确认订单 -->
+  <view class="create_orider" >
+    <view class="all_price">
+      <text>合计：</text>
+      <text class="price">￥{{price((showPrice*1) + (template.fee*1) || 0)}}</text>
+    </view>
+    <view class="player_btn" bindtap="create">提交订单</view>
+  </view>
+
+  <view class="player_mode" hidden="{{hidden}}">
+    <view class="player_box">
+      <view class="player_tit">
+          <view>支付方式</view>
+          <image src="../../images/cancel.png" bindtap="close" data-item="{{false}}"></image>
+        </view>
+        <view class="player_list">
+          <view class="player_item {{active?'active':''}}" bindtap="changeActive" data-item="{{true}}">在线支付</view>
+          <view class="player_item {{!active?'active':''}}" bindtap="changeActive" data-item="{{false}}">货到付款</view>
+        </view>
+        <view class="mode_btn" bindtap="close" data-item="{{true}}">确认</view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="player_point" hidden="{{pointStatus}}">
+    <view class="point_box">
+      <view class="player_tit">
+         <view>积分抵扣</view>
+        <image src="../../images/cancel.png" bindtap="hidePoint" ></image>
+      </view>
+      <view class="point_body">
+        <view class="point_ipt"><view>抵扣积分</view> <input type="number" placeholder="请输入抵扣积分" value="{{exchangePoint}}" bindinput="changePoint"></input></view>
+      </view>
+      <view class="point_btn" bindtap="setPoint">确定</view>
+    </view>
+  </view>
+  <view class="tpl_body" hidden="{{tplPop}}">
+    <view class="tpl_box">
+      <view class="tpl_tit">
+         <view>配送方式</view>
+        <image src="../../images/cancel.png" bindtap="showTplPop" ></image>
+      </view>
+      <view class="tpl_list">
+        <view class="tpl_item" wx:for="{{templates}}" wx:key="index" bindtap="changeTpl" data-item="{{item}}" data-idx="{{index}}">
+          <view class="tpl_fl" >
+            <view class="name">{{item.templateName}}</view>
+            <view class="fee" wx:if="{{item.logisticsType == 4}}">配送费：{{item.resultcode == 0 ?(item.fee > 0 ? '￥' + price(item.fee):'(包邮)'): '(配送公司未返回费用)'}}</view>
+            <view class="fee" wx:else>配送费：{{item.fee > 0 ? '￥' + price(item.fee):'(包邮)'}}</view>
+          </view>
+          <view class="tpl_fr" wx:if="{{item.logisticsType != 4 || (item.logisticsType == 4 && item.resultcode == 0 && isBusiness)}}">
+            <icon type="{{template.templateId == item.templateId ?'success':'circle'}}" color="{{template.templateId == item.templateId?'#D9001B':''}}"></icon>
+          </view>
+          <view class="tpl_fr" wx:else>
+            <icon type="warn" color="#C9C9C9"></icon>
+          </view>
+        </view>
+      </view>
+      <view class="point_btn" bindtap="showTplPop">确定</view>
+    </view>
+  </view>
+
+
+
+

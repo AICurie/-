@@ -1,0 +1,68 @@
+<view class="aftersale">
+  <wxs src="../order/price.wxs" module="price"></wxs>
+  <view class="goods_info">
+      <view  class="goods_tit">
+        <view class="goods_fl">
+          <image src="{{baseUrl + item.imgId+'?appId='+appId+'&width=200&height=200'}}"></image>
+        </view>
+        <view class="goods_fr">
+          <view class="goods_name">
+            <view class="name_fl">
+              <view class="tab " wx:if="{{item.isShowItemSupplier && item.itemSupplier }}">{{item.itemSupplier }}</view>
+              <view class="text {{item.isShowItemSupplier&&item.itemSupplier ?'tab_text':''}}">{{item.itemName}}</view>
+            </view>
+          </view>
+          <view class="goods_price">
+            <view class="price_txt">按实收数量结算</view>
+            <view class="price_box">
+              <view class="price">
+                <view class="util">￥</view>
+                <view class="num">{{price(item.skuPrice)}}</view>
+              </view>
+              <!-- <view class="goods_num">(共{{item.skuSum}}{{item.skuUnit}})</view> -->
+              <view class="goods_num">x{{item.skuSum}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+  </view>
+  <view class="cause_box">
+    <view class="cause_txt">
+      <view class="cause_label">申请原因</view>
+      <view class="cause_val">
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="name">
+          <view class="picker">
+            {{reason ? reason : '点击选择原因'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="cause_txt">
+      <view class="cause_label">需退金额</view>
+      <view class="cause_val">
+        <input type="digit" max="10" bindinput="changePrice" value="{{needRefundAmount}}" placeholder="请输入需退金额"/>
+      </view>
+    </view>
+    <view class="cause_txt">
+      <view class="cause_label">详细说明</view>
+      <view class="cause_val">
+        <textarea bindinput="changeDesc" value="{{applyDesc}}" placeholder="请描述申请售后服务的原因"></textarea>
+      </view>
+    </view>
+    <view class="cause_imgs">
+      <view class="cause_img" wx:for="{{imgs}}" wx:key="index">
+        <image mode="aspectFill" src="{{baseUrl + item + '?appId='+appId+'&width=200&height=200'}}"></image>
+        <view class="close">
+          <image bindtap="delHandle" data-idx="{{index}}" src="../../images/close_red.png"></image>
+        </view>
+      </view>
+      <view class="cause_img_add" bindtap="upimgHandle" wx:if="{{imgs.length < 3}}">
+        <image src="../../images/goods_add.png"></image>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="sub_btn" bindtap="topagehandle" data-url="/pages/order/retreat">提交申请</view>
+  <canvas canvas-id='CanvasId' style='position:fixed;left: 9999px;width:{{canvasWidth || 750}}px;height:{{ canvasHeight }}px' class='myCanvas'></canvas>
+</view>

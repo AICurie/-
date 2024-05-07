@@ -1,0 +1,9 @@
+// import apiList from '../../utils/urlApi';
+// var apiList = require("../../utils/urlApi")
+var api = getApp();
+var api = app.globalData.api;
+
+module.exports = function(id) {
+  let imageUrl = api + '/api/images/' + id;
+  return (imageUrl + "?appId=" + __wxConfig.accountInfo.appId + "&");
+}

@@ -1,0 +1,12 @@
+<!--pages/user/message.wxml-->
+<view class="message">
+  <view class="message_ls">
+    <view data-idx="{{index}}" bindtap="toDetail" url="/pages/user/messaged?id={{item.id}}" class="item {{item.status == 0 ? 'act' : ''}}" wx:for="{{list}}" wx:key="index">
+      <view class="title">
+        <view class="txt">{{item.title}}</view>
+        <view class="time">{{item.sendTime}}</view>
+      </view>
+      <view class="info">{{item.content}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,36 @@
+<view class="collage">
+  <wxs src="../activity/surplus.wxs" module="surplus"></wxs>
+  <view class="collage_ls">
+    <view class="collage_item" wx:for="{{list}}" wx:key="index">
+      <view class="item_fl">还差<text>{{item.groupPeopleSurplus}}</text>人成团</view>
+      <view class="item_fr">
+        <view class="item_time" wx:if="{{item.groupBuyingEndTimeStamp > nowTimeStamp}}">
+          {{surplus(item.groupBuyingEndTimeStamp-nowTimeStamp).h}}:
+          {{surplus(item.groupBuyingEndTimeStamp-nowTimeStamp).m}}:
+          {{surplus(item.groupBuyingEndTimeStamp-nowTimeStamp).s}}
+        </view>
+        <view class="item_time" wx:else>已结束</view>
+        <view class="item_btn" data-item="{{item}}" bindtap="showCollage">一起拼</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="collage_pop" hidden="{{isHideCollage}}" bindtap="hideCollage">
+  <view class="pop_box" catchtap="stopHandle">
+     <view class="box_tit">一起参与拼团</view>
+     <view class="box_desc">
+      <view class="desc_item">仅剩余<text>{{listItem.groupPeopleSurplus}}</text>个参团名额可用，赶紧来参团吧!</view>
+      <view class="desc_txt" wx:if="{{listItem.groupBuyingEndTimeStamp > nowTimeStamp}}">
+        火热拼团中 <text>{{surplus(listItem.groupBuyingEndTimeStamp-nowTimeStamp).h}}:{{surplus(listItem.groupBuyingEndTimeStamp-nowTimeStamp).m}}:{{surplus(listItem.groupBuyingEndTimeStamp-nowTimeStamp).s}}</text>后结束。
+      </view>
+      <view class="desc_txt" wx:else>已结束</view>
+     </view>
+     <view class="box_avatar">
+      <view class="avatar_item" wx:for="{{listItem.goodsGroupBuyingUserVoList}}" wx:key="index">
+        <image src="../../images/icon_avatar.png"></image>
+      </view>
+      <view class="avatar_item" wx:for="{{listItem.groupPeopleSurplus}}" wx:key="index">?</view>
+     </view>
+     <view class="pop_btn" bindtap="addCar">确认拼团</view>
+  </view>
+</view>

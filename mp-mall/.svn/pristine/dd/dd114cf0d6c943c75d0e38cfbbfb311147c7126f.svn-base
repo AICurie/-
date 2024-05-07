@@ -1,0 +1,109 @@
+/* pages/login/login.wxss */
+.login {
+  overflow: hidden;
+  min-height: 100vh;
+}
+.image {
+  width: 100%;
+  height: 200rpx;
+}
+.image image {
+  width: 100%;
+  height: 100%;
+}
+.logo {
+  width: 200rpx;
+  height: 200rpx;
+  margin: 80rpx auto 362rpx;
+}
+.logo image {
+  width: 100%;
+  height: 100%;
+}
+.tit {
+  text-align: center;
+  padding: 40rpx 0;
+}
+button {
+  margin-top: 36rpx;
+}
+button.wechat[type='primary'] {
+  width: 87%;
+  font-weight: normal;
+  border-radius: 40rpx;
+}
+.wechat image {
+  width: 44rpx;
+  height: 44rpx;
+  margin-top: -4rpx;
+  margin-right: 20rpx;
+  vertical-align: middle;
+}
+.phone {
+  width: 87%;
+  padding: 18rpx 0;
+  font-size: 28rpx;
+  color: #5ad563;
+  text-align: center;
+  font-weight: normal;
+  border-radius: 40rpx;
+  margin: 40rpx auto 0;
+  border: 1rpx solid #F0F0F0;
+  background-color: transparent;
+}
+button.user:not([size='mini']) {
+  font-size: 28rpx;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-weight: normal;
+  background-color: transparent;
+}
+.login_box {
+  width: 87%;
+  /* left: 50%; */
+  /* bottom: 80rpx; */
+  margin: 0 auto;
+  /* position: fixed; */
+  border-radius: 10rpx;
+  /* transform: translateX(-50%); */
+}
+.bottom {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 200rpx;
+  position: fixed;
+}
+.bottom image {
+  width: 100%;
+  height: 100%;
+}
+.treaty {
+  margin-top: 40rpx;
+  text-align: center;
+}
+.treaty navigator {
+  color: #017AFF;
+  display: inline;
+}
+.checkbox {
+  display: inline-block;
+  /* width: 28rpx;
+  height: 28rpx; */
+  padding: 10rpx;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-top: -6rpx;
+  margin-right: 20rpx;
+  border: 1rpx solid #ddd;
+}
+.checkbox .box {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  background-color: transparent;
+}
+.checkbox.active .box {
+  background-color: #5ad563;
+}

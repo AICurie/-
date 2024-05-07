@@ -1,0 +1,224 @@
+.arrondi {
+  overflow: hidden;
+  min-height: 100vh;
+  background-color: #F1F1F1;
+}
+.seckill_box {
+  margin: 20rpx;
+  padding: 0 16rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+
+.goods_item {
+  padding: 20rpx 0rpx 0;
+  display: flex;
+  border-bottom: 1rpx solid #f4f4f4;
+}
+.goods_item .goods_image {
+  width: 220rpx;
+  height: 220rpx;
+  position: relative;
+}
+.goods_item .goods_image image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+}
+.goods_item .goods_image .img_tip {
+  top: 10rpx;
+  right: 10rpx;
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+}
+.hot_goods .goods_list .goods_img .img_tip.seckill_tip {
+  width: 100rpx;
+}
+.hot_goods .goods_list .goods_img .img_tip image {
+  width: 100%;
+  height: 100%;
+}
+.goods_info {
+  flex: 1;
+  margin-left: 20rpx;
+  padding-bottom: 20rpx;
+}
+.goods_info > view {
+  font-size: 26rpx;
+  overflow-y: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+}
+.goods_desc {
+  color: #AAAAAA;
+}
+.goods_info .goods_tit {
+  font-size: 30rpx;
+  -webkit-line-clamp: 2;
+  position: relative;
+}
+.goods_info .goods_tit .tab {
+  display: inline-block;
+  width: 140rpx;
+  height: 40rpx;
+  color: #fff;
+  line-height: 40rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  position: absolute;
+  text-align: center;
+  border-radius: 10rpx;
+  overflow: hidden;
+  /* background-color: #c69c6d; */
+  background: linear-gradient(to right, #5ad563 0%, #36af62 100%);
+}
+.goods_info .goods_tit .tab image {
+  width: 100%;
+  height: 100%;
+}
+.goods_info .goods_tit .text {
+  font-size: 30rpx;
+  display: -webkit-box;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+.goods_info .goods_tit .text.tab_txt {
+  text-indent: 150rpx;
+}
+.goods_btn {
+  font-size: 26rpx;
+  position: relative;
+  border-radius: 40rpx;
+  padding: 10rpx 20rpx;
+  background-color: #d81e06;
+}
+.goods_sales .btn {
+  width: 60rpx;
+  height: 60rpx;
+}
+.goods_sales .btn image {
+width: 100%;
+height: 100%;
+}
+.goods_btn view {
+  color: #fff;
+}
+.goods_btn .spot {
+  top: 5px;
+  right: 5px;
+  width: 10rpx;
+  height: 10rpx;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #d81e06;
+}
+.goods_num {
+  padding: 0 20rpx;
+}
+.goods_info .goods_price {
+  display: flex;
+  padding: 10rpx 0;
+  align-items: center;
+  justify-content: space-between;
+}
+.goods_info .goods_price .price_box {
+  display: flex;
+  align-items: flex-end;
+}
+.price_box text {
+ margin-right: 10rpx;
+}
+.price_box .price {
+  color: #999;
+  font-size: 20rpx;
+  margin-left: 10rpx;
+}
+.goods_price .price_now {
+  display: flex;
+  align-items: flex-end;
+}
+.goods_price .price_now .util {
+  color: #FF0000;
+  font-size: 20rpx;
+}
+.goods_price .price_now .num {
+  color: #FF0000;
+  font-size: 32rpx;
+  height: 40rpx;
+  font-weight: 700;
+}
+.goods_price .price_old {
+  color: #E0E0E0;
+  font-size: 26rpx;
+  text-decoration: line-through;
+}
+.goods_info .goods_sales {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.goods_info .goods_sales .sales_num  {
+  display: flex;
+  margin-bottom: 10rpx;
+}
+.goods_info .goods_sales .sales_num .old {
+  font-size: 20rpx;
+  color: #333;
+  text-decoration: line-through;
+}
+.goods_info .goods_sales .sales_num .now {
+  font-size: 20rpx;
+  color: #333;
+  margin-left: 10rpx;
+}
+.goods_info .goods_sales .sales_num .sales_txt {
+  font-size: 20rpx;
+  color: #999;
+  margin-left: 10rpx;
+}
+.goods_info .amount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.goods_info .amount .amount_fl {
+  display: flex;
+}
+.goods_info .amount .amount_item {
+  padding: 10rpx 16rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  background-color: #eee;
+}
+.goods_info .amount .amount_item .amount_txt {
+  font-size: 20rpx;
+  white-space: nowrap;
+}
+.goods_info .amount .amount_item .amount_tit {
+  color: #999;
+  font-size: 20rpx;
+}
+.goods_info .amount .amount_ls {
+  display: flex;
+  margin-left: 10rpx;
+  border-radius: 10rpx;
+  background-color: #eee;
+}
+.goods_info .amount .amount_ls .amount_item {
+  border-right: 1rpx solid #ddd;
+}
+.goods_info .amount .amount_ls .amount_item:last-child {
+  border-right: none;
+}
+.goods_info .amount .btn {
+  width: 50rpx;
+  height: 50rpx;
+}
+.goods_info .amount .btn image {
+  width: 100%;
+  height: 100%;
+}
